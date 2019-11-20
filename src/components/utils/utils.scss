@@ -1,0 +1,87 @@
+$dark-grey: #202124;
+$greyish-two: #b7b7b7;
+$greyish-brown: #4d4d4d;
+$pale-orange: #ffa15f;
+$white-four: #d4d3d3;
+$white-two: #f6f6f6;
+$white: white;
+$pumpkin-orange: #ff7413;
+$pinkish-grey: #cccccc;
+$strawberry: #f63f45;
+$bright-orange: #ff6900;
+$charcoal-grey: #3d3d3f;
+$greyish: #acacac;
+$white-three: #ededed;
+
+@mixin font {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+}
+
+@mixin loginBtn($bgcolor) {
+  height: 50px;
+  width: 395px;
+  background-color: $bgcolor;
+  margin-top: 4%;
+  margin-left: 8%;
+  margin-bottom: 6%;
+}
+
+@mixin registerBtn($bgcolor) {
+  height: 50px;
+  width: 395px;
+  background-color: $bgcolor;
+  margin-top: 7%;
+  margin-left: 8%;
+  margin-bottom: 10%;
+}
+
+@mixin errorInput {
+  height: 46px;
+  width: 395px;
+  border: solid 1px $strawberry;
+  background-color: rgba(246, 63, 69, 0.04);
+  padding-left: 5px;
+}
+
+@mixin placeholder(
+  $selector,
+  $color,
+  $height,
+  $width,
+  $opacity,
+  $font-family,
+  $font-size,
+  $font-weight,
+  $font-style,
+  $font-stretch,
+  $line-height,
+  $letter-spacing
+) {
+  #{$selector}::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  #{$selector}::-moz-placeholder {
+    color: $color;
+  }
+
+  #{$selector}:-ms-input-placeholder {
+    color: $color;
+  }
+
+  #{$selector}::placeholder {
+    color: $color;
+    opacity: $opacity;
+    height: $height;
+    width: $width;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+  }
+}
