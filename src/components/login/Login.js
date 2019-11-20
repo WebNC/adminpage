@@ -1,16 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Login.scss'
-import { Link } from 'react-router-dom'
-// import { login } from '../../api/userAction'
+import { login } from '../api/admin.action'
 
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
             password: '',
-            errors: false
+            errors: false,
+            phone: '',
         };
     }
 
@@ -29,57 +29,53 @@ class Login extends React.Component {
 
     handleClick = e => {
         e.preventDefault()
-        const { username, password } = this.state;
-
-        // login(username, password).then(res => {
-        //     if (res) {
-        //         this.props.handleLogin();
-        //     } else {
-        //         this.setState({
-        //             errors: true
-        //         })
-        //     }
-        // })
+        const { phone, password } = this.state;
+        login(phone, password).then(res => {
+           if(!res){
+               this.setState({errors: true})
+           }
+        })
     }
 
 
     render() {
-        const { username, password, errors } = this.state
-        const active = username.trim() && password.trim();
-        const errorText = errors && <p className="errorNotification">Your username/password is invalid!</p>
-
-
+        const {password, errors, phone } = this.state
+        const active = phone && password.trim();
+        const errorText = errors && <p className="errorNotification">Your phone/password is invalid!</p>
         return (
 
-            <div className="loginModal ">
-                <div className="loginT mt-5" >Login</div>
+            <div className="loginModal pb-5">
+                <div className="loginT mt-3" >Login</div>
                 <div className="errorNotification mt-2 mb-2">{errorText}</div>
-
                 <div className="activeR">
-                    <label className="usernameLabel">USERNAME</label>
-                    <input type="text" name="username" id="username"
-                        placeholder="Enter your username..."
+                    <label className="usernameLabel">PHONE
+                    <input type="number" name="phone" id="phone"
+                        placeholder="Enter your phone..."
                         onFocus={this.handleFocus}
-                        value={username}
+                        value={phone}
                         className={errors ? 'errorInput' : 'normalInput'}
                         onChange={this.onChange} />
+                    </label>
+                   
                 </div>
 
                 <div className="activeR">
-                    <label className="passwordLabel">PASSWORD</label>
+                    <label className="passwordLabel">PASSWORD
                     <input type="password" name="password" id="password"
                         placeholder="Enter your password..."
                         value={password}
                         onFocus={this.handleFocus}
                         className={errors ? 'errorInput' : 'normalInput'}
                         onChange={this.onChange} />
+                    </label>
+                   
                 </div>
 
-                <button onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Login</div></button>
-                <hr className="mt-2"></hr>
+                <button type = 'button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Login</div></button>
+                <hr className="mt-2" />
 
                 <div className="mt-4 d-flex">
-                    <div className="dontHaveAccount mr-2">Don't have an account? </div>
+                    <div className="dontHaveAccount mr-2"> Don't have an account? </div>
                     <Link to="/register" className="register">Register</Link>
                 </div>
 

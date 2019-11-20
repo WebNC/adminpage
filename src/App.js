@@ -1,17 +1,25 @@
 import React from 'react';
-import Login from './components/login/Login';
-import Register from './components/register/Register';
-
 import {
   BrowserRouter as Router,
-  Route, Switch
+  Route, Switch, Redirect
 } from "react-router-dom";
+import Login from './components/login/Login';
+import Register from './components/register/Register';
+import Home from './components/home/Home';
 
 function App() {
+  const isLogin = false;
   return <Router>
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/register" >
+                {isLogin ? <Redirect to="/" /> : <Register />}
+            </Route>
+            <Route exact path="/login" >
+              {isLogin ? <Redirect to="/" /> : <Login />}
+            </Route>
+            <Route exact path="/" >
+              {!isLogin ? <Redirect to="/login" /> : <Home />}
+            </Route>
           </Switch>
         </Router >
 } 
