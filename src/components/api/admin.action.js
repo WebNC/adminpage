@@ -5,6 +5,8 @@ export const register = (username, password, email, phone) => {
         .post(`/users/register`, {
             username,
             password,
+            email,
+            phone
         })
         .then(res => {
             return res;

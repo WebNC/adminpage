@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../login/Login.scss'
- import { register } from '../api/admin.action'
-
-
-
-
+import { register } from '../api/admin.action';
+ 
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -35,8 +31,12 @@ class Register extends React.Component {
         e.preventDefault()
         const { username, password, email, phone } = this.state;
         register(username, password, email, phone).then(res => {
-           if(!res){
+    
+               if(!res){
                this.setState({errors: true})
+           }
+           else{
+               console.log(res.data);
            }
         })
 

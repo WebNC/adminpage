@@ -1,0 +1,66 @@
+@import "../utils/utils.scss";
+
+.brand-title {
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  color: #212529;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.profile-container {
+  height: 800px;
+  width: 900px;
+
+  .change-profile-title {
+    margin-left: 10%;
+    height: 100px;
+    width: 260px;
+  }
+
+  .change-avatar {
+    width: 152px !important;
+    margin-left: 0% !important;
+    padding-left: 0% !important;
+    color: white;
+    height: 32px;
+    font-weight: bold;
+  }
+
+  .activeR {
+    .passwordLabel {
+      width: 124px;
+    }
+  }
+
+  .loginButton {
+    height: 40px;
+    width: 180px;
+    margin-left: 4%;
+
+    .buttonText {
+      margin-left: 32%;
+      margin-top: 4%;
+      font-size: 14px;
+    }
+  }
+
+  .loginButtonActive {
+    height: 40px;
+    width: 180px;
+    margin-left: 4%;
+
+    .buttonText {
+      margin-left: 30%;
+      margin-top: 4%;
+      font-size: 14px;
+    }
+  }
+}
