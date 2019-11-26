@@ -16,7 +16,7 @@
 }
 
 .profile-container {
-  height: 800px;
+  height: 920px;
   width: 900px;
 
   .change-profile-title {
@@ -38,7 +38,18 @@
     .passwordLabel {
       width: 124px;
     }
+    .phoneInput {
+      width: 220px;
+    }
+    .ageInput{
+      width: 100px;
+    }
+    .pass{
+      width: 180px;
+    }
   }
+
+
 
   .loginButton {
     height: 40px;
