@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Login.scss'
+import '../utils/utils.scss'
 import { login } from '../api/admin.action'
 
 
@@ -43,7 +43,6 @@ class Login extends React.Component {
         const active = phone && password.trim();
         const errorText = errors && <p className="errorNotification">Your phone/password is invalid!</p>
         return (
-
             <div className="loginModal pb-5">
                 <div className="loginT mt-3" >Login</div>
                 <div className="errorNotification mt-2 mb-2">{errorText}</div>

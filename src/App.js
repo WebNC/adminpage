@@ -6,9 +6,10 @@ import {
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Home from './components/home/Home';
+import Profile from './components/profile/Profile';
 
 function App() {
-  const isLogin = false;
+  const isLogin = true;
   return <Router>
           <Switch>
             <Route exact path="/register" >
@@ -19,6 +20,9 @@ function App() {
             </Route>
             <Route exact path="/" >
               {!isLogin ? <Redirect to="/login" /> : <Home />}
+            </Route>
+            <Route exact path="/profile" >
+              {!isLogin ? <Redirect to="/login" /> : <Profile />}
             </Route>
           </Switch>
         </Router >
