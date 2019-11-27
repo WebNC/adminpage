@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../utils/utils.scss'
-import { login } from '../api/admin.action'
+import { login } from '../../api/admin.action'
 
 
 class Login extends React.Component {

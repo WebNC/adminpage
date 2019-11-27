@@ -3,10 +3,10 @@ import {
   BrowserRouter as Router,
   Route, Switch, Redirect
 } from "react-router-dom";
-import Login from './components/login/Login';
-import Register from './components/register/Register';
-import Home from './components/home/Home';
-import Profile from './components/profile/Profile';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Home from './containers/Home';
+import Profile from './containers/Profile';
 
 function App() {
   const isLogin = true;

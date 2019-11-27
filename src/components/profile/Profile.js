@@ -2,7 +2,7 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { getUser, updateProfile, updatePassword, updateAvatar } from '../api/admin.action'
+import { getUser, updateProfile, updatePassword, updateAvatar } from '../../api/admin.action'
 import { hashPassword } from '../utils/utils';
 import './Profile.scss'
 
@@ -41,11 +41,15 @@ class Profile extends React.Component {
         })
     }
 
-    handleCancelUsername = e => {
+    handleCancelInfor= e => {
         e.preventDefault()
         this.setState({
-            username: localStorage.getItem('username') || '',
+            username: localStorage.getItem('username') || 'username',
             errorUsername: false,
+            phone: 0,
+            age: 0,
+            email : '',
+            address: ''
 
         })
     }
@@ -60,17 +64,9 @@ class Profile extends React.Component {
         })
     }
 
-    handleCancelInfo = e => {
-        e.preventDefault()
-        this.setState({
-            age: '',
-            // phone: '', // old phone
-            address: ''
-                })
-    }
+  
 
-
-    validateUsername = () => {
+    validateInfor = () => {
         const { username } = this.state;
         if (username.indexOf(' ') !== -1) {
             return false
@@ -88,20 +84,11 @@ class Profile extends React.Component {
     }
 
 
-    validateInfo = () => {
-        const { password, newPassword, retypePassword, user } = this.state;
-        if (hashPassword(password) === user.password)
-            if (newPassword.indexOf(' ') === -1 && newPassword === retypePassword)
-                return true
-        return false
-    }
-
-
-    handleChangeUsername = e => {
+    handleChangeInfor = e => {
         e.preventDefault()
         const { user, username } = this.state;
         const {changeUsername} = this.props;
-        if (!this.validateUsername()) {
+        if (!this.validateInfor()) {
             this.setState({
                 errorUsername: true
             })
@@ -293,13 +280,13 @@ class Profile extends React.Component {
                             <div className="d-flex pl-4">
                                 <button
                                 type="button"
-                                    onClick={this.handleCancelUsername}
+                                    onClick={this.handleCancelInfor}
                                     className='loginButtonActive'>
                                     <div className="buttonText mb-4" >Cancel</div>
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={this.handleChangeUsername}
+                                    onClick={this.handleChangeInfor}
                                     className={active ? 'loginButtonActive' : 'loginButton'}>
                                     <div className="buttonText mb-4" >Change</div>
                                 </button>

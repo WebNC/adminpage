@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { register } from '../api/admin.action';
+import { register } from '../../api/admin.action';
  
 class Register extends React.Component {
     constructor(props) {
