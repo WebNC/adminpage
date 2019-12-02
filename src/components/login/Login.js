@@ -10,7 +10,7 @@ class Login extends React.Component {
         this.state = {
             password: '',
             errors: false,
-            phone: '',
+            email: '',
         };
     }
 
@@ -29,29 +29,38 @@ class Login extends React.Component {
 
     handleClick = e => {
         e.preventDefault()
-        const { phone, password } = this.state;
-        login(phone, password).then(res => {
-           if(!res){
-               this.setState({errors: true})
-           }
+        const {handleLogin} = this.props;
+        const { email, password } = this.state;
+        login(email, password).then(res => {
+            if(!res){
+                this.setState({errors: true})
+         }
+         else{
+             console.log(res.data);
+             handleLogin();
+             this.setState({
+                 email: '',
+                 password: ''
+             })
+         }
         })
     }
 
 
     render() {
-        const {password, errors, phone } = this.state
-        const active = phone && password.trim();
-        const errorText = errors && <p className="errorNotification">Your phone/password is invalid!</p>
+        const {password, errors, email } = this.state
+        const active = email && password.trim();
+        const errorText = errors && <p className="errorNotification">Your email/password is invalid!</p>
         return (
             <div className="loginModal pb-5">
                 <div className="loginT mt-3" >Login</div>
                 <div className="errorNotification mt-2 mb-2">{errorText}</div>
                 <div className="activeR">
-                    <label className="usernameLabel">PHONE
-                    <input type="number" name="phone" id="phone"
-                        placeholder="Enter your phone..."
+                    <label className="usernameLabel">EMAIL
+                    <input type="email" name="email" id="email"
+                        placeholder="Enter your email..."
                         onFocus={this.handleFocus}
-                        value={phone}
+                        value={email}
                         className={errors ? 'errorInput' : 'normalInput'}
                         onChange={this.onChange} />
                     </label>

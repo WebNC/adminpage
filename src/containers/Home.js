@@ -3,7 +3,7 @@ import Home from '../components/home/Home'
 
 
 const mapStateToProps = state => ({
-
+    store: state.login
 })
 
 const mapDispatchToProps = (dispatch) => {

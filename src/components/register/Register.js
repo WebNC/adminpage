@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { register } from '../../api/admin.action';
@@ -10,7 +11,7 @@ class Register extends React.Component {
             password: '',
             errors: false,
             email: '',
-            phone: '',
+         
         };
     }
 
@@ -29,23 +30,30 @@ class Register extends React.Component {
 
     handleClick = e => {
         e.preventDefault()
-        const { username, password, email, phone } = this.state;
-        register(username, password, email, phone).then(res => {
-    
-               if(!res){
+        const { username, password, email } = this.state;
+        const {handleLogin} = this.props;
+        register(username, password, email).then(res => {
+        if(!res){
                this.setState({errors: true})
-           }
-           else{
-               console.log(res.data);
-           }
+        }
+        else{
+            console.log(res.data);
+            handleLogin();
+            this.setState({
+                email: '',
+                password: '',
+                username: ''
+            })
+        }
         })
 
 
     }
 
+  
 
     render() {
-        const { username, password, errors, email, phone } = this.state
+        const { username, password, errors, email } = this.state
         const active = username.trim() && password.trim();
         const errorText = errors && <p className="errorNotification">Something is invalid!</p>
 
@@ -77,17 +85,7 @@ class Register extends React.Component {
                     </label>
                    
                 </div>
-                <div className="activeR">
-                    <label className="usernameLabel">PHONE
-                    <input type="number" name="phone" id="phone"
-                        placeholder="Enter your phone..."
-                        onFocus={this.handleFocus}
-                        value={phone}
-                        className={errors ? 'errorInput' : 'normalInput'}
-                        onChange={this.onChange} />
-                    </label>
-                   
-                </div>
+              
 
                 <div className="activeR">
                     <label className="passwordLabel">PASSWORD

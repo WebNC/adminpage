@@ -23,7 +23,6 @@ class Profile extends React.Component {
             address:'',
             age: 0,
             phone: 0,
-            email: '',
             url: oldUrl || 'http://placehold.it/1000'
         };
     }
@@ -48,7 +47,6 @@ class Profile extends React.Component {
             errorUsername: false,
             phone: 0,
             age: 0,
-            email : '',
             address: ''
 
         })
@@ -160,6 +158,7 @@ class Profile extends React.Component {
 
     componentDidMount = () => {
         const username = localStorage.getItem("username")
+        // get user ID - get infor
         getUser().then(res => {
             if (res) {
                 const users = res;
@@ -187,7 +186,7 @@ class Profile extends React.Component {
 
 
     render() {
-        const { username, password, url, errorPassword, errorUsername, newPassword, retypePassword, email,phone,age,address } = this.state
+        const { username, password, url, errorPassword, errorUsername, newPassword, retypePassword,phone,age,address } = this.state
         const { profile,storeAvatarURL } = this.props
         const active = username && username.trim() !== localStorage.getItem("username")
         const activePsw = password.trim() && newPassword.trim() && retypePassword.trim();
@@ -252,7 +251,7 @@ class Profile extends React.Component {
                                 </label>
                                 </div>
                             </div>
-                            <div className="activeR">
+                            {/* <div className="activeR">
                                 <label className="passwordLabel">EMAIL
                                 <input type="email" name="email" id="email"
                                     placeholder="Enter new email ... "
@@ -262,7 +261,7 @@ class Profile extends React.Component {
                                     onChange={this.onChange} />
                                 </label>
                                
-                            </div>
+                            </div> */}
 
                     
                             <div className="activeR">

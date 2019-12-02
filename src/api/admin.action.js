@@ -9,6 +9,10 @@ export const register = (username, password, email, phone) => {
             phone
         })
         .then(res => {
+            if(res.data){
+                const {token} = res.data;
+                localStorage.setItem("token", token);
+            }
             return res;
         }).catch(res => {
             console.log(res);
@@ -16,14 +20,17 @@ export const register = (username, password, email, phone) => {
         )
 }
 
-
-export const login = (phone, password) => {
+export const login = (email, password) => {
     return API
         .post(`/users/login`, {
-            phone,
+            email,
             password,
         })
         .then(res => {
+            if(res.data){
+                const {token} = res.data;
+                localStorage.setItem("token", token);
+            }
             return res
         }).catch(res => {
             console.log(res);
