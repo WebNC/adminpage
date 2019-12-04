@@ -10,7 +10,7 @@ const login = (state = initialState, action) => {
 
     switch (action.type) {
         case types.LOGIN:
-            if(action.email === 'admin@mail.com'){
+            if(action.email === 'admin2@mail.com'){
                 localStorage.setItem("admin", true);
             }
             return {
