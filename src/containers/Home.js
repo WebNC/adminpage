@@ -6,11 +6,11 @@ const mapStateToProps = state => ({
     store: state.login
 })
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//     }
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);
 

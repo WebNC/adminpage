@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Register from '../components/register/Register'
-import * as actions from '../actions/login'
+import * as actions from '../actions/index'
 
 
 const mapStateToProps = state => ({
@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLogin: () => {
-            dispatch(actions.handleLogin())
+        handleRegister: (username, email, password) => {
+            dispatch(actions.handleRegisterRequest(username, email, password)) 
         }
     }
 }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Profile from '../components/profile/Profile'
-import { handleLogout } from '../actions/login'
+import * as actions from '../actions/index'
 
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => {
-            dispatch(handleLogout())
+            dispatch(actions.logOutRequest())
         },
     }
 }

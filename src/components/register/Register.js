@@ -31,7 +31,7 @@ class Register extends React.Component {
     handleClick = e => {
         e.preventDefault()
         const { username, password, email } = this.state;
-        const {handleLogin} = this.props;
+        const {handleRegister} = this.props;
         register(username, password, email).then(res => {
         if(!res){
                this.setState({errors: true})
@@ -39,7 +39,7 @@ class Register extends React.Component {
         else{
             console.log(res);
 
-            handleLogin();
+            handleRegister(username, email, password);
             this.setState({
                 email: '',
                 password: '',
