@@ -137,6 +137,7 @@ class Profile extends React.Component {
 
     handleLogout = () => {
         const {logout} = this.props;
+        localStorage.removeItem("admin")
         logout();
     }
 

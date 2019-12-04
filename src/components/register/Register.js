@@ -37,7 +37,8 @@ class Register extends React.Component {
                this.setState({errors: true})
         }
         else{
-            console.log(res.data);
+            console.log(res);
+
             handleLogin();
             this.setState({
                 email: '',
@@ -59,8 +60,12 @@ class Register extends React.Component {
 
 
         return (
-            <div className="loginModal pb-5">
-                <div className="loginT mt-5" >Register</div>
+            <div>
+                <Link to="/" className="brand-title">
+                Go to Home
+            </Link>
+                <div className="loginModal pb-5">
+                <div className="loginT mt-5" >Create</div>
                 <div className="errorNotification mt-2 mb-2">{errorText}</div>
 
                 <div className="activeR">
@@ -99,18 +104,20 @@ class Register extends React.Component {
                    
                 </div>
 
-                <button type='button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Register</div></button>
+                <button type='button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Create</div></button>
                 <hr className="mt-2" />
 
-                <div className="mt-4 d-flex">
+                {/* <div className="mt-4 d-flex">
                     <div className="dontHaveAccount mr-2">You have an account? </div>
                     <Link to="/" className="register">Login</Link>
 
-                </div>
+                </div> */}
 
 
             </div>
 
+            </div>
+         
         );
     }
 }

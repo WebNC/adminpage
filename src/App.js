@@ -37,14 +37,15 @@ class App extends React.Component {
     const {logined} = this.state;
     return <Router>
     <Switch>
-      <Route exact path="/register" >
-          {logined ? <Redirect to="/" /> : <Register />}
-      </Route>
+
       <Route exact path="/login" >
         {logined ? <Redirect to="/" /> : <Login />}
       </Route>
       <Route exact path="/" >
         {!logined ? <Redirect to="/login" /> : <Home />}
+      </Route>
+      <Route exact path="/register" >
+          {!logined ? <Redirect to="/login" /> : <Register />}
       </Route>
       <Route exact path="/profile" >
         {!logined ? <Redirect to="/login" /> : <Profile />}

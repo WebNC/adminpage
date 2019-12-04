@@ -8,9 +8,11 @@ export const handleLogin = (email, password) => {
     }
 }
 
-export const handleLogout = () => {
+export const handleLogout = (email, password) => {
     return {
-        type: types.LOGOUT
+        type: types.LOGOUT,
+        email,
+        password
     }
 }
 

@@ -36,8 +36,7 @@ class Login extends React.Component {
                 this.setState({errors: true})
          }
          else{
-             console.log(res.data);
-             handleLogin();
+             handleLogin(email, password);
              this.setState({
                  email: '',
                  password: ''
@@ -82,10 +81,10 @@ class Login extends React.Component {
                 <button type = 'button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Login</div></button>
                 <hr className="mt-2" />
 
-                <div className="mt-4 d-flex">
+                {/* <div className="mt-4 d-flex">
                     <div className="dontHaveAccount mr-2"> Don't have an account? </div>
                     <Link to="/register" className="register">Register</Link>
-                </div>
+                </div> */}
 
 
             </div>
