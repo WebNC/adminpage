@@ -1,5 +1,23 @@
+import React from 'react';
 import { connect } from 'react-redux'
-import Home from '../components/home/Home'
+import { Link } from 'react-router-dom'
+
+class Home extends React.PureComponent {
+
+    render(){
+        const isRoot = localStorage.getItem("admin")!== null
+        return <>
+            <Link to="/profile" className="brand-title">
+                Go to profile
+            </Link>
+            {isRoot && <Link to="/register" className="brand-title">
+                Create new admin
+            </Link>}
+            
+        </>
+         
+    }
+}
 
 
 const mapStateToProps = state => ({

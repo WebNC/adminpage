@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 import './api/axios.config'
-import App from './containers/App'
+import App from './App'
 import rootReducer from './reducers/index'
 
 

@@ -1,13 +1,14 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import { getUser, updateProfile, updatePassword, updateAvatar } from '../../api/admin.action'
-import { hashPassword } from '../utils/utils';
+import { hashPassword } from '../../utils/utils';
 import './Profile.scss'
+import AvatarIMG from '../../components/Avatar'
+import * as actions from '../../actions/index'
 
-
-import AvatarIMG from './Avatar'
 
 
 class Profile extends React.Component {
@@ -63,13 +64,11 @@ class Profile extends React.Component {
     }
 
   
-
     validateInfor = () => {
         const { username } = this.state;
         if (username.indexOf(' ') !== -1) {
             return false
         }
-
         return true
     }
 
@@ -252,19 +251,7 @@ class Profile extends React.Component {
                                 </label>
                                 </div>
                             </div>
-                            {/* <div className="activeR">
-                                <label className="passwordLabel">EMAIL
-                                <input type="email" name="email" id="email"
-                                    placeholder="Enter new email ... "
-                                    value={email}
-                                    onFocus={this.handleFocus}
-                                    className={errorPassword ? 'errorInput' : 'normalInput'}
-                                    onChange={this.onChange} />
-                                </label>
-                               
-                            </div> */}
-
-                    
+                           
                             <div className="activeR">
                                 <label className="passwordLabel">ADDRESS
                                 <input type="text" name="address" id="address"
@@ -363,5 +350,19 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+
+const mapStateToProps = state => ({
+    store: state.login
+})
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => {
+            dispatch(actions.logOutRequest())
+        },
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 

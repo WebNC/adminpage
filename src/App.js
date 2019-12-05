@@ -4,11 +4,14 @@ import {
   BrowserRouter as Router,
   Route, Switch, Redirect
 } from "react-router-dom";
+import { connect } from 'react-redux'
 
 import Login from './containers/Login';
 import Register from './containers/Register';
 import Home from './containers/Home';
-import Profile from './containers/Profile';
+import Profile from './containers/Profile/Profile';
+
+
 
 require('dotenv').config()
 
@@ -55,4 +58,11 @@ class App extends React.Component {
 } 
 }
  
-export default App;
+
+const mapStateToProps = state => ({
+  store: state.login,
+})
+
+
+export default connect(mapStateToProps, null)(App);
+
