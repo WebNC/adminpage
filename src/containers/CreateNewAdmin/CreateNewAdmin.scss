@@ -1,0 +1,104 @@
+@import '../../utils/utils.scss';
+
+
+.loginT {
+    @include font();
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 10%;
+    color: $dark-grey;
+}
+
+.errorNotification {
+    width: 191px;
+    height: 22px;
+    margin-left: 20%;
+    height: 22px;
+    @include font();
+    font-size: 12px;
+    text-align: center;
+    color: $strawberry;
+}
+
+.activeR {
+    width: 195px;
+    margin-left: 8%;
+    margin-bottom: 4%;
+
+    .usernameLabel {
+      @include label(45px, 18px);
+    }
+
+    .passwordLabel {
+      @include label(76px, 18px);
+    }
+
+    .errorText {
+      @include font();
+      font-size: 10px;
+      line-height: 2.2;
+      color: $strawberry;
+    }
+
+    .errorInput {
+      border: solid 1px $strawberry;
+      background-color: rgba(246, 63, 69, 0.04);
+      height: 46px;
+      width: 395px;
+      padding-left: 5px;
+    }
+
+    .normalInput {
+      height: 46px;
+      width: 395px;
+      background-color: $white-two;
+      border: none;
+      padding-left: 5px;
+    }
+
+    @include placeholder(
+      "input",
+      $greyish-brown,
+      22px,
+      129px,
+      0.3,
+      Montserrat,
+      14px,
+      500,
+      normal,
+      normal,
+      1.57,
+      normal
+    );
+}
+
+  .loginButton {
+    @include loginBtn($white-four);
+    border: none;
+    .buttonText {
+      @include btnText();
+    }
+  }
+
+  .loginButtonActive {
+    @include loginBtn($pale-orange);
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+
+    .buttonText {
+      @include btnText();
+    }
+  }
+
+  .register {
+    height: 22px;
+    width: 62px;
+    @include font();
+    font-weight: bold;
+    color: $pumpkin-orange;
+    text-align: left;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }

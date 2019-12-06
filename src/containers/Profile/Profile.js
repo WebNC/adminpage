@@ -1,6 +1,4 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { getUser, updateProfile, updatePassword, updateAvatar } from '../../api/admin.action'
@@ -8,7 +6,7 @@ import { hashPassword } from '../../utils/utils';
 import './Profile.scss'
 import AvatarIMG from '../../components/Avatar'
 import * as actions from '../../actions/index'
-
+import Header from '../Header'
 
 
 class Profile extends React.Component {
@@ -187,31 +185,13 @@ class Profile extends React.Component {
 
     render() {
         const { username, password, url, errorPassword, errorUsername, newPassword, retypePassword,phone,age,address } = this.state
-        const { profile,storeAvatarURL } = this.props
+        const {storeAvatarURL } = this.props
         const active = username && username.trim() !== localStorage.getItem("username")
         const activePsw = password.trim() && newPassword.trim() && retypePassword.trim();
 
         return (
             <div className="pl-5 pr-5">
-                <Navbar bg="light" className="mb-5">
-                    <Navbar>
-                        <Link to="/" className="brand-title">
-                            HOME PAGE
-                        </Link>
-                    </Navbar>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto">
-                            <NavDropdown title={profile ? profile.username : 'Username'} id="basic-nav-dropdown" className="mr-3">
-                                <NavDropdown.Item >Profile</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={this.handleLogout}>Logout</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
-
+                <Header/>
                 <div className="loginModal profile-container mt-5">
                     <div className="loginT mt-5 change-profile-title" >Change Profile</div>
                     <div className="row">
