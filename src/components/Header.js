@@ -18,9 +18,16 @@ class Header extends React.Component {
 
     render(){
         const profile = '';
+        const newStyle = {
+            boxShadow: '0 14px 30px 0 rgba(0, 0, 0, 0.14)'
+        }
+        const navDropdown = {
+            textDecoration: 'none',
+            color: "#202124"
+        }
         return (
-            <div className="pl-5 pr-5">
-                <Navbar bg="light" className="mb-5">
+            <div className="pl-5 pr-5" style={newStyle}>
+                <Navbar bg="light" className="mb-3">
                     <Navbar>
                         <Link to="/" className="brand-title">
                             HOME
@@ -31,7 +38,7 @@ class Header extends React.Component {
                         <Nav className="ml-auto">
                             <NavDropdown title={profile ? profile.username : 'Username'} id="basic-nav-dropdown" className="mr-3">
                                 <NavDropdown.Item  >
-                                    <Link to="/profile" className="">
+                                    <Link to="/profile" style={navDropdown}>
                                         Change Profile
                                     </Link>
                                 </NavDropdown.Item>
