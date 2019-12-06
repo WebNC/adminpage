@@ -23,6 +23,15 @@ class CreateNewAdmin extends React.Component {
         })
     }
 
+    handleCancel = () => {
+        this.setState({
+            username: '',
+            password: '',
+            errors: false,
+            email: '',
+        })
+    }
+
     onChange = e => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -33,28 +42,29 @@ class CreateNewAdmin extends React.Component {
         e.preventDefault()
         const { username, password, email } = this.state;
         const {handleRegister} = this.props;
-        register(username, password, email).then(res => {
-        if(!res){
-               this.setState({errors: true})
-        }
-        else{
-            handleRegister(username, email, password);
-            this.setState({
-                email: '',
-                password: '',
-                username: ''
+        if(username.trim() && password.trim() && email.trim()){
+            register(username, password, email).then(res => {
+                if(!res){
+                       this.setState({errors: true})
+                }
+                else{
+                    handleRegister(username, email, password);
+                    this.setState({
+                        email: '',
+                        password: '',
+                        username: ''
+                    })
+                }
             })
         }
-        })
-
-
+       
     }
 
   
 
     render() {
         const { username, password, errors, email } = this.state
-        const active = username.trim() && password.trim();
+        const active = username.trim() && password.trim() && email.trim();
         const errorText = errors && <p className="errorNotification">Something is invalid!</p>
 
 
@@ -100,8 +110,11 @@ class CreateNewAdmin extends React.Component {
                     </label>
                    
                 </div>
+                <div className="d-flex">
+                    <button type='button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Create</div></button>
+                    <button type='button' onClick={this.handleCancel} className='loginButtonActive'><div className="buttonText mb-5" >Cancel</div></button>
 
-                <button type='button' onClick={this.handleClick} className={active ? 'loginButtonActive' : 'loginButton'}><div className="buttonText mb-5" >Create</div></button>
+                </div>
                
                 <hr className="mt-2" />
                </div>

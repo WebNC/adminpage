@@ -8,8 +8,8 @@ import { connect } from 'react-redux'
 
 import Login from './containers/Login';
 import Register from './containers/Register';
-import Home from './containers/Home';
-import Profile from './containers/Profile/Profile';
+import Home from './containers/Home/Home';
+import Profile from './containers/ChangeProfile/Profile';
 
 
 

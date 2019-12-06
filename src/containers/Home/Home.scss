@@ -1,0 +1,38 @@
+@import '../../utils/utils.scss';
+
+.first-column{
+   
+    .nav-item{
+        .tab-label{
+            @include font();
+            font-size: 18px;
+            color: $dark-grey;
+            border : none;
+            height: 40px;
+    
+            &:hover{
+                color: blue;
+            }
+            &:focus{
+                color: blue;
+               
+            }
+        }
+        .active{
+            border-right: 4px solid rgb(83, 102, 207);
+
+        }
+
+       
+        
+        
+    }
+
+    padding-right: 20%;
+    
+    border-right: 1px solid $greyish-two;
+    
+}
+.tab-content{
+    padding-left: 5%;
+}

@@ -132,24 +132,13 @@ class Profile extends React.Component {
 
     }
 
-    handleLogout = () => {
-        const {logout} = this.props;
-        localStorage.removeItem("admin")
-        logout();
-    }
-
     handleChangeAvatar = () => {
         const { user } = this.state;
         const {profile} = this.props;
         if (user) {
             user.url = profile.url
             updateAvatar(user).then(res => {
-                if (res === 1) {
-                    alert("update avatar successfully")
-                } else {
-                    alert("Ops, something wrong when update avatar")
-
-                }
+                
             })
         }
     }

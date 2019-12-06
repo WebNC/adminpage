@@ -1,104 +1,113 @@
 @import '../../utils/utils.scss';
 
+.content{
+    display: block;
+    background-color:#ffffff;
+    margin: 0px 60px 0 60px;
+    padding-bottom: 30px;
+    padding-top: 40px;
+    min-height: 100%;
 
-.loginT {
-    @include font();
-    font-size: 32px;
-    font-weight: bold;
-    margin-left: 10%;
-    color: $dark-grey;
-}
-
-.errorNotification {
-    width: 191px;
-    height: 22px;
-    margin-left: 20%;
-    height: 22px;
-    @include font();
-    font-size: 12px;
-    text-align: center;
-    color: $strawberry;
-}
-
-.activeR {
-    width: 195px;
-    margin-left: 8%;
-    margin-bottom: 4%;
-
-    .usernameLabel {
-      @include label(45px, 18px);
-    }
-
-    .passwordLabel {
-      @include label(76px, 18px);
-    }
-
-    .errorText {
+    .loginT {
       @include font();
-      font-size: 10px;
-      line-height: 2.2;
-      color: $strawberry;
+      font-size: 32px;
+      font-weight: bold;
+      margin-left: 14%;
+      color: $dark-grey;
     }
-
-    .errorInput {
-      border: solid 1px $strawberry;
-      background-color: rgba(246, 63, 69, 0.04);
-      height: 46px;
-      width: 395px;
-      padding-left: 5px;
+    
+    .errorNotification {
+      width: 191px;
+      height: 22px;
+      margin-left: 14%;
+      height: 22px;
+      @include font();
+      font-size: 12px;
+      text-align: center;
+      color: $strawberry;    }
+    
+    .activeR {
+        width: 195px;
+        margin-left: 8%;
+        margin-bottom: 4%;
+    
+        .usernameLabel {
+          @include label(45px, 18px);
+        }
+    
+        .passwordLabel {
+          @include label(76px, 18px);
+        }
+    
+        .errorText {
+          @include font();
+          font-size: 10px;
+          line-height: 2.2;
+          color: $strawberry;
+        }
+    
+        .errorInput {
+          border: solid 1px $strawberry;
+          background-color: rgba(246, 63, 69, 0.04);
+          height: 46px;
+          width: 395px;
+          padding-left: 5px;
+          font-size: 16px;
+        }
+    
+        .normalInput {
+          height: 46px;
+          width: 395px;
+          background-color: $white-two;
+          border: none;
+          padding-left: 5px;
+          font-size: 16px;
+        }
+    
+        @include placeholder(
+          "input",
+          $greyish-brown,
+          22px,
+          129px,
+          0.3,
+          Montserrat,
+          14px,
+          500,
+          normal,
+          normal,
+          1.57,
+          normal
+        );
     }
-
-    .normalInput {
-      height: 46px;
-      width: 395px;
-      background-color: $white-two;
+    
+    @mixin button($bgcolor){
       border: none;
-      padding-left: 5px;
-    }
+      height: 45px;
+      width: 100px;
+      margin-top: 3%;
+      margin-left: 11%;
+      margin-bottom: 6%;
+      background: $bgcolor;
 
-    @include placeholder(
-      "input",
-      $greyish-brown,
-      22px,
-      129px,
-      0.3,
-      Montserrat,
-      14px,
-      500,
-      normal,
-      normal,
-      1.57,
-      normal
-    );
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      color: $white;
+      font-family: Montserrat;
+      padding-top: 10px;
+      border-radius: 1px;
+
+    }
+      .loginButton {
+        @include button($white-four);
+        &:hover{
+          cursor: not-allowed;
+        }
+      }
+    
+      .loginButtonActive {
+        @include button($pale-orange);
+        box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+      }
+    
 }
-
-  .loginButton {
-    @include loginBtn($white-four);
-    border: none;
-    .buttonText {
-      @include btnText();
-    }
-  }
-
-  .loginButtonActive {
-    @include loginBtn($pale-orange);
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
-    border: none;
-
-    .buttonText {
-      @include btnText();
-    }
-  }
-
-  .register {
-    height: 22px;
-    width: 62px;
-    @include font();
-    font-weight: bold;
-    color: $pumpkin-orange;
-    text-align: left;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
