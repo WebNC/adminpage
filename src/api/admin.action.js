@@ -102,9 +102,9 @@ export const getSkill = () => {
 
 
 
-export const editSkill = (id) => {
+export const editSkill = (id, value) => {
     return API
-        .post(`/skill-list/update`,{id})
+        .post(`/skill-list/update`,{id, value})
         .then(res => {
             return res.data
         }).catch(error => console.log(error));

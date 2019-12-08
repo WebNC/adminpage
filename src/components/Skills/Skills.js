@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */
 import React from 'react';
-import {Table,Button} from 'react-bootstrap'
+import {Table,Button, Modal} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
-import {getSkill, addSkill} from '../../api/admin.action';
+import {getSkill, addSkill, editSkill} from '../../api/admin.action';
 import './Skills.scss';
 
 
@@ -15,7 +15,10 @@ class Skills extends React.Component {
       error: false,
       skill: '',
       skillList: [],
-      number:{}
+      number:{},
+      show: false,
+      selectedSkill : '',
+      selectedSkillID: ''
     };
   }
 
@@ -53,11 +56,15 @@ class Skills extends React.Component {
         error: true,
       })
     } else {
-      addSkill(skill)
+      addSkill(skill).then(res=>{
+        if(res.status !== 200){
+          this.setState({error: true})
+        }
+      })
       getSkill().then(res=>{
         if(res)
           this.setState({
-            skillList: res.skillList,
+            skillList: res.skillList || [{name: 'C'}],
             number: res.number,
             skill:''
           })
@@ -78,30 +85,44 @@ class Skills extends React.Component {
 
   }
 
-  handleEdit = () => {
+  handleEdit = (name, id) => {
+    this.setState({
+      show: true,
+      selectedSkill: name,
+      selectedSkillID: id
+    })
   }
 
-  UNSAFE_componentWillReceiveProps = () =>{
-    getSkill().then(res=>{
-      this.setState({
-        skillList: res.skillList,
-        number: res.number
-      })
+  handleSave = () => {
+    const {selectedSkill, selectedSkillID} = this.state;
+    editSkill(selectedSkill, selectedSkillID)
+  }
+
+  handleClose = () =>{
+    this.setState({
+      show: false
     })
   }
 
 
+
   render() {
-    const {error, skill, skillList, number} = this.state;
+    const {error, skill, skillList, number, show, selectedSkill} = this.state;
+
+
+    // const data = [{
+    //   name: 'C',
+    //   _id: 1
+    //     }]
 
     const skills = skillList.map((item, index) => {
       return(
         <tr key={index}>
           <td>{index + 1}</td>
           <td>{item.name}</td>
-          <td>{number[item._id].number}</td>
+          <td>{number[item._id] ? number[item._id].number : 1}</td>
           <td>
-            <MdEdit size="1.5em" onClick={()=>this.handleEdit(item._id)}/>
+            <MdEdit size="1.5em"  onClick={()=> this.handleEdit(item.name, item._id)}/>
             <span className="ml-3">
               <MdDeleteForever 
                 className="delete"
@@ -112,8 +133,35 @@ class Skills extends React.Component {
         )
       })
 
+
+    
+
     return (
       <div className="content-skill">
+         <Modal show={show} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter new skill</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex">
+          <input type="text" name="selectedSkill" id="selectedSkill"
+              value={selectedSkill}
+              onFocus={this.handleFocus}
+              className={error ? 'input-skill-error ' : 'input-skill rounded'}
+              onChange={this.onChange} />
+          <Button variant="primary"  className="ml-3" onClick={this.handleSave}>
+            Save Changes
+          </Button>
+          </div>
+          
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
         <div className="d-flex">
           <input type="text" name="skill" id="skill"
             placeholder="Enter new skill"
