@@ -8,6 +8,15 @@
       padding-left: 5px;
       font-size: 16px;
     }
+
+    .input-skill-error{
+        margin-right: 2%;
+        background-color: $white-two;
+      border: solid 1px red;
+      padding-left: 5px;
+      font-size: 16px;
+    }
+
     .delete{
         &:hover{
             cursor: pointer;

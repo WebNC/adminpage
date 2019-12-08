@@ -64,7 +64,7 @@ class Skills extends React.Component {
       getSkill().then(res=>{
         if(res)
           this.setState({
-            skillList: res.skillList || [{name: 'C'}],
+            skillList: res.skillList,
             number: res.number,
             skill:''
           })
@@ -95,7 +95,17 @@ class Skills extends React.Component {
 
   handleSave = () => {
     const {selectedSkill, selectedSkillID} = this.state;
+    this.setState({
+      show: false
+    })
     editSkill(selectedSkill, selectedSkillID)
+    getSkill().then(res=>{
+      this.setState({
+        skillList: res.skillList,
+        number: res.number,
+        skill:''
+      })
+    })
   }
 
   handleClose = () =>{
@@ -108,13 +118,6 @@ class Skills extends React.Component {
 
   render() {
     const {error, skill, skillList, number, show, selectedSkill} = this.state;
-
-
-    // const data = [{
-    //   name: 'C',
-    //   _id: 1
-    //     }]
-
     const skills = skillList.map((item, index) => {
       return(
         <tr key={index}>
