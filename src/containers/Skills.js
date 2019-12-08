@@ -9,11 +9,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteSkill: (skill) => {
-            dispatch(actions.handleDeleteSkill(skill))
+        deleteSkill: (id) => {
+            dispatch(actions.handleDeleteSkill(id))
         },
-        addSkill: (skill) => {
-            dispatch(actions.addSkill(skill))
+        addSkill: (name) => {
+            dispatch(actions.handleAddSkill(name))
+        },
+        editSkill: (id,value) => {
+            dispatch(actions.handleEditSkill(id, value))
         },
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table,Button} from 'react-bootstrap'
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdEdit} from "react-icons/md";
 import './Skills.scss';
 
 
@@ -68,6 +68,9 @@ class Skills extends React.Component {
               <MdDeleteForever 
                 className="delete"
                 onClick={this.handleDelete}/>
+                <span className="ml-3">
+                  <MdEdit size="1.5em" onClick={this.handleEdit}/>
+                </span>
             </td>
         </tr>
         )

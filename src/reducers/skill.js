@@ -1,4 +1,5 @@
 import * as types from '../constants/index'
+import {addSkill, deleteSkill, editSkill } from '../api/admin.action'
 
 const initialState = {
     skills: []
@@ -11,6 +12,7 @@ const skills = (state = initialState, action ) => {
                 ...state,
             }
         case types.ADD_SKILL:
+            addSkill(action.skills)
             return {
                 ...state,
             }

@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        lockStudent: (username) => {
-            dispatch(actions.handleLockStudent(username))
+        lockStudent: (id) => {
+            dispatch(actions.handleLockStudent(id))
         },
     }
 }

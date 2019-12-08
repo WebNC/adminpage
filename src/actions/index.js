@@ -55,31 +55,39 @@ export const logOutRequest = () => {
     }
 }
 
-export const  handleLockStudent =  username => {
+export const  handleLockStudent =  id => {
     return {
         type: types.LOCK_STUDENT,
-        username
+        id
     }
 }
 
-export const  handleLockTeacher =  username => {
+export const  handleLockTeacher =  id => {
     return {
         type: types.LOCK_TEACHER,
-        username
+        id
     }
 }
 
-export const  handleDeleteSkill =  name => {
+export const  handleDeleteSkill =  id => {
     return {
         type: types.DELETE_SKILL,
-        name
+        id
     }
 }
 
-export const  addSkill =  name => {
+export const  handleAddSkill =  name => {
     return {
         type: types.ADD_SKILL,
         name
+    }
+}
+
+export const  handleEditSkill =  (id, value) => {
+    return {
+        type: types.EDIT_SKILL,
+        id,
+        value
     }
 }
 

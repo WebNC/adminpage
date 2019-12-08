@@ -92,3 +92,37 @@ export const updateAvatar = (user) => {
 }
 
 
+export const getSkill = () => {
+    return API
+        .get(`/skill-list/read`)
+        .then(res => {
+            return res.data
+        }).catch(error => console.log(error));
+}
+
+export const editSkill = (id) => {
+    return API
+        .post(`/skill-list/update`,{id})
+        .then(res => {
+            return res.data
+        }).catch(error => console.log(error));
+}
+
+export const addSkill = (id) => {
+    return API
+        .post(`/skill-list/create`,{id})
+        .then(res => {
+            return res.data
+        }).catch(error => console.log(error));
+}
+
+export const deleteSkill = (id) => {
+    return API
+        .post(`/skill-list/delete`,{id})
+        .then(res => {
+            return res.data
+        }).catch(error => console.log(error));
+}
+
+
+
