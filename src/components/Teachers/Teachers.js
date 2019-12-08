@@ -1,6 +1,8 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye } from "react-icons/md";
+import {getAllUserTeacher} from '../../api/admin.action'
 import './Teachers.scss';
 
 
@@ -8,12 +10,15 @@ class Teachers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          
+          teachers: []
         };
     }
 
     componentDidMount = () => {
-      
+      const page = 1;
+      getAllUserTeacher(page).then(res=>{
+        this.setState({teachers: res.data.message})
+      })
     }
 
     handleLock = () =>{
@@ -22,14 +27,8 @@ class Teachers extends React.Component {
     }
 
     render() {
-      const data = [
-        {
-          username: 'username1',
-          major: ['major1','major2']    
-        }
-      ];
-      const teachers = data.map((item, index) => {
-        // const major = ` ${  item.map(i => i)}`
+      const {teachers} = this.state;
+      const teacherList = teachers.map((item, index) => {
         return(
           <tr key={index}>
             <td>{index + 1}</td>
@@ -58,7 +57,7 @@ class Teachers extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {teachers}
+            {teacherList}
           </tbody>
         </Table>
       );

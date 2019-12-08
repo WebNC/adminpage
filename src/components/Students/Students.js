@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye } from "react-icons/md";
+import {getAllUserStudent} from '../../api/admin.action'
 import './Students.scss';
 
 
@@ -8,12 +9,15 @@ class Students extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          
+          students: []
         };
     }
 
     componentDidMount = () => {
-      
+      const page = 1;
+      getAllUserStudent(page).then(res=>{
+        this.setState({students: res.data.message})
+      })
     }
 
     handleDelete = () =>{
@@ -23,12 +27,9 @@ class Students extends React.Component {
 
 
     render() {
-      const data = [
-        {username: 'username1'},
-        {username: 'username2'},
-        {username: 'username3'}
-      ];
-      const students = data.map((item, index) => {
+      const {students} = this.state;
+
+      const studentsList = students.map((item, index) => {
           return(
             <tr key={index}>
               <td>{index + 1}</td>
@@ -54,7 +55,7 @@ class Students extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {students}
+            {studentsList}
           </tbody>
         </Table>
       );

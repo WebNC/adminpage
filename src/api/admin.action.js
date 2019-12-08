@@ -128,4 +128,21 @@ export const deleteSkill = (id) => {
 }
 
 
+export const getAllUserTeacher = page => {
+    return API
+        .get(`/user-list/teacher/page=${page}`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+
+
+export const getAllUserStudent = page => {
+    return API
+        .get(`/user-list/student/page=${page}`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+
 
