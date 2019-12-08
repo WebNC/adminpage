@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { MdLock,MdRemoveRedEye } from "react-icons/md";
-import {getAllUserTeacher, blockUser} from '../../api/admin.action'
+import { MdLock,MdRemoveRedEye,MdLockOpen } from "react-icons/md";
 import {Link} from 'react-router-dom'
+import {getAllUserTeacher, blockUser, unblockUser} from '../../api/admin.action'
 import './Teachers.scss';
 
 
@@ -33,6 +33,16 @@ class Teachers extends React.Component {
       })
     }
 
+    handleOpenLock = id =>{
+      const {page} = this.state
+      unblockUser(id).then(res =>{
+        console.log(res)
+      })
+      getAllUserTeacher(page).then(res=>{
+        this.setState({teachers: res.data.message})
+      })
+    }
+
     render() {
       const {teachers} = this.state;
       const teacherList = teachers.map((item, index) => {
@@ -45,7 +55,10 @@ class Teachers extends React.Component {
               <div>
                 <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link>
                 <span className="ml-3">
-                  <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
+                  {item.isBlocked ? 
+                    <MdLockOpen  className="delete" onClick={() => this.handleOpenLock(item._id)}/> :
+                    <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
+                }
                 </span>
               </div>
             </td>

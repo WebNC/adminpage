@@ -2,8 +2,8 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
-import {getAllUserStudent, blockUser} from '../../api/admin.action'
 import {Link} from 'react-router-dom'
+import {getAllUserStudent, blockUser,unblockUser} from '../../api/admin.action'
 import './Students.scss';
 
 
@@ -35,7 +35,7 @@ class Students extends React.Component {
 
     handleOpenLock = id =>{
       const {page} = this.state
-      blockUser(id).then(res =>{
+      unblockUser(id).then(res =>{
         console.log(res)
       })
       getAllUserStudent(page).then(res=>{
