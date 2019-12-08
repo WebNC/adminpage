@@ -1,7 +1,8 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { MdLock,MdRemoveRedEye } from "react-icons/md";
-import {getAllUserStudent} from '../../api/admin.action'
+import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
+import {getAllUserStudent, blockUser} from '../../api/admin.action'
 import './Students.scss';
 
 
@@ -9,20 +10,36 @@ class Students extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          students: []
+          students: [],
+          page: 0,
         };
     }
 
     componentDidMount = () => {
-      const page = 1;
+      const {page} = this.state;
       getAllUserStudent(page).then(res=>{
         this.setState({students: res.data.message})
       })
     }
 
-    handleDelete = () =>{
-      const {lockStudent} = this.props;
-      lockStudent();
+    handleLock = id =>{
+      const {page} = this.state
+      blockUser(id).then(res =>{
+        console.log(res)
+      })
+      getAllUserStudent(page).then(res=>{
+        this.setState({students: res.data.message})
+      })
+    }
+
+    handleOpenLock = id =>{
+      const {page} = this.state
+      blockUser(id).then(res =>{
+        console.log(res)
+      })
+      getAllUserStudent(page).then(res=>{
+        this.setState({students: res.data.message})
+      })
     }
 
 
@@ -38,7 +55,12 @@ class Students extends React.Component {
               <div>
                 <MdRemoveRedEye className="view-detail" />
                 <span className="ml-3">
-                  <MdLock  className="delete" onClick={this.handleDelete}/>
+                  {item.isBlocked ? 
+                    <MdLockOpen  className="delete" onClick={() => this.handleOpenLock(item._id)}/> :
+                    <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
+
+
+                }
                 </span>
               </div>
             </td>

@@ -1,5 +1,5 @@
 import * as types from '../constants/index'
-import {addSkill, deleteSkill, editSkill, getSkill } from '../api/admin.action'
+import {addSkill, deleteSkill } from '../api/admin.action'
 
 
 

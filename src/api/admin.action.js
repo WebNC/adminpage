@@ -114,7 +114,6 @@ export const addSkill = (value) => {
     return API
         .post(`/skill-list/create`,{value   })
         .then(res => {
-            console.log(res)
             return res
         }).catch(error => console.log(error));
 }
@@ -130,7 +129,7 @@ export const deleteSkill = (id) => {
 
 export const getAllUserTeacher = page => {
     return API
-        .get(`/user-list/teacher/page=${page}`)
+        .get(`/user-list/teacher/${page}`)
         .then(res => {
             return res
         }).catch(error => console.log(error));
@@ -139,10 +138,18 @@ export const getAllUserTeacher = page => {
 
 export const getAllUserStudent = page => {
     return API
-        .get(`/user-list/student/page=${page}`)
+        .get(`/user-list/student/${page}`)
         .then(res => {
             return res
         }).catch(error => console.log(error));
 }
 
+
+export const blockUser = id => {
+    return API
+        .get(`/user/block/${id}`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
 

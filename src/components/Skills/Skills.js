@@ -20,7 +20,6 @@ class Skills extends React.Component {
 
   componentDidMount = () => {
     getSkill().then(res=>{
-      console.log(res)
       this.setState({
         skillList: res.skillList,
         number: res.number
@@ -109,7 +108,7 @@ class Skills extends React.Component {
       })
 
     return (
-      <div className="content">
+      <div className="content-skill">
         <div className="d-flex">
           <input type="text" name="skill" id="skill"
             placeholder="Enter new skill"
@@ -121,7 +120,7 @@ class Skills extends React.Component {
                   
         </div>
         
-      <Table striped bordered hover className="mt-5">
+      <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
             <th>#</th>

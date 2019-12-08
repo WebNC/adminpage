@@ -2,7 +2,7 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye } from "react-icons/md";
-import {getAllUserTeacher} from '../../api/admin.action'
+import {getAllUserTeacher, blockUser} from '../../api/admin.action'
 import './Teachers.scss';
 
 
@@ -10,20 +10,26 @@ class Teachers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          teachers: []
+          teachers: [],
+          page: 0,
         };
     }
 
     componentDidMount = () => {
-      const page = 1;
+      const {page} = this.state
       getAllUserTeacher(page).then(res=>{
         this.setState({teachers: res.data.message})
       })
     }
 
-    handleLock = () =>{
-      const {lockTeacher} = this.props;
-      lockTeacher();
+    handleLock = id =>{
+      const {page} = this.state
+      blockUser(id).then(res =>{
+        console.log(res)
+      })
+      getAllUserTeacher(page).then(res=>{
+        this.setState({teachers: res.data.message})
+      })
     }
 
     render() {
@@ -38,7 +44,7 @@ class Teachers extends React.Component {
               <div>
                 <MdRemoveRedEye  className="view-detail" />
                 <span className="ml-3">
-                  <MdLock  className="delete" onClick={this.handleLock}/>
+                  <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
                 </span>
               </div>
             </td>
