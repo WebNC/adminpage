@@ -17,7 +17,6 @@ const handleLogout = (email, password) => {
     }
 }
 
-
 const  handleRegister =  () => {
     return {
         type: types.REGISTER
@@ -53,6 +52,34 @@ export const handleRegisterRequest = (username, email, psw) => {
 export const logOutRequest = () => {
     return (dispatch) => {
         dispatch(handleLogout())
+    }
+}
+
+export const  handleLockStudent =  username => {
+    return {
+        type: types.LOCK_STUDENT,
+        username
+    }
+}
+
+export const  handleLockTeacher =  username => {
+    return {
+        type: types.LOCK_TEACHER,
+        username
+    }
+}
+
+export const  handleDeleteSkill =  name => {
+    return {
+        type: types.DELETE_SKILL,
+        name
+    }
+}
+
+export const  addSkill =  name => {
+    return {
+        type: types.ADD_SKILL,
+        name
     }
 }
 
