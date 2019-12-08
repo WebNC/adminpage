@@ -16,4 +16,10 @@
         width: 24px;
         height: 26px;
     }
+
+    td{
+        &:hover{
+            cursor: pointer;
+        }
+    }
 }

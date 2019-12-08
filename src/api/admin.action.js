@@ -100,6 +100,8 @@ export const getSkill = () => {
         }).catch(error => console.log(error));
 }
 
+
+
 export const editSkill = (id) => {
     return API
         .post(`/skill-list/update`,{id})
@@ -108,11 +110,12 @@ export const editSkill = (id) => {
         }).catch(error => console.log(error));
 }
 
-export const addSkill = (id) => {
+export const addSkill = (value) => {
     return API
-        .post(`/skill-list/create`,{id})
+        .post(`/skill-list/create`,{value   })
         .then(res => {
-            return res.data
+            console.log(res)
+            return res
         }).catch(error => console.log(error));
 }
 

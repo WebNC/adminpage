@@ -4,7 +4,7 @@ import Skills from '../components/Skills/Skills'
 
 
 const mapStateToProps = state => ({
-    store : state.login
+    skills: state.skills
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         editSkill: (id,value) => {
             dispatch(actions.handleEditSkill(id, value))
+        },
+        getSkill: () => {
+            dispatch(actions.getSkill())
         },
     }
 }

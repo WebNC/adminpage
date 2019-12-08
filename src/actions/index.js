@@ -91,3 +91,9 @@ export const  handleEditSkill =  (id, value) => {
     }
 }
 
+export const  getSkill =  () => {
+    return {
+        type: types.GET_SKILL
+    }
+}
+

@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import {Table,Button} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
+import {getSkill} from '../../api/admin.action';
 import './Skills.scss';
 
 
@@ -10,12 +12,20 @@ class Skills extends React.Component {
     super(props);
     this.state = {
       error: false,
-      skill: ''
+      skill: '',
+      skillList: [],
+      number:{}
     };
   }
 
   componentDidMount = () => {
-    
+    getSkill().then(res=>{
+      console.log(res)
+      this.setState({
+        skillList: res.skillList,
+        number: res.number
+      })
+    })
   }
 
   onChange = e => {
@@ -40,38 +50,60 @@ class Skills extends React.Component {
         error: true,
       })
     } else {
-      addSkill();
+      addSkill(skill)
+      getSkill().then(res=>{
+        this.setState({
+          skillList: res.skillList,
+          number: res.number,
+          skill:''
+        })
+      })
     }
   }
 
-  handleDelete = () =>{
+  handleDelete = (id) =>{
     const {deleteSkill} = this.props;
-    deleteSkill();
+    deleteSkill(id);
+    getSkill().then(res=>{
+      this.setState({
+        skillList: res.skillList,
+        number: res.number,
+        skill:''
+      })
+    })
+
+  }
+
+  handleEdit = () => {
+  }
+
+  UNSAFE_componentWillReceiveProps = () =>{
+    getSkill().then(res=>{
+      this.setState({
+        skillList: res.skillList,
+        number: res.number
+      })
+    })
   }
 
 
   render() {
-    const {error, skill} = this.state;
-    const data = [
-      {
-        name: 'skill1',
-        amount: 2   
-      }
-    ];
-    const skills = data.map((item, index) => {
-        return(
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{item.name}</td>
-            <td>{item.amount}</td>
-            <td>
+    const {error, skill, skillList, number} = this.state;
+
+    const skills = skillList.map((item, index) => {
+      return(
+        <tr key={index}>
+          <td>{index + 1}</td>
+          <td>{item.name}</td>
+          <td>{number[item._id].number}</td>
+          <td>
+            <MdEdit size="1.5em" onClick={()=>this.handleEdit(item._id)}/>
+            <span className="ml-3">
               <MdDeleteForever 
                 className="delete"
-                onClick={this.handleDelete}/>
-                <span className="ml-3">
-                  <MdEdit size="1.5em" onClick={this.handleEdit}/>
-                </span>
-            </td>
+                onClick={()=>this.handleDelete(item._id)}/>
+            </span>
+          </td>
         </tr>
         )
       })

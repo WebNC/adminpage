@@ -6,4 +6,5 @@ export const  EDIT_SKILL= 'EDIT_SKILL';
 export const  ADD_SKILL= 'ADD_SKILL';
 export const  LOCK_TEACHER= 'LOCK_TEACHER';
 export const  LOCK_STUDENT= 'LOCK_STUDENT';
+export const  GET_SKILL= 'GET_SKILL';
 
