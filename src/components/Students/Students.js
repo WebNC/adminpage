@@ -3,6 +3,7 @@ import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
 import {getAllUserStudent, blockUser} from '../../api/admin.action'
+import {Link} from 'react-router-dom'
 import './Students.scss';
 
 
@@ -42,7 +43,6 @@ class Students extends React.Component {
       })
     }
 
-
     render() {
       const {students} = this.state;
 
@@ -53,7 +53,9 @@ class Students extends React.Component {
               <td>{item.username}</td>
               <td>
               <div>
-                <MdRemoveRedEye className="view-detail" />
+                <Link to={`/${item._id}`}>
+                  <MdRemoveRedEye className="view-detail" />
+                </Link>
                 <span className="ml-3">
                   {item.isBlocked ? 
                     <MdLockOpen  className="delete" onClick={() => this.handleOpenLock(item._id)}/> :

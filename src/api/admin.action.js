@@ -153,3 +153,11 @@ export const blockUser = id => {
         }).catch(error => console.log(error));
 }
 
+export const getUserDetail = id =>{
+    return API
+        .get(`/user-detail${id}`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+

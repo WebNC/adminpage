@@ -3,6 +3,7 @@ import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye } from "react-icons/md";
 import {getAllUserTeacher, blockUser} from '../../api/admin.action'
+import {Link} from 'react-router-dom'
 import './Teachers.scss';
 
 
@@ -42,7 +43,7 @@ class Teachers extends React.Component {
             <td>{item.major}</td>
             <td>
               <div>
-                <MdRemoveRedEye  className="view-detail" />
+                <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link>
                 <span className="ml-3">
                   <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
                 </span>

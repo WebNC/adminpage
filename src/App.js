@@ -10,6 +10,7 @@ import Login from './containers/Login';
 import Register from './containers/Register';
 import Home from './containers/Home/Home';
 import Profile from './containers/ChangeProfile/Profile';
+import UserDetail from './components/UserDetail/UserDetail';
 
 
 
@@ -38,6 +39,9 @@ class App extends React.Component {
 
   render(){
     const {logined} = this.state;
+    //  const id = '5de73e09f2deb15b346d89aa';
+    // console.log(this.props.match)
+
     return <Router>
     <Switch>
 
@@ -53,6 +57,13 @@ class App extends React.Component {
       <Route exact path="/profile" >
         {!logined ? <Redirect to="/login" /> : <Profile />}
       </Route>
+      {/* <Route exact path="/:id" >
+        {!logined ? <Redirect to="/login" /> : <UserDetail />}
+      </Route > */}
+
+      <Route  exact path="/:id"   component={UserDetail} />
+
+
     </Switch>
   </Router >
 } 

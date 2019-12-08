@@ -1,8 +1,9 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */
 import React from 'react';
 import {Table,Button} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
-import {getSkill} from '../../api/admin.action';
+import {getSkill, addSkill} from '../../api/admin.action';
 import './Skills.scss';
 
 
@@ -20,10 +21,13 @@ class Skills extends React.Component {
 
   componentDidMount = () => {
     getSkill().then(res=>{
-      this.setState({
-        skillList: res.skillList,
-        number: res.number
-      })
+      if(res){
+        this.setState({
+          skillList: res.skillList,
+          number: res.number
+        })
+      }
+     
     })
   }
 
@@ -42,7 +46,7 @@ class Skills extends React.Component {
 
   handleAddSkill = () => {
     const {skill} = this.state;
-    const {addSkill} = this.props;
+    // const {addSkill} = this.props;
 
     if(skill.trim() === ''){
       this.setState({
@@ -51,11 +55,12 @@ class Skills extends React.Component {
     } else {
       addSkill(skill)
       getSkill().then(res=>{
-        this.setState({
-          skillList: res.skillList,
-          number: res.number,
-          skill:''
-        })
+        if(res)
+          this.setState({
+            skillList: res.skillList,
+            number: res.number,
+            skill:''
+          })
       })
     }
   }
