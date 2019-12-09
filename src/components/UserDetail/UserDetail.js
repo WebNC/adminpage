@@ -30,7 +30,7 @@ class UserDetail extends React.Component {
         const { information} = this.state
         // console.log(this.props)
         return (
-            <div >
+            <div className="user-detail">
                 <Header/>
                 <h2 className="ml-5 mt-3 mb-5">User information</h2>
                 <div className="row p-3 profile">

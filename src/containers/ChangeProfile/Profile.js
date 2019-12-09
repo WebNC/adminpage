@@ -237,13 +237,13 @@ class Profile extends React.Component {
                                 <button
                                 type="button"
                                     onClick={this.handleCancelInfor}
-                                    className='loginButtonActive'>
+                                    className='login-button-active'>
                                     <div className="buttonText mb-4" >Cancel</div>
                                 </button>
                                 <button
                                     type="button"
                                     onClick={this.handleChangeInfor}
-                                    className={active ? 'loginButtonActive' : 'loginButton'}>
+                                    className={active ? 'login-button-active' : 'login-button'}>
                                     <div className="buttonText mb-4" >Change</div>
                                 </button>
                             </div>

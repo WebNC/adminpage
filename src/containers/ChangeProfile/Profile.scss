@@ -1,33 +1,14 @@
 @import "../../utils/utils.scss";
 
-.brand-title {
-  display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  white-space: nowrap;
-  color: #212529;
-  font-family: Montserrat;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
 
 .profile-container {
-  height: 920px;
-  width: 900px;
+  height: 920px !important;
+  width: 900px !important;
 
   .change-profile-title {
     margin-left: 10%;
-    height: 100px;
-    width: 260px;
+    height: 100px !important;
+    width: 260px !important;
   }
 
   .change-avatar {
@@ -54,29 +35,32 @@
     }
   }
 
-
-
-  .loginButton {
-    height: 40px;
-    width: 180px;
-    margin-left: 4%;
+  .login-button-active {
+    height: 40px ;
+    width: 180px ;
+    padding-top: 1%;
+    padding-right: 5%;
+    background-color: #ffa15f;
+    margin-top: 4%;
+    margin-left: 6%;
+    margin-bottom: 6%;
+    border-radius: 1px;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+  
 
     .buttonText {
-      margin-left: 32%;
+      margin-left: 20%;
       margin-top: 4%;
       font-size: 14px;
+      color: white;
+      font-family: Montserrat;
+      font-weight: 600;
     }
   }
 
-  .loginButtonActive {
-    height: 40px;
-    width: 180px;
-    margin-left: 4%;
-
-    .buttonText {
-      margin-left: 30%;
-      margin-top: 4%;
-      font-size: 14px;
-    }
+  .login-button {
+    @extend .login-button-active;
+    background: $white-four;
   }
 }

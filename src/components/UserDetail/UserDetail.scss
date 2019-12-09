@@ -1,10 +1,15 @@
 @import '../Profile/Profile.scss';
+@import '../../utils/utils.scss';
 
-.profile{
-    .activeR{
-        width: auto;
-        .usernameLabel{
-            font-weight: bold;
+
+.user-detail{
+    background: $white-two;
+    .profile{
+        .activeR{
+            width: auto;
+            .usernameLabel{
+                font-weight: bold;
+            }
         }
     }
 }
