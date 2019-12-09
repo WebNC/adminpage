@@ -49,6 +49,7 @@ class Skills extends React.Component {
 
   handleAddSkill = () => {
     const {skill} = this.state;
+    const {skillList} = this.state;
     // const {addSkill} = this.props;
 
     if(skill.trim() === ''){
@@ -59,6 +60,10 @@ class Skills extends React.Component {
       addSkill(skill).then(res=>{
         if(res.status !== 200){
           this.setState({error: true})
+        }
+        else{
+          skillList.push({name: skill});
+          this.setState({skillList})
         }
       })
       getSkill().then(res=>{
@@ -74,14 +79,21 @@ class Skills extends React.Component {
 
   handleDelete = (id) =>{
     const {deleteSkill} = this.props;
+    const {skillList} = this.state;
     deleteSkill(id);
-    getSkill().then(res=>{
-      this.setState({
-        skillList: res.skillList,
-        number: res.number,
-        skill:''
-      })
-    })
+    const skill = skillList.find(item => item._id === id);
+    if(skill){
+      skillList.pop(skill);
+      this.setState({skillList})
+    }
+
+    // getSkill().then(res=>{
+    //   this.setState({
+    //     skillList: res.skillList,
+    //     number: res.number,
+    //     skill:''
+    //   })
+    // })
 
   }
 
