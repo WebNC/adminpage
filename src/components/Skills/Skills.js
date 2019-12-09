@@ -86,16 +86,7 @@ class Skills extends React.Component {
       skillList.pop(skill);
       this.setState({skillList})
     }
-
-    // getSkill().then(res=>{
-    //   this.setState({
-    //     skillList: res.skillList,
-    //     number: res.number,
-    //     skill:''
-    //   })
-    // })
-
-  }
+   }
 
   handleEdit = (name, id) => {
     this.setState({
@@ -114,7 +105,7 @@ class Skills extends React.Component {
     editSkill(selectedSkillID,selectedSkill)
     const indexOldItem = skillList.indexOf(item => item._id === selectedSkillID)
     if(indexOldItem){
-      skillList = [skillList.splice(0, indexOldItem-1), {name: selectedSkill, _id: selectedSkillID}, skillList.splice(indexOldItem, skillList.size)]
+      skillList = [...skillList.splice(0, indexOldItem), {name: selectedSkill, _id: selectedSkillID}, ...skillList.splice(indexOldItem + 1, skillList.size)]
       this.setState({skillList})
     }
     getSkill().then(res=>{

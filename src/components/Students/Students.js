@@ -23,24 +23,26 @@ class Students extends React.Component {
       })
     }
 
+
+    handleUpdate = (id) =>{
+      let {students} = this.state;
+      const index = students.findIndex(item => item._id === id);
+      if(index !== -1){
+        const student = students[index];
+        student.isBlocked = !student.isBlocked;
+        students = [...students.slice(0, index), student, ...students.slice(index+1, students.size)]
+        this.setState({students})
+      }
+    }
+
     handleLock = id =>{
-      const {page} = this.state
-      blockUser(id).then(res =>{
-        console.log(res)
-      })
-      getAllUserStudent(page).then(res=>{
-        this.setState({students: res.data.message})
-      })
+      this.handleUpdate(id)
+      blockUser(id);
     }
 
     handleOpenLock = id =>{
-      const {page} = this.state
-      unblockUser(id).then(res =>{
-        console.log(res)
-      })
-      getAllUserStudent(page).then(res=>{
-        this.setState({students: res.data.message})
-      })
+      this.handleUpdate(id)
+      unblockUser(id)
     }
 
     render() {
