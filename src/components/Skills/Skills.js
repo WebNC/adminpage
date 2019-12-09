@@ -42,7 +42,7 @@ class Skills extends React.Component {
 
   handleFocus = e => {
     this.setState({
-      [e.target.name]: '',
+      // [e.target.name]: '',
       error: false
     })
   }
@@ -50,8 +50,6 @@ class Skills extends React.Component {
   handleAddSkill = () => {
     const {skill} = this.state;
     const {skillList} = this.state;
-    // const {addSkill} = this.props;
-
     if(skill.trim() === ''){
       this.setState({
         error: true,
@@ -99,22 +97,26 @@ class Skills extends React.Component {
   handleSave = () => {
     const {selectedSkill, selectedSkillID} = this.state;
     let {skillList} = this.state;
+    
+    editSkill(selectedSkillID,selectedSkill)
+    const indexOldItem = skillList.findIndex(item => item._id === selectedSkillID)
+    if(indexOldItem !== -1){
+      const skill = skillList[indexOldItem]
+      skill.name = selectedSkill;
+      skillList = [...skillList.slice(0, indexOldItem), skill, ...skillList.slice(indexOldItem + 1, skillList.size)]
+      this.setState({skillList})
+    }
+
     this.setState({
       show: false
     })
-    editSkill(selectedSkillID,selectedSkill)
-    const indexOldItem = skillList.indexOf(item => item._id === selectedSkillID)
-    if(indexOldItem){
-      skillList = [...skillList.splice(0, indexOldItem), {name: selectedSkill, _id: selectedSkillID}, ...skillList.splice(indexOldItem + 1, skillList.size)]
-      this.setState({skillList})
-    }
-    getSkill().then(res=>{
-      this.setState({
-        skillList: res.skillList,
-        number: res.number,
-        skill:''
-      })
-    })
+    // getSkill().then(res=>{
+    //   this.setState({
+    //     skillList: res.skillList,
+    //     number: res.number,
+    //     skill:''
+    //   })
+    // })
   }
 
   handleClose = () =>{
@@ -132,7 +134,7 @@ class Skills extends React.Component {
         <tr key={index}>
           <td>{index + 1}</td>
           <td>{item.name}</td>
-          <td>{number[item._id] ? number[item._id].number : 1}</td>
+          <td>{number[item._id] ? number[item._id].number : 0}</td>
           <td>
             <MdEdit size="1.5em"  onClick={()=> this.handleEdit(item.name, item._id)}/>
             <span className="ml-3">
