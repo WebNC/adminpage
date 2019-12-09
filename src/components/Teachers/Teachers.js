@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
+import {Table, Pagination} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye,MdLockOpen } from "react-icons/md";
 import {Link} from 'react-router-dom'
 import {getAllUserTeacher, blockUser, unblockUser} from '../../api/admin.action'
@@ -13,6 +13,7 @@ class Teachers extends React.Component {
         this.state = {
           teachers: [],
           page: 0,
+          amount: 0,
         };
     }
 
@@ -45,8 +46,34 @@ class Teachers extends React.Component {
       unblockUser(id)
     }
 
+    handlePre = () =>{
+      const {page, amount} = this.state;
+      if(page  > Math.floor(amount/25)){
+        this.setState({page: page -1})
+        getAllUserTeacher(page).then(res=>{
+          this.setState({teachers: res.data.message})
+        })
+        
+      }
+      
+    }
+
+    handleNext = () =>{
+      const {page, amount} = this.state;
+      if(page < Math.floor(amount/25) ){
+        this.setState({page: page + 1})
+        getAllUserTeacher(page).then(res=>{
+          this.setState({teachers: res.data.message})
+        })
+        
+      }
+    }
+
+
     render() {
-      const {teachers} = this.state;
+      const {teachers,amount,page} = this.state;
+      const active = page +1;
+
       const teacherList = teachers.map((item, index) => {
         return(
           <tr key={index}>
@@ -67,8 +94,26 @@ class Teachers extends React.Component {
           </tr>
         )
       })
+
+      const items = [];
+      for (let number = 1; number <= amount/25+1; number+=1) {
+        items.push(
+          <Pagination.Item key={number}  active={number === active}>
+            {number}
+          </Pagination.Item>,
+        );
+      }
+
       return (
-        <Table striped bordered hover>
+        <>
+         <Pagination className="float-right mr-3" size="sm">
+            <Pagination.First onClick={this.handlePre} />
+            {items}
+            {/* <Pagination.Ellipsis /> */}
+            <Pagination.Last onClick={this.handleNext}/>
+          </Pagination>
+
+          <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
@@ -82,7 +127,10 @@ class Teachers extends React.Component {
             {teacherList}
           </tbody>
         </Table>
-      );
+     
+        </>
+        
+     );
     }
 }
 

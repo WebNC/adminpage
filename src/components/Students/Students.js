@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
+import {Table, Pagination} from 'react-bootstrap'
 import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
 import {Link} from 'react-router-dom'
-import {getAllUserStudent, blockUser,unblockUser} from '../../api/admin.action'
+import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/admin.action'
 import './Students.scss';
 
 
@@ -12,6 +12,7 @@ class Students extends React.Component {
         super(props);
         this.state = {
           students: [],
+          amount: 0,
           page: 0,
         };
     }
@@ -21,8 +22,11 @@ class Students extends React.Component {
       getAllUserStudent(page).then(res=>{
         this.setState({students: res.data.message})
       })
+      
+      getNumberUserStudent().then(res=>{
+        this.setState({amount: res.data.message.length})
+      })
     }
-
 
     handleUpdate = (id) =>{
       let {students} = this.state;
@@ -45,9 +49,32 @@ class Students extends React.Component {
       unblockUser(id)
     }
 
-    render() {
-      const {students} = this.state;
+    handlePre = () =>{
+      const {page, amount} = this.state;
+      if(page  > Math.floor(amount/25)){
+        this.setState({page: page -1})
+        getAllUserStudent(page).then(res=>{
+          this.setState({students: res.data.message})
+        })
+        
+      }
+      
+    }
 
+    handleNext = () =>{
+      const {page, amount} = this.state;
+      if(page < Math.floor(amount/25) ){
+        this.setState({page: page + 1})
+        getAllUserStudent(page).then(res=>{
+          this.setState({students: res.data.message})
+        })
+        
+      }
+    }
+
+    render() {
+      const {students, amount, page} = this.state;
+      const active = page +1;
       const studentsList = students.map((item, index) => {
           return(
             <tr key={index}>
@@ -71,20 +98,38 @@ class Students extends React.Component {
           </tr>
           )
         })
+
+      const items = [];
+      for (let number = 1; number <= amount/25+1; number+=1) {
+        items.push(
+          <Pagination.Item key={number}  active={number === active}>
+            {number}
+          </Pagination.Item>,
+        );
+      }
       return (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Setting</th>
-            </tr>
-          </thead>
-          <tbody>
-            {studentsList}
-          </tbody>
-        </Table>
-      );
+        <>
+          <Pagination className="float-right mr-3" size="sm">
+            <Pagination.First onClick={this.handlePre} />
+            {items} 
+            {/* <Pagination.Ellipsis /> */}
+            <Pagination.Last onClick={this.handleNext}/>
+          </Pagination>
+
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Setting</th>
+              </tr>
+            </thead>
+            <tbody>
+              {studentsList}
+            </tbody>
+          </Table>
+        </>
+     );
     }
 }
 

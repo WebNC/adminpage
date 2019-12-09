@@ -144,6 +144,22 @@ export const getAllUserStudent = page => {
         }).catch(error => console.log(error));
 }
 
+export const getNumberUserTeacher = () =>{
+    return API
+        .get(`user-list/teacher/number`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+
+export const getNumberUserStudent = () =>{
+    return API
+        .get(`user-list/student/number`)
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+
 
 export const blockUser = id => {
     return API
