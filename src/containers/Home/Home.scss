@@ -1,5 +1,23 @@
 @import '../../utils/utils.scss';
 
+.brand-title{
+    display: inline-block;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    color: #212529;
+    font-family: Montserrat;
+    font-weight: 600;
+  
+    &:hover {
+      text-decoration: none;
+    }
+}
+
+
 .first-column{
     .nav-tabs{
         border-bottom: none;

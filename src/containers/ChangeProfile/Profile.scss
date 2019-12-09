@@ -22,24 +22,24 @@
 
   .activeR {
     .passwordLabel {
-      width: 124px;
+      width: 124px !important;
     }
     .phoneInput {
-      width: 220px;
+      width: 220px !important;
     }
     .ageInput{
-      width: 100px;
+      width: 100px !important;
     }
     .pass{
-      width: 180px;
+      width: 180px !important;
     }
   }
 
   .login-button-active {
-    height: 40px ;
-    width: 180px ;
+    height: 34px;
+    width: 140px;
     padding-top: 1%;
-    padding-right: 5%;
+    padding-right: 4%;
     background-color: #ffa15f;
     margin-top: 4%;
     margin-left: 6%;
@@ -50,8 +50,8 @@
   
 
     .buttonText {
-      margin-left: 20%;
-      margin-top: 4%;
+      margin-left: 12%;
+      margin-top: 1%;
       font-size: 14px;
       color: white;
       font-family: Montserrat;

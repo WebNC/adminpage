@@ -137,9 +137,7 @@ class Profile extends React.Component {
         const {profile} = this.props;
         if (user) {
             user.url = profile.url
-            updateAvatar(user).then(res => {
-                
-            })
+            updateAvatar(user)
         }
     }
 
@@ -238,13 +236,13 @@ class Profile extends React.Component {
                                 type="button"
                                     onClick={this.handleCancelInfor}
                                     className='login-button-active'>
-                                    <div className="buttonText mb-4" >Cancel</div>
+                                    <div className="buttonText" >Cancel</div>
                                 </button>
                                 <button
                                     type="button"
                                     onClick={this.handleChangeInfor}
                                     className={active ? 'login-button-active' : 'login-button'}>
-                                    <div className="buttonText mb-4" >Change</div>
+                                    <div className="buttonText" >Change</div>
                                 </button>
                             </div>
 
@@ -301,14 +299,15 @@ class Profile extends React.Component {
                         <button
                         type="button"
                             onClick={this.handleCancelPsw}
-                            className='loginButtonActive '>
-                            <div className="buttonText mb-5" >Cancel</div>
+                            className='login-button-active'>
+                            <div className="buttonText " >Cancel</div>
                         </button>
                         <button
                         type="button"
                             onClick={this.handleChangePsw}
-                            className={activePsw ? 'loginButtonActive ' : 'loginButton'}>
-                            <div className="buttonText mb-5" >Change</div>
+                            className={activePsw ? 'login-button-active ' : 'login-button'}>
+                            <div className="buttonText" >Change</div>
+                            
                         </button>
 
                     </div>
