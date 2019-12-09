@@ -107,10 +107,16 @@ class Skills extends React.Component {
 
   handleSave = () => {
     const {selectedSkill, selectedSkillID} = this.state;
+    let {skillList} = this.state;
     this.setState({
       show: false
     })
-    editSkill(selectedSkill, selectedSkillID)
+    editSkill(selectedSkillID,selectedSkill)
+    const indexOldItem = skillList.indexOf(item => item._id === selectedSkillID)
+    if(indexOldItem){
+      skillList = [skillList.splice(0, indexOldItem-1), {name: selectedSkill, _id: selectedSkillID}, skillList.splice(indexOldItem, skillList.size)]
+      this.setState({skillList})
+    }
     getSkill().then(res=>{
       this.setState({
         skillList: res.skillList,
