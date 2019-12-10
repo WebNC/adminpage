@@ -3,7 +3,7 @@ import React from 'react';
 import {Table, Pagination} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye,MdLockOpen } from "react-icons/md";
 import {Link} from 'react-router-dom'
-import {getAllUserTeacher, blockUser, unblockUser} from '../../api/admin.action'
+import {getAllUserTeacher, blockUser, unblockUser, getNumberUserTeacher} from '../../api/admin.action'
 import './Teachers.scss';
 
 
@@ -21,6 +21,12 @@ class Teachers extends React.Component {
       const {page} = this.state
       getAllUserTeacher(page).then(res=>{
         this.setState({teachers: res.data.message})
+      })
+
+      getNumberUserTeacher().then(res =>{
+        this.setState({
+          amount: res.data.message
+        })
       })
     }
 

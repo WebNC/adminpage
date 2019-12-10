@@ -24,7 +24,7 @@ class Students extends React.Component {
       })
       
       getNumberUserStudent().then(res=>{
-        this.setState({amount: res.data.message.length})
+        this.setState({amount: res.data.message})
       })
     }
 

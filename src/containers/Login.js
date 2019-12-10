@@ -66,8 +66,6 @@ class Login extends React.Component {
                     </label>
                    
                 </div>
-                {/* <Input label="EMAIL" type="email" name="email" id="email"  className={errors ? 'errorInput' : 'normalInput'}/> */}
-
                 <div className="activeR">
                     <label className="passwordLabel">PASSWORD
                     <input type="password" name="password" id="password"
@@ -90,7 +88,6 @@ class Login extends React.Component {
 
 
             </div>
-
         );
     }
 }
