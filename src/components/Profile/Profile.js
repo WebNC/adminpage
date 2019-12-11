@@ -70,7 +70,7 @@ class Profile extends React.Component {
                 </div>
 
                 <div className="col-4">
-                    <img src="http://placehold.it/1000" height="120" width="120" alt="avatar" className="avartar"/>
+                    <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/>
                 </div>
                     </div>
          

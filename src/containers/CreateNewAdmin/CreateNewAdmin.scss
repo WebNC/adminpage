@@ -10,10 +10,12 @@
 
     .loginT {
       @include font();
-      font-size: 32px;
-      font-weight: bold;
-      margin-left: 14%;
       color: $dark-grey;
+      
+
+      font-weight: normal;
+      font-size: 35px;
+      margin-left: 11%;
     }
     
     .errorNotification {
@@ -32,11 +34,16 @@
         margin-bottom: 4%;
     
         .usernameLabel {
+          
           @include label(45px, 18px);
+          font-size: 15px;
+          font-weight: normal;
         }
     
         .passwordLabel {
           @include label(76px, 18px);
+          font-size: 15px;
+          font-weight: normal;
         }
     
         .errorText {
@@ -82,20 +89,21 @@
     
     @mixin button($bgcolor){
       border: none;
-      height: 45px;
-      width: 100px;
+      height: 39px;
+      width: 93px;
       margin-top: 3%;
-      margin-left: 11%;
+      margin-left: 13%;
       margin-bottom: 6%;
       background: $bgcolor;
 
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       text-align: center;
       color: $white;
       font-family: Montserrat;
-      padding-top: 10px;
-      border-radius: 1px;
+      border-radius: 3px;
+
+      padding-top: 8px;
 
     }
       .loginButton {

@@ -75,7 +75,7 @@ class CreateNewAdmin extends React.Component {
                 <div className="errorNotification mt-2 mb-2">{errorText}</div>
 
                 <div className="activeR">
-                    <label className="usernameLabel">USERNAME
+                    <label className="usernameLabel">Username
                     <input type="text" name="username" id="username"
                         placeholder="Enter your username..."
                         onFocus={this.handleFocus}
@@ -87,7 +87,7 @@ class CreateNewAdmin extends React.Component {
                 </div>
                
                 <div className="activeR">
-                    <label className="usernameLabel">EMAIL
+                    <label className="usernameLabel">Email
                     <input type="email" name="email" id="email"
                         placeholder="Enter your email..."
                         onFocus={this.handleFocus}
@@ -100,7 +100,7 @@ class CreateNewAdmin extends React.Component {
               
 
                 <div className="activeR">
-                    <label className="passwordLabel">PASSWORD
+                    <label className="passwordLabel">Password
                     <input type="password" name="password" id="password"
                         placeholder="Enter your password..."
                         value={password}

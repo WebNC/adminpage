@@ -16,7 +16,7 @@ class UserDetail extends React.Component {
         const{location}=this.props
         const id = location.pathname
         getUserDetail(id).then(res=>{
-            console.log(res.data.message)
+            // console.log(res.data.message)
             this.setState({
                 information: res.data.message
             })
