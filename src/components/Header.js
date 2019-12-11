@@ -26,8 +26,8 @@ class Header extends React.Component {
             color: "#202124"
         }
         return (
-            <div className="pl-5 pr-5" style={newStyle}>
-                <Navbar bg="light" className="mb-3">
+            <div className="" style={newStyle}>
+                <Navbar className="mb-3 pl-5 pr-5" style={{background:'rgb(164, 208, 238)' }}>
                     <Navbar>
                         <Link to="/" className="brand-title">
                             HOME

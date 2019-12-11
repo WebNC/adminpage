@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { connect } from 'react-redux'
 
-import Login from './containers/Login';
+import Login from './containers/Login/Login';
 import Register from './containers/Register';
 import Home from './containers/Home/Home';
 import Profile from './containers/ChangeProfile/Profile';
