@@ -122,7 +122,7 @@ export const deleteSkill = (id) => {
     return API
         .post(`/skill-list/delete`,{id})
         .then(res => {
-            return res.data
+            return res
         }).catch(error => console.log(error));
 }
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import {Table,Button, Modal} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
-import {getSkill, addSkill, editSkill} from '../../api/admin.action';
+import {getSkill, addSkill, editSkill, deleteSkill} from '../../api/admin.action';
 import './Skills.scss';
 
 
@@ -56,34 +56,39 @@ class Skills extends React.Component {
       })
     } else {
       addSkill(skill).then(res=>{
+        console.log(res)
         if(res.status !== 200){
           this.setState({error: true})
         }
         else{
-          skillList.push({name: skill});
+          // console.log(res.data)
+          skillList.push({name: res.data.value});
           this.setState({skillList})
         }
       })
-      getSkill().then(res=>{
-        if(res)
-          this.setState({
-            skillList: res.skillList,
-            number: res.number,
-            skill:''
-          })
-      })
+      // getSkill().then(res=>{
+      //   if(res)
+      //     this.setState({
+      //       skillList: res.skillList,
+      //       number: res.number,
+      //       skill:''
+      //     })
+      // })
     }
   }
 
   handleDelete = (id) =>{
-    const {deleteSkill} = this.props;
     const {skillList} = this.state;
-    deleteSkill(id);
-    const skill = skillList.find(item => item._id === id);
-    if(skill){
-      skillList.pop(skill);
-      this.setState({skillList})
-    }
+    deleteSkill(id).then(res=>{
+      if(res.status === 200){
+        const skill = skillList.find(item => item._id === id);
+        if(skill){
+          skillList.pop(skill);
+          this.setState({skillList})
+        }
+      }
+    })
+    
    }
 
   handleEdit = (name, id) => {
@@ -125,8 +130,6 @@ class Skills extends React.Component {
     })
   }
 
-
-
   render() {
     const {error, skill, skillList, number, show, selectedSkill} = this.state;
     const skills = skillList.map((item, index) => {
@@ -146,10 +149,6 @@ class Skills extends React.Component {
         </tr>
         )
       })
-
-
-    
-
     return (
       <div className="content-skill">
          <Modal show={show} onHide={this.handleClose}>

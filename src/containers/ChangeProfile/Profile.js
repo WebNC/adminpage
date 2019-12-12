@@ -177,7 +177,7 @@ class Profile extends React.Component {
         const activePsw = password.trim() && newPassword.trim() && retypePassword.trim();
 
         return (
-            <div className="pl-5 pr-5">
+            <div className="">
                 <Header/>
                 <div className="loginModal profile-container mt-5">
                     <div className="loginT mt-5 change-profile-title" >Change Profile</div>
