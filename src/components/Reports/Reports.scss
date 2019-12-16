@@ -1,0 +1,18 @@
+.icon{
+    &:hover{
+        cursor: pointer;
+    }
+    color : rgb(252, 58, 58);
+    width: 24px;
+    height: 26px;
+    
+}
+
+.delete{
+    @extend .icon;
+}
+
+.view-detail{
+    @extend .icon;
+    color:rgb(8, 119, 211);
+}

@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable camelcase */
 import React from 'react';
 import {
@@ -21,7 +22,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      logined : localStorage.getItem("token") && true
+      logined : localStorage.getItem("token") != undefined && true
     }
   }
 
@@ -33,7 +34,7 @@ class App extends React.Component {
 
   componentDidMount = () =>{
     let {logined} = this.state;
-    logined = localStorage.getItem("token") && true;
+    logined = localStorage.getItem("token")!= undefined && true;
     this.setState({logined})
   }
 
@@ -62,6 +63,8 @@ class App extends React.Component {
       </Route > */}
 
       <Route  exact path="/:id"   component={UserDetail} />
+      <Route  exact path="/contract/:id"   component={UserDetail} />
+      <Route  exact path="/report/:id"   component={UserDetail} />
 
 
     </Switch>

@@ -7,55 +7,38 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'username',
-            address:'address',
-            age: 20,
-            phone: 34567890,
+            user: {},
         };
     }
 
     componentDidMount = () => {
-        const username = localStorage.getItem("username")
-        // get user ID - get infor
         getUser().then(res => {
-            if (res) {
-                const users = res;
-                if (users) {
-                    const user = users.find(e => {
-                        if (e.username === username)
-                            return e;
-                        return null;
-                    });
-                    this.setState({
-                        username: user.username,
-                    })
-
-                }
-            }
-
-        })
-
-        this.setState({
-            username
+            this.setState({user: res });
         })
     }
 
 
     render() {
-        const { username,  phone,age,address } = this.state
+        const { user } = this.state
         return (
             <div className="row p-3 profile">
                 <div className="col-7">
                     <div className="activeR d-flex">
                         <p className="usernameLabel">USERNAME </p>
-                        <p className="value">{username || 'username'}</p>
+                        <p className="value">{ user.username }</p>
                     </div>
-                    
                     <div className="activeR d-flex">
+                        <p className="usernameLabel">EMAIL </p>
+                        <p  className="value">{user.email}</p>
+                    </div>
+                    {
+                    user.phone ?
+                    `<div className="activeR d-flex">
                         <p className="usernameLabel">PHONE </p>
-                        <p  className="value">{phone}</p>
-                    </div>
-                    <div className="activeR d-flex">
+                        <p  className="value">{user.phone}</p>
+                    </div>` : ' '
+                    }
+                    {/* <div className="activeR d-flex">
                         <p className="usernameLabel">AGE </p>
                         <p  className="value">{age}</p>
                     </div>
@@ -64,7 +47,7 @@ class Profile extends React.Component {
                             <p className="usernameLabel">ADDRESS </p>
                             <p  className="value" >{address}</p>
                     </div>
-                    
+                     */}
                     <hr width="300px" />
                     
                 </div>

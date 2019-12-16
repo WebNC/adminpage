@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import Header from '../../containers/Header'
-import {getUserDetail} from '../../api/admin.action'
+import {getUserDetail} from '../../api/user.action'
 import './UserDetail.scss'
 
 class UserDetail extends React.Component {

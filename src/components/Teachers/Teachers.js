@@ -3,7 +3,7 @@ import React from 'react';
 import {Table, Pagination} from 'react-bootstrap'
 import { MdLock,MdRemoveRedEye,MdLockOpen } from "react-icons/md";
 import {Link} from 'react-router-dom'
-import {getAllUserTeacher, blockUser, unblockUser, getNumberUserTeacher} from '../../api/admin.action'
+import {getAllUserTeacher, blockUser, unblockUser, getNumberUserTeacher} from '../../api/user.action'
 import './Teachers.scss';
 
 
@@ -12,14 +12,13 @@ class Teachers extends React.Component {
         super(props);
         this.state = {
           teachers: [],
-          page: 0,
+          pageSize: 10,
           amount: 0,
         };
     }
 
     componentDidMount = () => {
-      const {page} = this.state
-      getAllUserTeacher(page).then(res=>{
+      getAllUserTeacher(1).then(res=>{
         this.setState({teachers: res.data.message})
       })
 
@@ -52,34 +51,15 @@ class Teachers extends React.Component {
       unblockUser(id)
     }
 
-    handlePre = () =>{
-      const {page, amount} = this.state;
-      if(page  > Math.floor(amount/25)){
-        this.setState({page: page -1})
-        getAllUserTeacher(page).then(res=>{
-          this.setState({teachers: res.data.message})
-        })
-        
-      }
-      
-    }
-
-    handleNext = () =>{
-      const {page, amount} = this.state;
-      if(page < Math.floor(amount/25) ){
-        this.setState({page: page + 1})
-        getAllUserTeacher(page).then(res=>{
-          this.setState({teachers: res.data.message})
-        })
-        
-      }
+    handleChange = (value) =>{
+      getAllUserTeacher(value).then(res=>{
+        this.setState({teachers: res.data.message})
+      })
     }
 
 
     render() {
-      const {teachers,amount,page} = this.state;
-      const active = page +1;
-
+      const {teachers,amount,pageSize} = this.state;
       const teacherList = teachers.map((item, index) => {
         return(
           <tr key={index}>
@@ -101,24 +81,9 @@ class Teachers extends React.Component {
         )
       })
 
-      const items = [];
-      for (let number = 1; number <= amount/25+1; number+=1) {
-        items.push(
-          <Pagination.Item key={number}  active={number === active}>
-            {number}
-          </Pagination.Item>,
-        );
-      }
-
       return (
         <>
-         <Pagination className="float-right mr-3" size="sm">
-            <Pagination.First onClick={this.handlePre} />
-            {items}
-            {/* <Pagination.Ellipsis /> */}
-            <Pagination.Last onClick={this.handleNext}/>
-          </Pagination>
-
+          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>
             <tr>

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable prefer-template */
 import API from './axios.config'
 
 export const register = (username, password, email, phone) => {
@@ -28,22 +30,22 @@ export const login = (email, password) => {
         })
         .then(res => {
             if(res.data){
-                const {token} = res.data;
-                localStorage.setItem("token", token);
+                const { user } = res.data;
+                localStorage.setItem("token", user.token);
             }
             return res
         }).catch(res => {
             console.log(res);
         }
-        )
+    )
 }
 
 
 export const getUser = () => {
     return API
-        .get(`/users/me`)
+        .get(`/users/me`, { 'headers': { 'Authorization': 'Bearer ' + localStorage.getItem("token")}})
         .then(res => {
-            // to do
+            return res.data
         }).catch(error => console.log(error));
 }
 
@@ -55,7 +57,7 @@ export const updateProfile = (user) => {
             type: 0
         })
         .then(res => {
-           // to do
+           return res
         }).catch(res => {
             console.log(res)
         }
@@ -69,7 +71,7 @@ export const updatePassword = (user) => {
             type: 1
         })
         .then(res => {
-            // todo 
+            return res
         }).catch(res => {
             console.log(res)
         }
@@ -84,106 +86,11 @@ export const updateAvatar = (user) => {
             type: 2
         })
         .then(res => {
-            // todo
+            return res
         }).catch(res => {
             console.log(res)
         }
         )
 }
 
-
-export const getSkill = () => {
-    return API
-        .get(`/skill-list/read`)
-        .then(res => {
-            return res.data
-        }).catch(error => console.log(error));
-}
-
-
-
-export const editSkill = (id, value) => {
-    return API
-        .post(`/skill-list/update`,{id, value})
-        .then(res => {
-            return res.data
-        }).catch(error => console.log(error));
-}
-
-export const addSkill = (value) => {
-    return API
-        .post(`/skill-list/create`,{value   })
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-export const deleteSkill = (id) => {
-    return API
-        .post(`/skill-list/delete`,{id})
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-
-export const getAllUserTeacher = page => {
-    return API
-        .get(`/user-list/teacher/${page}`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-
-export const getAllUserStudent = page => {
-    return API
-        .get(`/user-list/student/${page}`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-export const getNumberUserTeacher = () =>{
-    return API
-        .get(`user-list/teacher/number`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-export const getNumberUserStudent = () =>{
-    return API
-        .get(`user-list/student/number`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-
-export const blockUser = id => {
-    return API
-        .get(`/user/block/${id}`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-export const unblockUser = id => {
-    return API
-        .get(`/user/unblock/${id}`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
-
-
-
-export const getUserDetail = id =>{
-    return API
-        .get(`/user-detail${id}`)
-        .then(res => {
-            return res
-        }).catch(error => console.log(error));
-}
 

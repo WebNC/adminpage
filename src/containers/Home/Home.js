@@ -6,7 +6,12 @@ import CreateNewAdmin from '../CreateNewAdmin/CreateNewAdmin'
 import Profile from '../../components/Profile/Profile';
 import Students from '../Students';
 import Teachers from '../Teachers';
-import Skills from '../Skills'
+import Skills from '../Skills';
+import Contracts from '../Contracts';
+import Reports from '../Reports';
+import TopTeacherIncome from '../TopTeacherIncome';
+import TopSkillIncome from '../TopSkillIncome'
+
 import './Home.scss'
 
 class Home extends React.PureComponent {
@@ -38,6 +43,21 @@ class Home extends React.PureComponent {
                   <Nav.Item  className={tabClassName}>
                     <Nav.Link eventKey="5" className=" tab-label">Skills</Nav.Link>
                   </Nav.Item>
+                  <Nav.Item  className={tabClassName}>
+                    <Nav.Link eventKey="6" className=" tab-label">Contracts</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item  className={tabClassName}>
+                    <Nav.Link eventKey="7" className=" tab-label">Reports</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item  className={tabClassName}>
+                    <Nav.Link eventKey="8" className=" tab-label">Income Chart</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item  className={tabClassName}>
+                    <Nav.Link eventKey="9" className=" tab-label">Top Teacher Income</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item  className={tabClassName}>
+                    <Nav.Link eventKey="10" className=" tab-label">Top Skill Income</Nav.Link>
+                  </Nav.Item>
                 </Nav>
               </div>
           
@@ -59,6 +79,21 @@ class Home extends React.PureComponent {
                   </Tab.Pane>
                   <Tab.Pane eventKey="5">
                     <Skills/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="6">
+                    <Contracts/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="7">
+                    <Reports/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="8">
+                    <Reports/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="9">
+                    <TopTeacherIncome/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="10">
+                    <TopSkillIncome/>
                   </Tab.Pane>
                 </Tab.Content>
               </div>

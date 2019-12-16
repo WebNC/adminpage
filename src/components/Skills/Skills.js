@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */
 import React from 'react';
 import {Table,Button, Modal} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
-import {getSkill, addSkill, editSkill, deleteSkill} from '../../api/admin.action';
+import { Pagination } from "antd";
+import {getSkill, addSkill, editSkill, deleteSkill, getNumberSkill} from '../../api/skill.action';
 import './Skills.scss';
 
 
@@ -18,19 +20,23 @@ class Skills extends React.Component {
       number:{},
       show: false,
       selectedSkill : '',
-      selectedSkillID: ''
+      selectedSkillID: '',
+      amount: 0,
+      pageSize: 8,
     };
   }
 
   componentDidMount = () => {
-    getSkill().then(res=>{
+    getSkill(1).then(res=>{
       if(res){
         this.setState({
           skillList: res.skillList,
           number: res.number
         })
       }
-     
+    })
+    getNumberSkill().then(res=>{
+      this.setState({ amount: res.message })
     })
   }
 
@@ -42,7 +48,7 @@ class Skills extends React.Component {
 
   handleFocus = e => {
     this.setState({
-      // [e.target.name]: '',
+      [e.target.name]: '',
       error: false
     })
   }
@@ -56,24 +62,14 @@ class Skills extends React.Component {
       })
     } else {
       addSkill(skill).then(res=>{
-        console.log(res)
         if(res.status !== 200){
           this.setState({error: true})
         }
         else{
-          // console.log(res.data)
-          skillList.push({name: res.data.value});
+          skillList.push(res.data.value);
           this.setState({skillList})
         }
       })
-      // getSkill().then(res=>{
-      //   if(res)
-      //     this.setState({
-      //       skillList: res.skillList,
-      //       number: res.number,
-      //       skill:''
-      //     })
-      // })
     }
   }
 
@@ -115,13 +111,6 @@ class Skills extends React.Component {
     this.setState({
       show: false
     })
-    // getSkill().then(res=>{
-    //   this.setState({
-    //     skillList: res.skillList,
-    //     number: res.number,
-    //     skill:''
-    //   })
-    // })
   }
 
   handleClose = () =>{
@@ -130,8 +119,17 @@ class Skills extends React.Component {
     })
   }
 
+  handleChange = (value) =>{
+    getSkill(value).then(res=>{
+      this.setState({
+        skillList: res.skillList,
+        number: res.number
+      })
+    })
+  }
+
   render() {
-    const {error, skill, skillList, number, show, selectedSkill} = this.state;
+    const {error, skill, skillList, number, show, selectedSkill, amount, pageSize} = this.state;
     const skills = skillList.map((item, index) => {
       return(
         <tr key={index}>
@@ -185,7 +183,7 @@ class Skills extends React.Component {
           <Button onClick={this.handleAddSkill}>Add</Button>
                   
         </div>
-        
+      <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
