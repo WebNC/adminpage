@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Tab, Row, Col, Nav} from 'react-bootstrap'
 import Header from '../Header'
 import CreateNewAdmin from '../CreateNewAdmin/CreateNewAdmin'
-import Profile from '../../components/Profile/Profile';
+import Profile from '../Profile'
 import Students from '../Students';
 import Teachers from '../Teachers';
 import Skills from '../Skills';

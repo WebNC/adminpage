@@ -4,12 +4,11 @@
 import React from 'react';
 import {Table,Button, Modal} from 'react-bootstrap'
 import { MdDeleteForever, MdEdit} from "react-icons/md";
-import { Pagination } from "antd";
+import * as antd from "antd";
 import {getSkill, addSkill, editSkill, deleteSkill, getNumberSkill} from '../../api/skill.action';
 import './Skills.scss';
 
-
-
+const {confirm} = antd.Modal
 class Skills extends React.Component {
   constructor(props) {
     super(props);
@@ -83,9 +82,20 @@ class Skills extends React.Component {
           this.setState({skillList})
         }
       }
-    })
-    
-   }
+    })  
+  }
+
+  handleConfirm = (id) => {
+    const {handleDelete} = this
+    confirm({
+      title: 'Bạn muốn xóa skill này?',
+      content: 'Xác nhận nếu bạn thực sự muốn xóa skill này',
+      onOk() {
+        handleDelete(id)
+      },
+      onCancel() {},
+    });
+  }
 
   handleEdit = (name, id) => {
     this.setState({
@@ -141,7 +151,7 @@ class Skills extends React.Component {
             <span className="ml-3">
               <MdDeleteForever 
                 className="delete"
-                onClick={()=>this.handleDelete(item._id)}/>
+                onClick={()=>this.handleConfirm(item._id)}/>
             </span>
           </td>
         </tr>
@@ -183,7 +193,7 @@ class Skills extends React.Component {
           <Button onClick={this.handleAddSkill}>Add</Button>
                   
         </div>
-      <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+      <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

@@ -2,10 +2,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { Button } from "antd";
+import { Button, Select } from "antd";
 import {getAllReport} from '../../api/report.action'
 import './TopSkillIncome.scss';
 
+const { Option } = Select;
 
 class TopSkillIncome extends React.Component {
     constructor(props) {
@@ -22,6 +23,9 @@ class TopSkillIncome extends React.Component {
       })
     }
 
+    handleChangeSelect = () => {
+
+    }
 
     render() {
       const {topSkill} = this.state;
@@ -42,6 +46,11 @@ class TopSkillIncome extends React.Component {
       })
       return (
         <>
+        <h2>Top 10 doanh thu cao nhất theo skill</h2>
+          <Select defaultValue="all" style={{ width: 120 }} onChange={this.handleChangeSelect}>
+          <Option value="all">Toàn thời gian</Option>
+            <Option value="month">Trong Tháng</Option>
+          </Select>
           <Table striped bordered hover>
           <thead>
             <tr>

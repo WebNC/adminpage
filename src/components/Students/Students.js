@@ -1,12 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table, Pagination} from 'react-bootstrap'
+import {Table} from 'react-bootstrap'
 import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
 import {Link} from 'react-router-dom'
+import {Pagination, Modal} from 'antd'
 import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/user.action'
 import './Students.scss';
 
-
+const {confirm} = Modal
 class Students extends React.Component {
     constructor(props) {
         super(props);
@@ -39,13 +40,29 @@ class Students extends React.Component {
     }
 
     handleLock = id =>{
-      this.handleUpdate(id)
-      blockUser(id);
+      const {handleUpdate} = this
+      confirm({
+        title: 'Bạn muốn khóa tài khoản này?',
+        content: 'Xác nhận nếu bạn thực sự muốn khóa tài khoản',
+        onOk() {
+          handleUpdate(id)
+          blockUser(id)
+        },
+        onCancel() {},
+      });
     }
 
     handleOpenLock = id =>{
-      this.handleUpdate(id)
-      unblockUser(id)
+      const {handleUpdate} = this
+      confirm({
+        title: 'Bạn muốn mở khóa tài khoản này?',
+        content: 'Xác nhận nếu bạn thực sự muốn mở khóa tài khoản',
+        onOk() {
+          handleUpdate(id)
+          unblockUser(id)
+        },
+        onCancel() {},
+      });
     }
 
     handleChange = (value) =>{

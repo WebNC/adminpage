@@ -42,17 +42,14 @@ class TopSkillIncome extends React.Component {
       })
       return (
         <>
+        <h2>Top 10 doanh thu cao nhất theo giáo Viên</h2>
           <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
-              <th>Create Date</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Content</th>
-              <th>Status</th>
-              <th>Setting</th>
-
+              <th>ID</th>
+              <th>Name</th>
+              <th>Income</th>
             </tr>
           </thead>
           <tbody>
