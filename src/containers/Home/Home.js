@@ -17,8 +17,8 @@ import './Home.scss'
 class Home extends React.PureComponent {
 
   render(){
-    const isRoot = localStorage.getItem("admin")!== null
-    const tabClassName = "mb-4 text-right tabs-column"
+    const isRoot = localStorage.getItem("admin") !== null
+    const tabClassName = "mb-2 text-right tabs-column"
     return <>
       <Header/>
       <div className="content">

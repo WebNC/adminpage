@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      logined : localStorage.getItem("token") != undefined && true
+      logined : localStorage.getItem("token")  && true
     }
   }
 
@@ -32,17 +32,8 @@ class App extends React.Component {
     this.setState({logined})
   }
 
-  componentDidMount = () =>{
-    let {logined} = this.state;
-    logined = false;
-    this.setState({logined})
-  }
-
   render(){
     const {logined} = this.state;
-    //  const id = '5de73e09f2deb15b346d89aa';
-    // console.log(this.props.match)
-
     return <Router>
     <Switch>
 
