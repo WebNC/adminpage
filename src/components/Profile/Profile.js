@@ -29,6 +29,7 @@ class Profile extends React.Component {
         const { user } = this.state
         return (
             <div>
+                <h2>Profile</h2>
                 <div className="row p-3 profile">
                     <div className="col-7">
                         <div className="activeR d-flex">

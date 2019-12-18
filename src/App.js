@@ -34,7 +34,7 @@ class App extends React.Component {
 
   componentDidMount = () =>{
     let {logined} = this.state;
-    logined = localStorage.getItem("token")!= undefined && true;
+    logined = false;
     this.setState({logined})
   }
 
@@ -61,10 +61,9 @@ class App extends React.Component {
       {/* <Route exact path="/:id" >
         {!logined ? <Redirect to="/login" /> : <UserDetail />}
       </Route > */}
-
-      <Route  exact path="/:id"   component={UserDetail} />
       <Route  exact path="/contract/:id"   component={UserDetail} />
-      <Route  exact path="/report/:id"   component={UserDetail} />
+      <Route  exact path="/:id"   component={UserDetail} />
+      
 
 
     </Switch>

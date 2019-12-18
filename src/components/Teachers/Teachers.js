@@ -102,6 +102,7 @@ class Teachers extends React.Component {
 
       return (
         <>
+          <h2>Danh sách giáo viên</h2>
           <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>

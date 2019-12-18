@@ -56,8 +56,8 @@ class TopSkillIncome extends React.Component {
             <tr>
               <th>#</th>
               <th>Create Date</th>
-              <th>From</th>
-              <th>To</th>
+              <th>From Date</th>
+              <th>To Date</th>
               <th>Content</th>
               <th>Status</th>
               <th>Setting</th>

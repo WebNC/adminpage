@@ -64,6 +64,7 @@ class Reports extends React.Component {
       })
       return (
         <>
+          <h2>Danh sách report</h2>
           <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>
