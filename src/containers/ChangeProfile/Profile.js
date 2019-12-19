@@ -4,10 +4,7 @@ import {Tab, Tabs} from 'react-bootstrap'
 import ChangeBasicInfo from './ChangeBasicInfo'
 import ChangePassword from './ChangePassword'
 import ChangeAvatar from './ChangeAvatar'
-// import { getUser, updateProfile, updatePassword, updateAvatar } from '../../api/admin.action'
-// import { hashPassword } from '../../utils/utils';
 import './Profile.scss'
-// import * as actions from '../../actions/index'
 import Header from '../Header'
 
 
@@ -29,13 +26,13 @@ class Profile extends React.Component {
                     <div className="loginT mt-5 change-profile-title" >Change Profile</div>
 
                     <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
-                        <Tab eventKey="home" title="Basic information">
+                        <Tab eventKey="home" title="Basic information" className="pt-5">
                             <ChangeBasicInfo/>
                         </Tab>
-                        <Tab eventKey="profile" title="Password">
+                        <Tab eventKey="profile" title="Password" className="pt-5">
                             <ChangePassword/>
                         </Tab>
-                        <Tab eventKey="contact" title="Avatar" >
+                        <Tab eventKey="contact" title="Avatar" className="pt-5" >
                             <ChangeAvatar/>
                         </Tab>
                     </Tabs>

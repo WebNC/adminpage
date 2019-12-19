@@ -1,11 +1,11 @@
 import * as types from '../constants/index';
 import {login, register} from  '../api/admin.action'
 
-const handleLogin = (email, password) => {
+const handleLogin = (email, user) => {
     return {
         type: types.LOGIN,
         email,
-        password
+        user
     }
 }
 
@@ -23,13 +23,13 @@ const  handleRegister =  () => {
     }
 }
 
-export const handleLoginRequest = (email, psw) => {
+export const handleLoginRequest = (email, user) => {
     return (dispatch) => {
-        if (!login(email, psw))
+        if (!login(email, user))
             dispatch(handleLogout())
         else {
-            login(email, psw).then(res => {
-                dispatch(handleLogin(email,psw))
+            login(email, user).then(res => {
+                dispatch(handleLogin(email,user))
             })
         }
     }

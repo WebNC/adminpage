@@ -42,7 +42,8 @@ class Login extends React.Component {
                 this.setState({errors: true})
             }
             else{
-             handleLogin(email, password);
+                console.log(res.data.user)
+             handleLogin(email, res.data.user);
              this.setState({
                  email: '',
                  password: ''
@@ -105,8 +106,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLogin: (email, password) => {
-            dispatch(actions.handleLoginRequest(email, password))
+        handleLogin: (email, user) => {
+            dispatch(actions.handleLoginRequest(email, user))
         }
     }
 }

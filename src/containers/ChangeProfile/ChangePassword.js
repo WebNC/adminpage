@@ -1,4 +1,7 @@
 import React from 'react';
+import {  Input, Button, Icon} from 'antd';
+import { hashPassword } from '../../utils/utils';
+
 
 
 class ChangePassword extends React.Component {
@@ -23,124 +26,92 @@ class ChangePassword extends React.Component {
         })
     }
 
-    
-    // handleCancelPsw = e => {
-    //     e.preventDefault()
-    //     this.setState({
-    //         password: '',
-    //         newPassword: '',
-    //         retypePassword: '',
-    //         errorPassword: false
-    //     })
-    // }
+    handleCancelPsw = e => {
+        e.preventDefault()
+        this.setState({
+            password: '',
+            newPassword: '',
+            retypePassword: '',
+            errorPassword: false
+        })
+    }
 
-    
-    // validatePassword = () => {
-    //     const { password, newPassword, retypePassword, user } = this.state;
-    //     if (hashPassword(password) === user.password)
-    //         if (newPassword.indexOf(' ') === -1 && newPassword === retypePassword)
-    //             return true
-    //     return false
-    // }
+    validatePassword = () => {
+        const { password, newPassword, retypePassword, user } = this.state;
+        if (hashPassword(password) === user.password)
+            if (newPassword.indexOf(' ') === -1 && newPassword === retypePassword)
+                return true
+        return false
+    }
 
-
-    
-    // handleChangePsw = e => {
-    //     e.preventDefault()
-    //     if (!this.validatePassword()) {
-    //         this.setState({
-    //             errorPassword: true
-    //         })
-    //     }
-    //     else {
-    //         const { user, newPassword } = this.state;
-    //         if (user) {
-    //             user.password = newPassword;
-    //             updatePassword(user).then(res => {
-    //                 if (res === 1) {
-    //                     this.setState({
-    //                         errorPassword: false,
-    //                         password: '',
-    //                         newPassword: '',
-    //                         retypePassword: ''
-    //                     })
-    //                     alert("Change password successfully")
-    //                 } else {
-    //                     this.setState({
-    //                         errorPassword: true
-    //                     })
-    //                 }
-    //             })
-    //         }
-    //     }
-
-    // }
-
-
+    handleChangePsw = e => {
+        e.preventDefault()
+        if (!this.validatePassword()) {
+            this.setState({
+                errorPassword: true
+            })
+        }
+        else {
+            const { user, newPassword } = this.state;
+            if (user) {
+                user.password = newPassword;
+                // updatePassword(user).then(res => {
+                // })
+            }
+        }
+    }
 
     render(){
         const {password, newPassword, retypePassword, errorPassword} = this.state;
         const activePsw = password.trim() && newPassword.trim() && retypePassword.trim();
 
         return (
-            <div>
-          
-          <div className="activeR">
-                                <label className="passwordLabel">PASSWORD
-                                <input type="password" name="password" id="password"
-                                    placeholder="Enter your password..."
-                                    value={password}
-                                    onFocus={this.handleFocus}
-                                    className={errorPassword ? 'errorInput' : 'normalInput'}
-                                    onChange={this.onChange} />
-                                </label>
-                               
-                            </div>
-                           
-                           <div className="d-flex">
-                           <div className="activeR">
-                                <label className="passwordLabel">NEW PASSWORD
-                                <input type="password" name="newPassword" id="newpassword"
-                                    placeholder="Enter new password ... "
-                                    value={newPassword}
-                                    onFocus={this.handleFocus}
-                                    className={errorPassword ? 'errorInput' : 'pass normalInput'}
-                                    onChange={this.onChange} />
-                                </label>
-                               
-                            </div>
-                            <div className="activeR">
-                                <label className="passwordLabel">NEW PASSWORD
-                                <input type="password" name="retypePassword" id="renewpassword"
-                                    placeholder="Retype new password ..."
-                                    value={retypePassword}
-                                    onFocus={this.handleFocus}
-                                    className={errorPassword ? 'errorInput' : 'pass normalInput'}
-                                    onChange={this.onChange} />
-                                </label>
-                               
-                            </div>
-                           </div>
-                       
-           
-            <div className="d-flex">
-            <button
-            type="button"
-                onClick={this.handleCancelPsw}
-                className='login-button-active'>
-                <div className="buttonText " >Cancel</div>
-            </button>
-            <button
-            type="button"
-                onClick={this.handleChangePsw}
-                className={activePsw ? 'login-button-active ' : 'login-button'}>
-                <div className="buttonText" >Change</div>
-                
-            </button>
+        <div className="ml-5">
+      
+      <div className="d-flex ">
+          <p className="mr-4 item-name">Password</p>
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)'}} />}
+            style={{ width: 300}}
+            name="password" id="password"
+            value={password}
+            onFocus={this.handleFocus}
+            onChange={this.onChange} 
+          />
+        </div>
+        <div className="d-flex mt-3">
+            <p className="mr-4 item-name">New Password</p>
+            <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                name="newPassword" id="newPassword"
+                value={newPassword}
+                style={{width: 300}}
+                onFocus={this.handleFocus}
+                onChange={this.onChange} 
+              />
+        </div>
 
-            </div>
-            </div>
-        );
+        <div className="d-flex mt-3">
+            <p className="mr-4 item-name">Retype</p>
+            <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                name="retypePassword" id="retypePassword"
+                value={retypePassword}
+                style={{width: 300}}
+                onFocus={this.handleFocus}
+                onChange={this.onChange} 
+            />
+          </div>
+
+     
+     
+        <div className="d-flex mt-5 group-button">
+          <Button onClick={this.handleCancelInfor} className="ml-5 mr-3"> Cancel </Button>
+          <Button onClick={this.handleChangeInfor}> Change </Button>
+         </div>
+
+     </div>
+    );
 
     }
 }

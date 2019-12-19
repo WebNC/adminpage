@@ -47,16 +47,6 @@ class Profile extends React.Component {
                             <p  className="value">{user.phone}</p>
                         </div>` : ' '
                         }
-                        {/* <div className="activeR d-flex">
-                            <p className="usernameLabel">AGE </p>
-                            <p  className="value">{age}</p>
-                        </div>
-                        
-                        <div className="activeR d-flex">
-                                <p className="usernameLabel">ADDRESS </p>
-                                <p  className="value" >{address}</p>
-                        </div>
-                        */}
                         <hr width="300px" />
                         
                     </div>
@@ -65,9 +55,8 @@ class Profile extends React.Component {
                         <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/>
                     </div>
                 </div>
-                <div className= "row">
+                <div className= "row ml-5">
                     <Link to="/profile"><Button>Edit Profile</Button></Link>
-                     <Button type="danger" onClick= {()=> this.handleLogout()}>Log out</Button>   
                 </div>
             </div>
          

@@ -22,7 +22,6 @@ class CreateNewAdmin extends React.Component {
     }
 
     handleFocus = e => {
-        console.log(e.target.getAttribute('name'))
         this.setState({
             [e.target.getAttribute('name')]: '',
             errors: false,
@@ -96,7 +95,7 @@ class CreateNewAdmin extends React.Component {
                                 onFocus={this.handleFocus}
                                 onChange={this.onChange} 
                                 placeholder="Enter Email"
-                                />
+                            />
 
                             <Input
                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -106,7 +105,8 @@ class CreateNewAdmin extends React.Component {
                                 onFocus={this.handleFocus}
                                 onChange={this.onChange} 
                                 placeholder="Enter username"
-                                />
+                            />
+
                             <Input
                                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 type="password" id="password"
@@ -116,7 +116,8 @@ class CreateNewAdmin extends React.Component {
                                 onChange={this.onChange} 
                                 onFocus={this.handleFocus}
                                 placeholder="Enter password"
-                                />
+                            />
+                            
                             <div className="d-flex" style={{paddingRight: '30%'}}>
                                 <Button type="primary" onClick={this.handleClick} disabled={!active} className="login-form-button mt-3" >
                                     Create

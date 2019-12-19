@@ -11,56 +11,14 @@
     width: 260px !important;
   }
 
-  .change-avatar {
-    width: 152px !important;
-    margin-left: 0% !important;
-    padding-left: 0% !important;
-    color: white;
-    height: 32px;
-    font-weight: bold;
+  .item-name{
+    text-align: right !important;
+    width: 180px;
   }
 
-  .activeR {
-    .passwordLabel {
-      width: 124px !important;
-    }
-    .phoneInput {
-      width: 220px !important;
-    }
-    .ageInput{
-      width: 100px !important;
-    }
-    .pass{
-      width: 180px !important;
-    }
+  .group-button{
+    margin-left: 20% !important;
   }
 
-  .login-button-active {
-    height: 34px;
-    width: 140px;
-    padding-top: 1%;
-    padding-right: 4%;
-    background-color: #ffa15f;
-    margin-top: 4%;
-    margin-left: 6%;
-    margin-bottom: 6%;
-    border-radius: 1px;
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
-    border: none;
-  
-
-    .buttonText {
-      margin-left: 12%;
-      margin-top: 1%;
-      font-size: 14px;
-      color: white;
-      font-family: Montserrat;
-      font-weight: 600;
-    }
-  }
-
-  .login-button {
-    @extend .login-button-active;
-    background: $white-four;
-  }
+ 
 }

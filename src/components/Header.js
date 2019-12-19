@@ -1,5 +1,6 @@
 import React from 'react';
-import { Navbar } from 'react-bootstrap'
+import { Navbar , Nav} from 'react-bootstrap'
+import {Button} from 'antd'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 
@@ -31,8 +32,14 @@ class Header extends React.Component {
                         <Link to="/" className="brand-title ml-4">
                             HOME
                         </Link>
-                       
+
+                     
+
                     </Navbar>
+                    <Navbar className="ml-auto">
+                        <Button type="primary" className="ml-auto" onClick= {()=> this.handleLogout()}>Log out</Button>   
+                    </Navbar>
+                    
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 </Navbar>
 

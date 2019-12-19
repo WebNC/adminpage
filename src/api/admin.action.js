@@ -29,10 +29,10 @@ export const login = (email, password) => {
             password,
         })
         .then(res => {
-            if(res.data){
-                const { user } = res.data;
-                localStorage.setItem("token", user.token);
-            }
+            // if(res.data){
+            //     // const { user } = res.data;
+            //     // localStorage.setItem("token", user.token);
+            // }
             return res
         }).catch(res => {
             console.log(res);
