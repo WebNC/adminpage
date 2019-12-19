@@ -3,6 +3,7 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { Button, Pagination } from "antd";
+import FormatDate from '../../helper/FomatDate'
 import {getAllReport, getNumberReport, solveReport} from '../../api/report.action'
 import './Reports.scss';
 
@@ -19,6 +20,7 @@ class Reports extends React.Component {
 
     componentDidMount = () => {
       getAllReport(1).then(res=>{
+        console.log(res.data.message);
         this.setState({reports: res.data.message})
       })
 
@@ -51,7 +53,7 @@ class Reports extends React.Component {
         return(
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{item.date}</td>
+            <td>{FormatDate(item.date)}</td>
             <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
             <td><p>{item.teacherName}</p><p>ID: {item.teacherName}</p></td>
             <td><p>{item.content}</p></td>

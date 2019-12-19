@@ -7,6 +7,7 @@ import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import ContractDetail from './ContractDetail/ContracDetail'
 
+// import FormatDate from '../../helper/FomatDate';
 
 class Contracts extends React.Component {
     constructor(props) {

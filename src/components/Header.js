@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar , Nav} from 'react-bootstrap'
+import { Navbar} from 'react-bootstrap'
 import {Button} from 'antd'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
