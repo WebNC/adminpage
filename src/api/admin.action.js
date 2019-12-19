@@ -50,11 +50,10 @@ export const getUser = () => {
 }
 
 
-export const updateProfile = (user) => {
+export const updateProfile = (id, username, address, age, phone) => {
     return API
-        .post(`/users/me`, {
-            user,
-            type: 0
+        .post(`/edit`, {
+            id, username, address, age, phone
         })
         .then(res => {
            return res
@@ -64,11 +63,11 @@ export const updateProfile = (user) => {
         )
 }
 
-export const updatePassword = (user) => {
+export const updatePassword = (id, password) => {
     return API
-        .post(`/users/me`, {
-            user,
-            type: 1
+        .post(`/change-pass`, {
+            id,
+            password
         })
         .then(res => {
             return res

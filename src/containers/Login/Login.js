@@ -42,7 +42,6 @@ class Login extends React.Component {
                 this.setState({errors: true})
             }
             else{
-                console.log(res.data.user)
              handleLogin(email, res.data.user);
              this.setState({
                  email: '',

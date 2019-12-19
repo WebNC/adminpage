@@ -4,10 +4,10 @@ const logined = localStorage.getItem("token");
 
 const initialState = {
     isLogin: (logined !== null) && true ,
-        username: '',
-        age: '',
-        address : '',
-        phone: '',
+    username: '',
+    age: '',
+    address : '',
+    phone: '',
     
 }
 
@@ -15,15 +15,15 @@ const login = (state = initialState, action) => {
 
     switch (action.type) {
         case types.LOGIN:
-            console.log(action)
             if(action.email === 'admin2@mail.com'){
                 localStorage.setItem("admin", true);
             }
+
             localStorage.setItem("token", action.user.token);
             return {
                 ...state,
                 username: action.user.username,
-                isLogin: true
+                isLogin: true,
             }
         case types.LOGOUT:
             localStorage.removeItem("token");
