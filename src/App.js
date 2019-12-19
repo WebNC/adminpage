@@ -53,7 +53,7 @@ class App extends React.Component {
         {!logined ? <Redirect to="/login" /> : <UserDetail />}
       </Route > */}
       {/* <Route  exact path="/contract/:id"   component={UserDetail} /> */}
-      <Route  exact path="/:id"   component={UserDetail} />
+      {/* <Route  exact path="/:id"   component={UserDetail} /> */}
       
 
 

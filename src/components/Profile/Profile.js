@@ -31,42 +31,46 @@ class Profile extends React.Component {
 
     render() {
         const { user } = this.state
+        const style={
+            width : '100px',
+            textAlign: 'right'
+        }
         return (
             <div>
                 <h2>Profile</h2>
                 <div className="row p-3 profile">
                     <div className="col-7">
-                        <div className="activeR d-flex">
-                            <p className="usernameLabel">USERNAME </p>
+                        <div className=" d-flex ml-5 mt-4">
+                            <h6 className="mr-3" style={style}>Username :</h6>
                             <p className="value">{ user.username }</p>
                         </div>
-                        <div className="activeR d-flex">
-                            <p className="usernameLabel">EMAIL </p>
+                        <div className="ml-5 d-flex mt-3">
+                            <h6 className="mr-3"style={style}>Email :</h6>
                             <p  className="value">{user.email}</p>
                         </div>
                         {
                         user.age ?
-                        <div className="activeR d-flex">
-                            <p className="usernameLabel">AGE </p>
+                        <div className="ml-5 d-flex mt-3">
+                            <h6 className="mr-3"style={style}>Age : </h6>
                             <p  className="value">{user.age}</p>
                         </div> : ' '
                         }
                         {
                         user.phone ?
-                        <div className="activeR d-flex">
-                            <p className="usernameLabel">PHONE </p>
+                        <div className="ml-5 d-flex mt-3">
+                            <h6 className="mr-3"style={style}>Phone : </h6>
                             <p  className="value">{user.phone}</p>
                         </div> : ' '
                         }
                         {
                         user.address ?
-                        <div className="activeR d-flex">
-                            <p className="usernameLabel">ADDRESS </p>
+                        <div className="ml-5 d-flex mt-3">
+                            <h6 className="mr-3"style={style}>Address :</h6>
                             <p  className="value">{user.address}</p>
                         </div> : ' '
                         }
 
-
+                        
                         <hr width="300px" />
                         
                     </div>

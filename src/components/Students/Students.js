@@ -2,10 +2,10 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
-import {Link} from 'react-router-dom'
 import {Pagination, Modal} from 'antd'
 import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/user.action'
 import './Students.scss';
+import UserDetailModal from '../UserDetailModal/UserDetailModal'
 
 const {confirm} = Modal
 class Students extends React.Component {
@@ -15,6 +15,8 @@ class Students extends React.Component {
           students: [],
           amount: 0,
           pageSize: 10,
+          showModal : false,
+          student: {}
         };
     }
 
@@ -71,8 +73,22 @@ class Students extends React.Component {
       })
     }
 
+    handleClickShowModal = item =>{
+      this.setState({
+        student: item,
+      })
+      this.handleShowModal();
+    }
+
+    handleShowModal = () =>{
+      const {showModal} = this.state;
+      this.setState({
+        showModal: !showModal,
+      })
+    }
+
     render() {
-      const {students, amount, pageSize} = this.state;
+      const {students, amount, pageSize, showModal, student} = this.state;
       const studentsList = students.map((item, index) => {
           return(
             <tr key={index}>
@@ -80,15 +96,16 @@ class Students extends React.Component {
               <td>{item.username}</td>
               <td>
               <div>
-                <Link to={`/${item._id}`}>
+                {/* <Link to={`/${item._id}`}>
                   <MdRemoveRedEye className="view-detail" />
-                </Link>
+                </Link> */}
+
+                <MdRemoveRedEye className="view-detail" onClick={() => this.handleClickShowModal(item)} />
+
                 <span className="ml-3">
                   {item.isBlocked ? 
                     <MdLockOpen  className="delete" onClick={() => this.handleOpenLock(item._id)}/> :
                     <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
-
-
                 }
                 </span>
               </div>
@@ -99,7 +116,8 @@ class Students extends React.Component {
 
       return (
         <>
-          <h2>Danh sách học sinh</h2>
+        <UserDetailModal open={showModal} information={student} handleShow={this.handleShowModal}/>
+          <h2>Student List</h2>
           <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
             <thead>

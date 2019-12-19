@@ -23,7 +23,7 @@ class Home extends React.PureComponent {
       <Header/>
       <div className="content">
 
-        <Tab.Container id="left-tabs-example" defaultActiveKey="6">
+        <Tab.Container id="left-tabs-example" defaultActiveKey="2">
           <Row>
             <Col sm={3}>
               <div className="first-column">

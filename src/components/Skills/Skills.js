@@ -193,7 +193,7 @@ class Skills extends React.Component {
           <Button onClick={this.handleAddSkill}>Add</Button>
                   
         </div>
-        <h2>Danh sách kỹ năng</h2>
+        <h2>Skill List </h2>
       <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
       <Table striped bordered hover className="mt-3">
         <thead>
