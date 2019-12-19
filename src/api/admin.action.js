@@ -78,11 +78,23 @@ export const updatePassword = (id, password) => {
 }
 
 
-export const updateAvatar = (id, password) => {
+export const updateAvatar = ({id, file}) => {
+    console.log(id, file)
+
+    const formData = new FormData();
+    formData.append('avatar', file);
+    formData.append('id', id);
+    
+    console.log(formData);
+    const config = {
+        'headers': { 
+        'content-type': 'multipart/form-data'
+        }
+    }
+
     return API
-        .post(`/avatar`, {
-            id,
-            password
+        .post(`/upload/avatar`, {
+           formData, config
         })
         .then(res => {
             return res

@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'antd';
 import {Link} from 'react-router-dom';
 import { getUser } from '../../api/admin.action'
+import MyAvatar from '../MyAvatar/MyAvatar'
 import './Profile.scss'
 
 
@@ -71,7 +72,8 @@ class Profile extends React.Component {
                     </div>
 
                     <div className="col-4">
-                        <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/>
+                        <MyAvatar user={user}/>
+                        {/* <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/> */}
                     </div>
                 </div>
                 <div className= "row ml-5 pl-5">
