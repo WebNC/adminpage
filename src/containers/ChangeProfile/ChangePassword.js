@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Input, Button, Icon} from 'antd';
-import { hashPassword } from '../../utils/utils';
+import {getUser, updatePassword} from '../../api/admin.action'
 
 
 
@@ -8,15 +8,24 @@ class ChangePassword extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            password: '',
             newPassword: '',
             retypePassword: '',
+            user: {}
         }
+    }
+
+    componentDidMount = () =>{
+        getUser().then(res=>{ 
+            this.setState({
+                user: res,
+            })
+        });
     }
 
     handleFocus = () => {
         this.setState({
             errorPassword: false,
+            success: false
         })
     }
 
@@ -29,18 +38,19 @@ class ChangePassword extends React.Component {
     handleCancelPsw = e => {
         e.preventDefault()
         this.setState({
-            password: '',
             newPassword: '',
             retypePassword: '',
-            errorPassword: false
+            errorPassword: false,
+            success: false,
         })
     }
 
+
+
     validatePassword = () => {
-        const { password, newPassword, retypePassword, user } = this.state;
-        if (hashPassword(password) === user.password)
-            if (newPassword.indexOf(' ') === -1 && newPassword === retypePassword)
-                return true
+        const {  newPassword, retypePassword } = this.state;
+        if (newPassword.trim() !== '' && newPassword.indexOf(' ') === -1 && newPassword === retypePassword)
+            return true
         return false
     }
 
@@ -54,63 +64,66 @@ class ChangePassword extends React.Component {
         else {
             const { user, newPassword } = this.state;
             if (user) {
-                user.password = newPassword;
-                // updatePassword(user).then(res => {
-                // })
+                updatePassword(user._id, newPassword).then(res => {
+                    if(res.data){
+                        this.setState({
+                            newPassword: '',
+                            retypePassword: '',
+                            success: true,
+                        })
+                    }
+                })
             }
         }
     }
 
     render(){
-        const {password, newPassword, retypePassword, errorPassword} = this.state;
-        const activePsw = password.trim() && newPassword.trim() && retypePassword.trim();
+        const { newPassword, retypePassword, errorPassword, success} = this.state;
+
+        const errorText = errorPassword && <p className="errorNotification">Something is invalid!</p>
+        const successText = success && <p className="errorNotification">Change password successfully!</p>
+
 
         return (
         <div className="ml-5">
-      
-      <div className="d-flex ">
-          <p className="mr-4 item-name">Password</p>
-          <Input
-            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)'}} />}
-            style={{ width: 300}}
-            name="password" id="password"
-            value={password}
-            onFocus={this.handleFocus}
-            onChange={this.onChange} 
-          />
+            <div className="errorNotification">{errorText}</div>
+            <div className="errorNotification mb-3">{successText}</div>
+
+            <div className="d-flex mt-1">
+                <p className="mr-4 item-name">New Password</p>
+                <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    name="newPassword" id="newPassword"
+                    type="password"
+                    value={newPassword}
+                    style={{width: 300}}
+                    onFocus={this.handleFocus}
+                    onChange={this.onChange} 
+                />
+            </div>
+
+            <div className="d-flex mt-3">
+                <p className="mr-4 item-name">Retype</p>
+                <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    name="retypePassword" id="retypePassword"
+                    type="password"
+                    value={retypePassword}
+                    style={{width: 300}}
+                    onFocus={this.handleFocus}
+                    onChange={this.onChange} 
+                />
+            </div>
+
+        
+        
+            <div className="d-flex mt-5 group-button">
+            <Button onClick={this.handleCancelPsw} className="ml-5 mr-3"> Cancel </Button>
+            <Button onClick={this.handleChangePsw} disabled={errorPassword}> Change </Button>
+            </div>
         </div>
-        <div className="d-flex mt-3">
-            <p className="mr-4 item-name">New Password</p>
-            <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                name="newPassword" id="newPassword"
-                value={newPassword}
-                style={{width: 300}}
-                onFocus={this.handleFocus}
-                onChange={this.onChange} 
-              />
-        </div>
 
-        <div className="d-flex mt-3">
-            <p className="mr-4 item-name">Retype</p>
-            <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                name="retypePassword" id="retypePassword"
-                value={retypePassword}
-                style={{width: 300}}
-                onFocus={this.handleFocus}
-                onChange={this.onChange} 
-            />
-          </div>
-
-     
-     
-        <div className="d-flex mt-5 group-button">
-          <Button onClick={this.handleCancelInfor} className="ml-5 mr-3"> Cancel </Button>
-          <Button onClick={this.handleChangeInfor}> Change </Button>
-         </div>
-
-     </div>
+    
     );
 
     }

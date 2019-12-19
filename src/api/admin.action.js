@@ -78,11 +78,11 @@ export const updatePassword = (id, password) => {
 }
 
 
-export const updateAvatar = (user) => {
+export const updateAvatar = (id, password) => {
     return API
-        .post(`/users/me`, {
-            user,
-            type: 2
+        .post(`/avatar`, {
+            id,
+            password
         })
         .then(res => {
             return res

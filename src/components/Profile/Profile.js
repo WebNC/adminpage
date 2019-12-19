@@ -15,7 +15,10 @@ class Profile extends React.Component {
 
     componentDidMount = () => {
         getUser().then(res => {
-            this.setState({user: res });
+            this.setState({user: res || {
+                username: 'username',
+                email: 'email@mail.com'
+            } });
         })
     }
 
@@ -41,12 +44,28 @@ class Profile extends React.Component {
                             <p  className="value">{user.email}</p>
                         </div>
                         {
+                        user.age ?
+                        <div className="activeR d-flex">
+                            <p className="usernameLabel">AGE </p>
+                            <p  className="value">{user.age}</p>
+                        </div> : ' '
+                        }
+                        {
                         user.phone ?
-                        `<div className="activeR d-flex">
+                        <div className="activeR d-flex">
                             <p className="usernameLabel">PHONE </p>
                             <p  className="value">{user.phone}</p>
-                        </div>` : ' '
+                        </div> : ' '
                         }
+                        {
+                        user.address ?
+                        <div className="activeR d-flex">
+                            <p className="usernameLabel">ADDRESS </p>
+                            <p  className="value">{user.address}</p>
+                        </div> : ' '
+                        }
+
+
                         <hr width="300px" />
                         
                     </div>
@@ -55,8 +74,8 @@ class Profile extends React.Component {
                         <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/>
                     </div>
                 </div>
-                <div className= "row ml-5">
-                    <Link to="/profile"><Button>Edit Profile</Button></Link>
+                <div className= "row ml-5 pl-5">
+                    <Link to="/profile"><Button type="primary">Edit Profile</Button></Link>
                 </div>
             </div>
          

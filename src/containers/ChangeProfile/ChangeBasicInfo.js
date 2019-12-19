@@ -16,12 +16,12 @@ class ChangeBasicInfo extends React.Component {
             age: '',
             phone: '',
             error: false,
+            success: false
         }
     }
 
     componentDidMount = () => {
         getUser().then(res=>{ 
-               console.log(res)
             this.setState({
                 user: res,
                 username: res.username,
@@ -36,6 +36,7 @@ class ChangeBasicInfo extends React.Component {
     handleFocus = () => {
         this.setState({
             error: false,
+            success: false
         })
     }
 
@@ -61,7 +62,7 @@ class ChangeBasicInfo extends React.Component {
    
 
     validateInfor = () => {
-        const { phone, address, age} = this.state;
+        const { phone, age} = this.state;
         const isVNPhoneMobile = /^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/;
         const isError = /[a-zA-Z]|\s\W|(_)/;
         if (!isVNPhoneMobile.test(phone) || age.search(isError) !== -1 || phone.search(isError) !== -1) {
@@ -89,7 +90,8 @@ class ChangeBasicInfo extends React.Component {
                             username: newUser.username,
                             age: newUser.age,
                             address: newUser.address,
-                            phone: newUser.phone
+                            phone: newUser.phone,
+                            success:  true,
                         })
                     }
                    
@@ -102,14 +104,17 @@ class ChangeBasicInfo extends React.Component {
    
 
     render(){
-        const { username,phone,age,address, error } = this.state
+        const { username,phone,age,address, error, success } = this.state
         const errorText = error && <p className="errorNotification">Something is invalid!</p>
+        const successText = success && <p className="errorNotification">Change password successfully!</p>
 
 
         return ( 
         <div className="ml-5">
-            <div className="errorNotification mb-4-1">{errorText}</div>
-            <div className="d-flex mt-4 ">
+            <div className="errorNotification">{errorText}</div>
+            <div className="errorNotification mb-3">{successText}</div>
+
+            <div className="d-flex mt-1 ">
                 <p className="mr-4 item-name">Username</p>
                 <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />}
