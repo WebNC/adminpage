@@ -11,6 +11,14 @@ export const getSkill = (page) => {
         }).catch(error => console.log(error));
 }
 
+export const getAllSkill = () => {
+    return API
+        .get(`/skill-list`)
+        .then(res => {
+            return res.data
+        }).catch(error => console.log(error));
+}
+
 export const getNumberSkill = () => {
     return API
         .get(`/skill-list/number`)

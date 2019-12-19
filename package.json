@@ -10,6 +10,7 @@
     "dotenv": "^8.2.0",
     "global": "^4.4.0",
     "heroku": "^7.35.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-avatar-edit": "^0.8.3",

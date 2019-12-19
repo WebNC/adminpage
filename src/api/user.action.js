@@ -57,8 +57,12 @@ export const unblockUser = id => {
 
 
 export const getUserDetail = id =>{
+    let _id = id;
+    if(id.indexOf('/') === -1){
+        _id = '/' + id;
+    }
     return API
-        .get(`/user-detail${id}`)
+        .get(`/user-detail${_id}`)
         .then(res => {
             return res
         }).catch(error => console.log(error));

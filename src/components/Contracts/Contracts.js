@@ -2,9 +2,10 @@
 import React from 'react';
 import {Table, Pagination} from 'react-bootstrap'
 import { MdRemoveRedEye } from "react-icons/md";
-import {Link} from 'react-router-dom'
+import moment from 'moment'
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
+import ContractDetail from './ContractDetail/ContracDetail'
 
 
 class Contracts extends React.Component {
@@ -14,6 +15,8 @@ class Contracts extends React.Component {
           contracts: [],
           pageSize: 10,
           amount: 0,
+          showDetailModal : false,
+          detailContract: {}
         };
     }
 
@@ -36,20 +39,38 @@ class Contracts extends React.Component {
       })
     }
 
+    handleShowModal = () =>{
+      const {showDetailModal} = this.state;
+      this.setState({
+        showDetailModal: !showDetailModal,
+      })
+    }
+
+    handleDetailContract = (item) =>{
+      this.setState({
+        detailContract: item,
+      })
+      this.handleShowModal();
+    }
+
     render() {
-      const {contracts,amount,pageSize} = this.state;
-      const teacherList = contracts.map((item, index) => {
+      // open, handleShowDetailContract, contractDetail
+      const {contracts,amount,pageSize, showDetailModal, detailContract} = this.state;
+      const contractList = contracts.map((item, index) => {
         return(
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{item.createAt}</td>
-            <td>{item.fromDate}</td>
-            <td>{item.toDate}</td>
+            <td>{moment(item.createAt).format('DD/MM/YYYY')}</td>
+            <td>{moment(item.fromDate).format('DD/MM/YYYY')}</td>
+            <td>{moment(item.toDate).format('DD/MM/YYYY')}</td>
             <td>{item.value}</td>
             <td>{item.status}</td>
             <td>
               <div>
-                <Link to={`/contract/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link>
+                {/* <Link to={`/contract/${item._id}`}>
+                </Link> */}
+                <MdRemoveRedEye  className="view-detail" onClick={() => this.handleDetailContract(item)} />
+
               </div>
             </td>
           </tr>
@@ -58,6 +79,7 @@ class Contracts extends React.Component {
 
       return (
         <>
+        <ContractDetail open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
           <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>
@@ -73,7 +95,7 @@ class Contracts extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {teacherList}
+            {contractList}
           </tbody>
         </Table>
      
