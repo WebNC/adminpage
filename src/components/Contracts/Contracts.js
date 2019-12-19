@@ -5,7 +5,7 @@ import { MdRemoveRedEye } from "react-icons/md";
 import {Link} from 'react-router-dom'
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
-
+import FormatDate from '../../helper/FomatDate';
 
 class Contracts extends React.Component {
     constructor(props) {
@@ -42,9 +42,9 @@ class Contracts extends React.Component {
         return(
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{item.createAt}</td>
-            <td>{item.fromDate}</td>
-            <td>{item.toDate}</td>
+            <td>{FormatDate(item.createAt)}</td>
+            <td>{FormatDate(item.fromDate)}</td>
+            <td>{FormatDate(item.toDate)}</td>
             <td>{item.value}</td>
             <td>{item.status}</td>
             <td>
