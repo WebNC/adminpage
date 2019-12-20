@@ -79,13 +79,11 @@ export const updatePassword = (id, password) => {
 
 
 export const updateAvatar = ({id, file}) => {
-    console.log(id, file)
 
     const formData = new FormData();
     formData.append('avatar', file);
     formData.append('id', id);
     
-    console.log(formData);
     const config = {
         'headers': { 
         'content-type': 'multipart/form-data'
@@ -93,9 +91,9 @@ export const updateAvatar = ({id, file}) => {
     }
 
     return API
-        .post(`/upload/avatar`, {
+        .post(`/upload/avatar`, 
            formData, config
-        })
+        )
         .then(res => {
             return res
         }).catch(res => {

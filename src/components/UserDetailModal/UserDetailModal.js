@@ -2,12 +2,15 @@
 import React from 'react';
 import moment from 'moment';
 import {Modal} from 'react-bootstrap'
+import MyAvatar from '../MyAvatar/MyAvatar'
 
 class UserDetailModal extends React.PureComponent {
 
 
   render(){
     const { information, open, handleShow} = this.props;
+    console.log(information);
+
       const style={
     width : '100px',
     textAlign: 'right'
@@ -55,7 +58,8 @@ class UserDetailModal extends React.PureComponent {
               </div>
 
               <div className="col-5">
-                <img src="http://placehold.it/1000" height="120" width="120" alt="avatar" className="avartar"/>
+                <MyAvatar canNotChange user={information}/>
+                {/* <img src="http://placehold.it/1000" height="120" width="120" alt="avatar" className="avartar"/> */}
                 {
                   ( information.type === 'Người dạy') ?
                   <div className="mt-5">

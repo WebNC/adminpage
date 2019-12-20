@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Avatar, Tooltip, Result} from 'antd';
+import {  Button, Avatar, Tooltip, Result} from 'antd';
 import { Modal} from 'react-bootstrap'
 import './style.css'
 import {updateAvatar} from '../../api/admin.action';
@@ -34,11 +34,14 @@ class MyAvatar extends React.Component {
     e.preventDefault();
     const {user} = this.props;
     const {file} = this.state
+
+
     updateAvatar({
       id: user._id,
       file
     }).then(res=>{
         if(res){
+          console.log(res)
             this.setState({
                 successMessage: true
             })
@@ -58,18 +61,26 @@ class MyAvatar extends React.Component {
   }
 
   render() {
-    const { imageUrl} = this.props;
-    const {visible, imagePreviewUrl, successMessage, errMessage} = this.state;
+    const {  canNotChange, user} = this.props;
+    const {visible, imagePreviewUrl, successMessage, errMessage, file} = this.state;
     return (
       <div>
-        <Tooltip placement="bottom" title="Cập nhật ảnh đại diện">
-          <Button className="btn-avatar" onClick={this.showModal}>
-            <Avatar size={130} src={imageUrl} className="avatar-img" />
-          </Button>
-        </Tooltip>
-        <div> </div>
-        <Button className="mt-3 ml-4" onClick={this.showModal}>Change</Button>
+        {
+          canNotChange ? 
+          <Avatar size={130} src={user.url } className="avatar-img" /> :
 
+          <Tooltip placement="bottom" title="Cập nhật ảnh đại diện">
+            <Button className="btn-avatar" onClick={this.showModal}>
+              <Avatar size={130} src={user.url} className="avatar-img" />
+            </Button>
+
+            <div> </div>
+            <Button className="mt-3 ml-4" onClick={this.showModal}>Change</Button>
+
+        </Tooltip>
+
+        }
+       
         <Modal show={visible} onHide={this.handleCancel}>
           <Modal.Header closeButton>
             <Modal.Title>Cập nhật ảnh đại diện</Modal.Title>
@@ -90,7 +101,7 @@ class MyAvatar extends React.Component {
                 ):(
                   <>
                     <div className="preview-avatar mb-5">
-                      <Avatar size={200} src={imagePreviewUrl || imageUrl} />
+                      <Avatar size={200} src={imagePreviewUrl || user.url} />
                     </div>
 
                     <form onSubmit={this.onFormSubmit}     >
@@ -104,7 +115,7 @@ class MyAvatar extends React.Component {
           }
           </Modal.Body>
           <Modal.Footer>
-              <Button type="primary" onClick={this.onFormSubmit}>Change</Button>
+              <Button type="primary" onClick={this.onFormSubmit} disabled={successMessage || !file}>Change</Button>
           </Modal.Footer>
         </Modal>
       </div>
