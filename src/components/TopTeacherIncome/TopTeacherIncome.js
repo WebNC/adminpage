@@ -2,12 +2,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { Button } from "antd";
-import {getAllReport} from '../../api/report.action'
+import {getAllTopTeacherIncome} from '../../api/topIncome.action'
 import './TopTeacherIncome.scss';
 
 
-class TopSkillIncome extends React.Component {
+class TopTeacherIncome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,8 +15,7 @@ class TopSkillIncome extends React.Component {
     }
 
     componentDidMount = () => {
-      const {page} = this.state
-      getAllReport(page).then(res=>{
+      getAllTopTeacherIncome('month').then(res=>{
         this.setState({topSkill: res.data.message})
       })
     }
@@ -29,14 +27,9 @@ class TopSkillIncome extends React.Component {
         return(
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{item.date}</td>
-            <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
-            <td><p>{item.teacherName}</p><p>ID: {item.teacherName}</p></td>
-            <td><p>{item.content}</p></td>
-            <td>{item.status === false?'Chưa giải quyết': 'Đã giải quyết'}</td>
-            <td>
-              { item.status === false ? <div><Button onClick =  { () => this.solve(item._id,index)}> Giải quyết </Button></div> : '' }
-            </td>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
+            <td>{item.income}</td>
           </tr>
         )
       })
@@ -62,4 +55,4 @@ class TopSkillIncome extends React.Component {
     }
 }
 
-export default TopSkillIncome;
+export default TopTeacherIncome;

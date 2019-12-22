@@ -1,13 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table, Pagination} from 'react-bootstrap'
+import {Table} from 'react-bootstrap'
 import { MdRemoveRedEye } from "react-icons/md";
 import moment from 'moment'
+import {Pagination} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import ContractDetail from './ContractDetail/ContracDetail'
-
-// import FormatDate from '../../helper/FomatDate';
 
 class Contracts extends React.Component {
     constructor(props) {

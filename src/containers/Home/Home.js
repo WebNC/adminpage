@@ -11,6 +11,7 @@ import Contracts from '../Contracts';
 import Reports from '../Reports';
 import TopTeacherIncome from '../TopTeacherIncome';
 import TopSkillIncome from '../TopSkillIncome'
+import IncomeChart from '../../components/IncomeChart/IncomeChart'
 
 import './Home.scss'
 
@@ -87,7 +88,7 @@ class Home extends React.PureComponent {
                     <Reports/>
                   </Tab.Pane>
                   <Tab.Pane eventKey="8">
-                    <Reports/>
+                    <IncomeChart/>
                   </Tab.Pane>
                   <Tab.Pane eventKey="9">
                     <TopTeacherIncome/>
