@@ -25,18 +25,21 @@ class TopSkillIncome extends React.Component {
     handleChangeSelect = () => {
 
     }
-
+    
     render() {
       const {topSkill} = this.state;
       const teacherList = topSkill.map((item, index) => {
-        return(
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.income}</td>
-          </tr>
-        )
+        if (item.income > 0){
+          return(
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.income}</td>
+            </tr>
+          )
+        }
+        return '';
       })
       return (
         <>

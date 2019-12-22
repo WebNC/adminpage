@@ -1,9 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { MdRemoveRedEye } from "react-icons/md";
 import moment from 'moment'
-import {Pagination} from 'antd';
+import {Pagination, Button} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import DetailContract from './ContractDetail/ContracDetail'
@@ -69,7 +68,7 @@ class Contracts extends React.Component {
               <div>
                 {/* <Link to={`/contract/${item._id}`}>
                 </Link> */}
-                <MdRemoveRedEye  className="view-detail" onClick={() => this.handleDetailContract(item)} />
+                <Button onClick={() => this.handleDetailContract(item)}>Xem chi tiết</Button>
 
               </div>
             </td>
