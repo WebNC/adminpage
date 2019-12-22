@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import {Modal} from 'react-bootstrap'
+import {Icon} from 'antd'
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import {getAllSkill} from '../../../api/skill.action'
@@ -65,31 +66,61 @@ class DetailContract extends React.Component {
           });
         }
         return (
-         <Modal show={open} onHide={handleShowDetailContract} size="lg">
+         <Modal show={open} onHide={handleShowDetailContract}>
             <Modal.Header closeButton>
               <Modal.Title>Contract detail</Modal.Title>
             </Modal.Header>
               <Modal.Body>
                 {contractDetail.skill ? 
                 
-                <div className="info-contract-teacher">
-
-                    <div className="d-flex">
-                        <div className="item-info-contract-teacher mr-5">
-                            <h5 className="title-contract-teacher">Create at :</h5>
-                            <h5>
-                                {moment(contractDetail.createAt).format('DD/MM/YYYY')} 
-                            </h5>
-                        </div>
-
-                        <div className="item-info-contract-teacher ml-5">
-                            <h5 className="title-contract-teacher">Rating :</h5> 
-                            <h5>
-                                {contractDetail.rating}
-                            </h5> 
-                        </div>
-                    </div>
-               
+              <div className="info-contract-teacher">
+                <div className="d-flex">
+                  <div className="item-info-contract-teacher mr-5">
+                    <h5 className="title-contract-teacher">Create at :</h5>
+                    <h5>
+                      {moment(contractDetail.createAt).format('DD/MM/YYYY')} 
+                    </h5>
+                  </div>
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Student : </h5> 
+                  <h5>
+                    {student.username}
+                  </h5> 
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Teacher : </h5> 
+                  <h5>
+                    {teacher.username}
+                  </h5> 
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Studying at :</h5>
+                  <h5>
+                    {`${contractDetail.address.address}, ${contractDetail.address.district}, Hồ Chí Minh` } 
+                  </h5>
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Time :</h5>
+                  <h5>
+                    {contractDetail.fromDate !== undefined ? 
+                      ` Từ ${moment(contractDetail.fromDate).format('DD/MM/YYYY')} đến ${moment(contractDetail.toDate).format('DD/MM/YYYY')}` 
+                      : ''
+                    } 
+                  </h5>
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Skill :</h5>
+                  <div style={{display: "block"}}>
+                    {selectedSkill}
+                  </div>
+                </div>
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Hour :</h5> 
+                  <h5>
+                    {contractDetail.hour }
+                  </h5>
+                </div>
                 <div className="item-info-contract-teacher">
                   <h5 className="title-contract-teacher">Status :</h5>
                   <h5>
@@ -105,71 +136,29 @@ class DetailContract extends React.Component {
                     </h5>
                   </div> : <></>
                 }
-
-                <div className="d-flex">
-                    <div className="item-info-contract-teacher mr-5">
-                        <h5 className="title-contract-teacher">Student : </h5> 
-                        <h5>
-                            {student.username}
-                        </h5> 
+                <div className="item-info-contract-teacher">
+                  <h5 className="title-contract-teacher">Đánh giá :</h5>
+                  {contractDetail.comment !== undefined ? (
+                    <div style={{display: "flex"}}>
+                      <h5>
+                        {contractDetail.rating} 
+                      </h5>
+                      <Icon type="star" theme="filled" style={{color:"#faad14", paddingTop: "8px"}}/>
+                      <h5>{` - ${contractDetail.comment.comment}`}</h5> 
                     </div>
-
-                    <div className="item-info-contract-teacher ml-5">
-                        <h5 className="title-contract-teacher">Teacher : </h5> 
-                        <h5>
-                            {teacher.username}
-                        </h5> 
-                    </div>
-                </div>
-               
-               
-
-                <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Studying at :</h5>
-                  <h5>
-                    {`${contractDetail.address.address}, ${contractDetail.address.district}, Hồ Chí Minh` } 
-                  </h5>
-                </div>
-
-                <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Time :</h5>
-                  <h5>
-                    {contractDetail.fromDate !== undefined ? 
-                      ` Từ ${moment(contractDetail.fromDate).format('DD/MM/YYYY')} đến ${moment(contractDetail.toDate).format('DD/MM/YYYY')}` 
-                      : ''
-                    } 
-                  </h5>
-                </div>
-
-                <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Skill :</h5>
-                  <div style={{display: "block"}}>
-                    {selectedSkill}
+                    ):(
+                      <h5>
+                        Chưa có đánh giá từ người học
+                      </h5>
+                  )}
                   </div>
-                </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Comment :</h5>
-                  <div style={{display: "block"}}>
-                  <h5>{`+ ${contractDetail.comment}`}</h5>
-                  </div>
-                </div>
-
-                <div className="d-flex">
-                <div className="item-info-contract-teacher mr-5">
-                  <h5 className="title-contract-teacher">Hour :</h5> 
-                  <h5>
-                    {contractDetail.hour }
-                  </h5>
-                </div>
-
-                <div className="item-info-contract-teacher ml-5">
                   <h5 className="title-contract-teacher " >Total : </h5>
                   <h5 >
                     {`${contractDetail.value} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </h5>
                 </div>
-                </div>
-            </div> 
+              </div>
           : 
           <></>
                 }
