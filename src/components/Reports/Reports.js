@@ -20,7 +20,6 @@ class Reports extends React.Component {
 
     componentDidMount = () => {
       getAllReport(1).then(res=>{
-        console.log(res.data.message);
         this.setState({reports: res.data.message})
       })
 

@@ -1,8 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { MdLock,MdLockOpen,MdRemoveRedEye } from "react-icons/md";
-import {Pagination, Modal} from 'antd'
+import {Pagination, Modal, Button} from 'antd'
 import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/user.action'
 import './Students.scss';
 import UserDetailModal from '../UserDetailModal/UserDetailModal'
@@ -96,16 +95,13 @@ class Students extends React.Component {
               <td>{item.username}</td>
               <td>
               <div>
-                {/* <Link to={`/${item._id}`}>
-                  <MdRemoveRedEye className="view-detail" />
-                </Link> */}
-
-                <MdRemoveRedEye className="view-detail" onClick={() => this.handleClickShowModal(item)} />
+                {/* <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link> */}
+                <Button onClick={() => this.handleClickShowModal(item)}>Xem chi tiết</Button>
 
                 <span className="ml-3">
                   {item.isBlocked ? 
-                    <MdLockOpen  className="delete" onClick={() => this.handleOpenLock(item._id)}/> :
-                    <MdLock  className="delete" onClick={() => this.handleLock(item._id)}/>
+                    <Button  type="primary" onClick={() => this.handleOpenLock(item._id)}>Mở khóa tài khoản</Button> :
+                    <Button  type="danger" onClick={() => this.handleLock(item._id)}>Khóa tài khoản</Button>
                 }
                 </span>
               </div>

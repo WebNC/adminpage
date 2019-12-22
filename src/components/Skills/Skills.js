@@ -2,8 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */
 import React from 'react';
-import {Table,Button, Modal} from 'react-bootstrap'
-import { MdDeleteForever, MdEdit} from "react-icons/md";
+import {Table, Modal} from 'react-bootstrap'
 import * as antd from "antd";
 import {getSkill, addSkill, editSkill, deleteSkill, getNumberSkill} from '../../api/skill.action';
 import './Skills.scss';
@@ -147,11 +146,11 @@ class Skills extends React.Component {
           <td>{item.name}</td>
           <td>{number[item._id] ? number[item._id].number : 0}</td>
           <td>
-            <MdEdit size="1.5em"  onClick={()=> this.handleEdit(item.name, item._id)}/>
+            <antd.Button  onClick={()=> this.handleEdit(item.name, item._id)}>Chỉnh sửa</antd.Button>
             <span className="ml-3">
-              <MdDeleteForever 
-                className="delete"
-                onClick={()=>this.handleConfirm(item._id)}/>
+              <antd.Button 
+                type = "danger"
+                onClick={()=>this.handleConfirm(item._id)}>Xóa</antd.Button>
             </span>
           </td>
         </tr>
@@ -170,19 +169,19 @@ class Skills extends React.Component {
               onFocus={this.handleFocus}
               className={error ? 'input-skill-error ' : 'input-skill rounded'}
               onChange={this.onChange} />
-          <Button variant="primary"  className="ml-3" onClick={this.handleSave}>
+          <antd.Button type="primary"  className="ml-3" onClick={this.handleSave}>
             Save Changes
-          </Button>
+          </antd.Button>
           </div>
           
           </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
+          <antd.Button type="danger" onClick={this.handleClose}>
             Close
-          </Button>
+          </antd.Button>
         </Modal.Footer>
       </Modal>
-
+      <h2>Skill List </h2>
         <div className="d-flex">
           <input type="text" name="skill" id="skill"
             placeholder="Enter new skill"
@@ -190,10 +189,9 @@ class Skills extends React.Component {
             onFocus={this.handleFocus}
             className={error ? 'input-skill-error ' : 'input-skill rounded'}
             onChange={this.onChange} />
-          <Button onClick={this.handleAddSkill}>Add</Button>
+          <antd.Button type = "primary" onClick={this.handleAddSkill}>Add</antd.Button>
                   
         </div>
-        <h2>Skill List </h2>
       <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
       <Table striped bordered hover className="mt-3">
         <thead>

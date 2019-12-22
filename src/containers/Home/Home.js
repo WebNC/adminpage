@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {Tab, Row, Col, Nav} from 'react-bootstrap'
+import { Tabs} from 'antd'
 import Header from '../Header'
 import CreateNewAdmin from '../CreateNewAdmin/CreateNewAdmin'
 import Profile from '../Profile'
@@ -15,93 +15,47 @@ import IncomeChart from '../../components/IncomeChart/IncomeChart'
 
 import './Home.scss'
 
+const { TabPane } = Tabs;
+
 class Home extends React.PureComponent {
 
   render(){
     const isRoot = localStorage.getItem("admin") !== null
-    const tabClassName = "mb-2 text-right tabs-column"
     return <>
       <Header/>
       <div className="content">
-
-        <Tab.Container id="left-tabs-example" defaultActiveKey="2">
-          <Row>
-            <Col sm={3}>
-              <div className="first-column">
-                <Nav fill variant="tabs"  className="flex-column">
-                  {isRoot && <Nav.Item className={tabClassName}>
-                    <Nav.Link eventKey="1" className=" tab-label">Create Admin</Nav.Link>
-                  </Nav.Item >}
-                  <Nav.Item className={tabClassName}>
-                    <Nav.Link eventKey="2" className=" tab-label">Profile</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className={tabClassName}>
-                    <Nav.Link eventKey="3" className=" tab-label">Teachers</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className={tabClassName}>
-                    <Nav.Link eventKey="4" className=" tab-label">Students</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="5" className=" tab-label">Skills</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="6" className=" tab-label">Contracts</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="7" className=" tab-label">Reports</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="8" className=" tab-label">Income Chart</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="9" className=" tab-label">Top Teacher Income</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item  className={tabClassName}>
-                    <Nav.Link eventKey="10" className=" tab-label">Top Skill Income</Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </div>
-          
-            </Col>
-            <Col sm={9}>
-              <div className="tab-content">
-                <Tab.Content>
-                  <Tab.Pane eventKey="1">
-                    <CreateNewAdmin/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="2">
-                    <Profile/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="3">
-                    <Teachers/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="4">
-                    <Students/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="5">
-                    <Skills/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="6">
-                    <Contracts/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="7">
-                    <Reports/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="8">
-                    <IncomeChart/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="9">
-                    <TopTeacherIncome/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="10">
-                    <TopSkillIncome/>
-                  </Tab.Pane>
-                </Tab.Content>
-              </div>
-            
-            </Col>
-          </Row>
-        </Tab.Container>
+      <Tabs defaultActiveKey="2" tabPosition= 'left' style={{ height: 700 }}>
+          { isRoot &&<TabPane tab='Create Admin' key={1}>
+            <CreateNewAdmin/>
+          </TabPane>}
+          <TabPane tab='Profile' key={2}>
+            <Profile/>
+          </TabPane>
+          <TabPane tab='Teacher' key={3}>
+            <Teachers/>
+          </TabPane>
+          <TabPane tab='Students' key={4}>
+            <Students/>
+          </TabPane>
+          <TabPane tab='Skills' key={5}>
+            <Skills/>
+          </TabPane>
+          <TabPane tab='Contracts' key={6}>
+            <Contracts/>
+          </TabPane>
+          <TabPane tab='Reports' key={7}>
+            <Reports/>
+          </TabPane>
+          <TabPane tab='Income Chart' key={8}>
+            <IncomeChart/>
+          </TabPane>
+          <TabPane tab='Top Teacher Income' key={9}>
+            <TopTeacherIncome/>
+          </TabPane>
+          <TabPane tab='Top Skill Income' key={10}>
+            <TopSkillIncome/>
+          </TabPane>
+      </Tabs>
       </div>
     </>
       
