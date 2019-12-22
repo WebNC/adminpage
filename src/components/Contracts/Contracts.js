@@ -6,7 +6,7 @@ import moment from 'moment'
 import {Pagination} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
-import ContractDetail from './ContractDetail/ContracDetail'
+import DetailContract from './ContractDetail/ContracDetail'
 
 class Contracts extends React.Component {
     constructor(props) {
@@ -79,7 +79,7 @@ class Contracts extends React.Component {
 
       return (
         <>
-        <ContractDetail open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
+        <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
           <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>

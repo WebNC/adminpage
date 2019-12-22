@@ -64,13 +64,6 @@ class DetailContract extends React.Component {
                     </h5>)
           });
         }
-
-        const comments = [];
-        if(contractDetail.comment){
-            contractDetail.comment.forEach(item => 
-                comments.push( <h5>{`+ ${item.comment}`}</h5>)
-            )
-        } 
         return (
          <Modal show={open} onHide={handleShowDetailContract} size="lg">
             <Modal.Header closeButton>
@@ -157,7 +150,7 @@ class DetailContract extends React.Component {
                 <div className="item-info-contract-teacher">
                   <h5 className="title-contract-teacher">Comment :</h5>
                   <div style={{display: "block"}}>
-                    {comments}
+                  <h5>{`+ ${contractDetail.comment}`}</h5>
                   </div>
                 </div>
 
@@ -165,7 +158,7 @@ class DetailContract extends React.Component {
                 <div className="item-info-contract-teacher mr-5">
                   <h5 className="title-contract-teacher">Hour :</h5> 
                   <h5>
-                    { contractDetail.hour }
+                    {contractDetail.hour }
                   </h5>
                 </div>
 
@@ -176,16 +169,11 @@ class DetailContract extends React.Component {
                   </h5>
                 </div>
                 </div>
-
-               
             </div> 
           : 
           <></>
                 }
               </Modal.Body>
-         
-             
-            
           </Modal>
         )
     }
