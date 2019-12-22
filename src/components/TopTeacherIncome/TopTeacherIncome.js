@@ -16,6 +16,7 @@ class TopTeacherIncome extends React.Component {
 
     componentDidMount = () => {
       getAllTopTeacherIncome('month').then(res=>{
+        console.log(res.data.message)
         this.setState({topSkill: res.data.message})
       })
     }
