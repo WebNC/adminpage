@@ -150,7 +150,7 @@ class DetailContract extends React.Component {
                 <div className="item-info-contract-teacher">
                   <h5 className="title-contract-teacher">Comment :</h5>
                   <div style={{display: "block"}}>
-                  <h5>{`+ ${contractDetail.comment}`}</h5>
+                  <h5>{`${contractDetail.comment.comment}`}</h5>
                   </div>
                 </div>
 
