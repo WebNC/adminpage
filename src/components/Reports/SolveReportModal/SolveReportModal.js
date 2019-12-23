@@ -24,6 +24,7 @@ class SolveReportModal extends React.Component {
     }
   }
 
+
   UNSAFE_componentWillReceiveProps = (props)=>{
     const {teacherID, studentID, contractID, reportID} = props;
     
@@ -34,35 +35,41 @@ class SolveReportModal extends React.Component {
         teacher: res.data.teacher,
         contract: res.data.contract,
         chat: res.data.chat,
-        message: ''
+        message: '',
       })
     })
   }
 
   handleDeclineButton = () => {
     const { reportId } = this.state;
+    const { reports, index, handleSolveReport } = this.props
     solveReport(reportId, false).then(res => {
       this.setState({
         message: 'Đã giải quyết khiếu nại'
       })
       console.log(res);
     })
+    reports[index].status = true;
+    handleSolveReport(reports);
   }
 
   handleAcceptButton = () => {
     const { reportId } = this.state;
+    const { reports, index, handleSolveReport } = this.props
     solveReport(reportId, true).then(res => {
       this.setState({
         message: 'Đã giải quyết khiếu nại'
       })
       console.log(res);
     })
+    reports[index].status = true;
+    handleSolveReport(reports);
   }
 
     render() {
         const {open, handleShowModal} = this.props;
         const {student, teacher, chat, contract, message} = this.state;
-        
+
         return (
          <Modal show={open} onHide={handleShowModal} dialogClassName="solve-modal">
             <Modal.Header closeButton>

@@ -2,12 +2,13 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import { Button, Pagination } from "antd";
+import { Button, Pagination, Icon, Spin } from "antd";
 import SolveReportModal from './SolveReportModal/SolveReportModal'
 import FormatDate from '../../helper/FomatDate'
 import {getAllReport, getNumberReport} from '../../api/report.action'
 import './Reports.scss';
 
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class Reports extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Reports extends React.Component {
           amount: 0,
           pageSize: 5,
           isShow: false,
+          isLoading: true
         };
     }
 
@@ -27,9 +29,11 @@ class Reports extends React.Component {
 
       getNumberReport().then(res =>{
         this.setState({
-          amount: res.data.message
+          amount: res.data.message,
+          isLoading: false
         })
       })
+      
     }
 
     handleChange = (value) =>{
@@ -41,6 +45,11 @@ class Reports extends React.Component {
     handleShowModal = () => {
       const { isShow } = this.state
       this.setState({isShow: !isShow});
+
+    }
+
+    handleSolveReport = (reports) => {
+      this.setState({reports});
     }
     // solve = (id, index) => {
     //   solveReport(id).then( res => {
@@ -53,7 +62,7 @@ class Reports extends React.Component {
     // }
 
     render() {
-      const {reports, amount, pageSize, isShow} = this.state;
+      const {reports, amount, pageSize, isShow, isLoading} = this.state;
       const teacherList = reports.map((item, index) => {
         return(
           <>
@@ -74,33 +83,45 @@ class Reports extends React.Component {
             contractID={item.contractID} 
             handleShowModal={this.handleShowModal} 
             open={isShow} 
-            reportID = {item._id}/>
+            reportID = {item._id}
+            reports = {reports}
+            index={index}
+            handleSolveReport={this.handleSolveReport}/>
           </>
         )
       })
       return (
         <>
-          <h2>Danh sách report</h2>
-          <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Ngày tạo</th>
-              <th>Từ người dùng</th>
-              <th>Đến người dùng</th>
-              <th>Nội dung</th>
-              <th>Tình trạng</th>
-              <th>Tác vụ</th>
+        {isLoading === true ? (
+          <div style={{textAlign: "center"}}>
+            <Spin indicator={antIcon} />
+          </div>
+        ):(
+          <>
+            <h2>Danh sách report</h2>
+            <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ngày tạo</th>
+                <th>Từ người dùng</th>
+                <th>Đến người dùng</th>
+                <th>Nội dung</th>
+                <th>Tình trạng</th>
+                <th>Tác vụ</th>
 
-            </tr>
-          </thead>
-          <tbody>
-            {teacherList}
-          </tbody>
-        </Table>
-        <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+              </tr>
+            </thead>
+            <tbody>
+              {teacherList}
+            </tbody>
+          </Table>
+          {amount > pageSize &&
+            <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          }
+          </>
+        )}
         </>
-        
      );
     }
 }

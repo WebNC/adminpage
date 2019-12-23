@@ -7,6 +7,8 @@ import * as antd from "antd";
 import {getSkill, addSkill, editSkill, deleteSkill, getNumberSkill} from '../../api/skill.action';
 import './Skills.scss';
 
+const antIcon = <antd.Icon type="loading" style={{ fontSize: 24 }} spin />;
+
 const {confirm} = antd.Modal
 class Skills extends React.Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class Skills extends React.Component {
       selectedSkillID: '',
       amount: 0,
       pageSize: 8,
+      isLoading: true,
     };
   }
 
@@ -34,7 +37,9 @@ class Skills extends React.Component {
       }
     })
     getNumberSkill().then(res=>{
-      this.setState({ amount: res.message })
+      this.setState({ 
+        amount: res.message,
+        isLoading: false })
     })
   }
 
@@ -138,7 +143,7 @@ class Skills extends React.Component {
   }
 
   render() {
-    const {error, skill, skillList, number, show, selectedSkill, amount, pageSize} = this.state;
+    const {error, skill, skillList, number, show, selectedSkill, amount, pageSize, isLoading} = this.state;
     const skills = skillList.map((item, index) => {
       return(
         <tr key={index}>
@@ -157,57 +162,66 @@ class Skills extends React.Component {
         )
       })
     return (
-      <div className="content-skill">
-         <Modal show={show} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Nhập kỹ năng mới</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="d-flex">
-          <input type="text" name="selectedSkill" id="selectedSkill"
-              value={selectedSkill}
-              onFocus={this.handleFocus}
-              className={error ? 'input-skill-error ' : 'input-skill rounded'}
-              onChange={this.onChange} />
-          <antd.Button type="primary"  className="ml-3" onClick={this.handleSave}>
-            Lưu thay đổi
-          </antd.Button>
-          </div>
-          
-          </Modal.Body>
-        <Modal.Footer>
-          <antd.Button type="danger" onClick={this.handleClose}>
-            Đóng
-          </antd.Button>
-        </Modal.Footer>
-      </Modal>
-      <h2>Skill List </h2>
-        <div className="d-flex">
-          <input type="text" name="skill" id="skill"
-            placeholder="Thêm kỹ năng mới"
-            value={skill}
-            onFocus={this.handleFocus}
-            className={error ? 'input-skill-error ' : 'input-skill rounded'}
-            onChange={this.onChange} />
-          <antd.Button type = "primary" onClick={this.handleAddSkill}>Thêm</antd.Button>
-                  
+      <>
+      {isLoading === true ? (
+        <div style={{textAlign: "center"}}>
+          <antd.Spin indicator={antIcon} />
         </div>
+      ):(
+        <div className="content-skill">
+          <Modal show={show} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Nhập kỹ năng mới</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="d-flex">
+              <input type="text" name="selectedSkill" id="selectedSkill"
+                  value={selectedSkill}
+                  onFocus={this.handleFocus}
+                  className={error ? 'input-skill-error ' : 'input-skill rounded'}
+                  onChange={this.onChange} />
+              <antd.Button type="primary"  className="ml-3" onClick={this.handleSave}>
+                Lưu thay đổi
+              </antd.Button>
+              </div>
+              
+              </Modal.Body>
+            <Modal.Footer>
+              <antd.Button type="danger" onClick={this.handleClose}>
+                Đóng
+              </antd.Button>
+            </Modal.Footer>
+          </Modal>
+          <h2>Danh sách kỹ năng </h2>
+            <div className="d-flex">
+              <input type="text" name="skill" id="skill"
+                placeholder="Thêm kỹ năng mới"
+                value={skill}
+                onFocus={this.handleFocus}
+                className={error ? 'input-skill-error ' : 'input-skill rounded'}
+                onChange={this.onChange} />
+              <antd.Button type = "primary" onClick={this.handleAddSkill}>Thêm</antd.Button>     
+            </div>
+          <Table striped bordered hover className="mt-3">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Kỹ năng</th>
+                <th>Số lượng</th>
+                <th>Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {skills}
+            </tbody>
+          </Table>
+          {amount > pageSize &&
+            <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          }
+        </div>
+      )}
+      </>
       
-      <Table striped bordered hover className="mt-3">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Kỹ năng</th>
-            <th>Số lượng</th>
-            <th>Tác vụ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {skills}
-        </tbody>
-      </Table>
-      <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-      </div>
     );
   }
 }

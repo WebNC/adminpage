@@ -1,11 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import {Pagination, Modal, Button} from 'antd'
+import {Pagination, Modal, Button, Icon, Spin} from 'antd'
 import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/user.action'
 import './Students.scss';
 import UserDetailModal from '../UserDetailModal/UserDetailModal'
 
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 const {confirm} = Modal
 class Students extends React.Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class Students extends React.Component {
           amount: 0,
           pageSize: 10,
           showModal : false,
-          student: {}
+          student: {},
+          isLoading: true
         };
     }
 
@@ -25,8 +27,10 @@ class Students extends React.Component {
       })
       
       getNumberUserStudent().then(res=>{
-        this.setState({amount: res.data.message})
-      })
+        this.setState({
+          amount: res.data.message,
+          isLoading: false})
+      })      
     }
 
     handleUpdate = (id) =>{
@@ -87,7 +91,7 @@ class Students extends React.Component {
     }
 
     render() {
-      const {students, amount, pageSize, showModal, student} = this.state;
+      const {students, amount, pageSize, showModal, student, isLoading} = this.state;
       const studentsList = students.map((item, index) => {
           return(
             <tr key={index}>
@@ -112,23 +116,33 @@ class Students extends React.Component {
 
       return (
         <>
-        <UserDetailModal open={showModal} information={student} handleShow={this.handleShowModal}/>
-          <h2>Danh sách học sinh</h2>
-         
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Tên</th>
-                <th>Tác vụ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {studentsList}
-            </tbody>
-          </Table>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+        {isLoading === true ? (
+          <div style={{textAlign: "center"}}>
+            <Spin indicator={antIcon} />
+          </div>
+        ):(
+          <>
+            <UserDetailModal open={showModal} information={student} handleShow={this.handleShowModal}/>
+            <h2>Danh sách học sinh</h2>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tên</th>
+                  <th>Tác vụ</th>
+                </tr>
+              </thead>
+              <tbody>
+                {studentsList}
+              </tbody>
+            </Table>
+            {amount > pageSize &&
+              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+            }
+          </>
+        )}
         </>
+        
      );
     }
 }

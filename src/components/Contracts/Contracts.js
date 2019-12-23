@@ -2,11 +2,12 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import moment from 'moment'
-import {Pagination, Button} from 'antd';
+import {Pagination, Button, Icon, Spin} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import DetailContract from './ContractDetail/ContracDetail'
 
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class Contracts extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +16,8 @@ class Contracts extends React.Component {
           pageSize: 10,
           amount: 0,
           showDetailModal : false,
-          detailContract: {}
+          detailContract: {},
+          isLoading: true,
         };
     }
 
@@ -26,7 +28,8 @@ class Contracts extends React.Component {
 
       getNumberContract().then(res =>{
         this.setState({
-          amount: res.data.message
+          amount: res.data.message,
+          isLoading: false
         })
       })
     }
@@ -54,7 +57,7 @@ class Contracts extends React.Component {
 
     render() {
       // open, handleShowDetailContract, contractDetail
-      const {contracts,amount,pageSize, showDetailModal, detailContract} = this.state;
+      const {contracts,amount,pageSize, showDetailModal, detailContract, isLoading} = this.state;
       const contractList = contracts.map((item, index) => {
         return(
           <tr key={index}>
@@ -62,7 +65,7 @@ class Contracts extends React.Component {
             <td>{moment(item.createAt).format('DD/MM/YYYY')}</td>
             <td>{moment(item.fromDate).format('DD/MM/YYYY')}</td>
             <td>{moment(item.toDate).format('DD/MM/YYYY')}</td>
-            <td>{item.value}</td>
+            <td>{`${item.value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
             <td>{item.status}</td>
             <td>
               <div>
@@ -78,30 +81,37 @@ class Contracts extends React.Component {
 
       return (
         <>
-       
-        <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
-        <h2>Danh sách hợp đồng </h2>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Ngày tạo</th>
-                <th>Từ ngày</th>
-                <th>Đến ngày</th>
-                <th>Giá trị</th>
-                <th>Tình trạng</th>
-                <th>Tác vụ</th>
+        {isLoading === true ? (
+          <div style={{textAlign: "center"}}>
+            <Spin indicator={antIcon} />
+          </div>
+        ):(
+          <>
+            <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
+            <h2>Danh sách hợp đồng </h2>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Ngày tạo</th>
+                  <th>Từ ngày</th>
+                  <th>Đến ngày</th>
+                  <th>Giá trị</th>
+                  <th>Tình trạng</th>
+                  <th>Tác vụ</th>
 
-              </tr>
-            </thead>
-            <tbody>
-              {contractList}
-            </tbody>
-          </Table>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-     
-        </>
-        
+                </tr>
+              </thead>
+              <tbody>
+                {contractList}
+              </tbody>
+            </Table>
+            {amount > pageSize &&
+              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+            }
+          </>
+        )}
+      </>
      );
     }
 }
