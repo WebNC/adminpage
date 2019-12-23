@@ -35,9 +35,6 @@ class UserDetailModal extends React.PureComponent {
                     <h6 className="mr-3"  style={style}>Giới tính :</h6>
                     <p >{information.sex|| `Nam`}</p>
                 </div>
-
-                        
-
                 <div className=" d-flex mt-1">
                     <h6 className="mr-3" style={style}>Số điện thoại :</h6>
                     <p  >{information.phone || '01234xxxx'}</p>
@@ -62,11 +59,11 @@ class UserDetailModal extends React.PureComponent {
                   ( information.type === 'Người dạy') ?
                   <div className="mt-5">
                     <div className=" d-flex mt-1">
-                          <h6 className="mr-3" style={style}> Nghề nghiệp : </h6>
+                          <h6 className="mr-3" style={style}> Nghề nghiệp: </h6>
                           <p >{information.major}</p>
                     </div>
                     <div className=" d-flex mt-1">
-                        <h6 className="mr-3" style={style}>Kỹ năng : </h6>
+                        <h6 className="mr-3" style={style}>Kỹ năng: </h6>
                         <p >{information.major}</p>
                     </div>
                   </div> : <></>

@@ -1,13 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import {Pagination, Modal, Button} from 'antd'
+import {Pagination, Modal, Button, Icon, Spin} from 'antd'
 import {getAllUserTeacher, blockUser, unblockUser, getNumberUserTeacher} from '../../api/user.action'
 import './Teachers.scss';
 import UserDetailModal from '../UserDetailModal/UserDetailModal'
 
 const {confirm} = Modal
-
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class Teachers extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +16,8 @@ class Teachers extends React.Component {
           pageSize: 10,
           amount: 0,
           showModal : false,
-          teacher: {}
+          teacher: {},
+          isLoading: true
         };
     }
 
@@ -27,7 +28,8 @@ class Teachers extends React.Component {
 
       getNumberUserTeacher().then(res =>{
         this.setState({
-          amount: res.data.message
+          amount: res.data.message,
+          isLoading: false
         })
       })
     }
@@ -94,7 +96,7 @@ class Teachers extends React.Component {
 
 
     render() {
-      const {teachers,amount,pageSize, showModal, teacher} = this.state;
+      const {teachers,amount,pageSize, showModal, teacher, isLoading} = this.state;
       const teacherList = teachers.map((item, index) => {
         return(
           <tr key={index}>
@@ -120,27 +122,35 @@ class Teachers extends React.Component {
 
       return (
         <>
-                <UserDetailModal open={showModal} information={teacher} handleShow={this.handleShowModal}/>
+        {isLoading === true ? (
+          <div style={{textAlign: "center"}}>
+            <Spin indicator={antIcon} />
+          </div>
+        ):(
+          <>
+            <UserDetailModal open={showModal} information={teacher} handleShow={this.handleShowModal}/>
+            <h2>Danh sách giáo viên</h2>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tên</th>
+                  <th>Chuyên ngành</th>
+                  <th>Tác vụ</th>
 
-          <h2>Danh sách giáo viên</h2>
-          <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Tên</th>
-              <th>Chuyên ngành</th>
-              <th>Tác vụ</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {teacherList}
-          </tbody>
-        </Table>
-        {amount > pageSize &&
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-        }
+                </tr>
+              </thead>
+              <tbody>
+                {teacherList}
+              </tbody>
+            </Table>
+            {amount > pageSize &&
+              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+            }
+          </>
+        )}
         </>
+        
         
      );
     }
