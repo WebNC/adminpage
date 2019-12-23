@@ -113,20 +113,21 @@ class Students extends React.Component {
       return (
         <>
         <UserDetailModal open={showModal} information={student} handleShow={this.handleShowModal}/>
-          <h2>Student List</h2>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          <h2>Danh sách học sinh</h2>
+         
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>#</th>
-                <th>Username</th>
-                <th>Setting</th>
+                <th>Tên</th>
+                <th>Tác vụ</th>
               </tr>
             </thead>
             <tbody>
               {studentsList}
             </tbody>
           </Table>
+          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
         </>
      );
     }

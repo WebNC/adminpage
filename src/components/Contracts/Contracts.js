@@ -78,25 +78,27 @@ class Contracts extends React.Component {
 
       return (
         <>
+       
         <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+        <h2>Danh sách hợp đồng </h2>
           <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Create Date</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Value</th>
-              <th>Status</th>
-              <th>Setting</th>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ngày tạo</th>
+                <th>Từ ngày</th>
+                <th>Đến ngày</th>
+                <th>Giá trị</th>
+                <th>Tình trạng</th>
+                <th>Tác vụ</th>
 
-            </tr>
-          </thead>
-          <tbody>
-            {contractList}
-          </tbody>
-        </Table>
+              </tr>
+            </thead>
+            <tbody>
+              {contractList}
+            </tbody>
+          </Table>
+          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
      
         </>
         

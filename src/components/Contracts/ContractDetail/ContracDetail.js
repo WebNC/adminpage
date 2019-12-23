@@ -68,7 +68,7 @@ class DetailContract extends React.Component {
         return (
          <Modal show={open} onHide={handleShowDetailContract}>
             <Modal.Header closeButton>
-              <Modal.Title>Contract detail</Modal.Title>
+              <Modal.Title>Chi tiết hợp đồng</Modal.Title>
             </Modal.Header>
               <Modal.Body>
                 {contractDetail.skill ? 
@@ -76,26 +76,26 @@ class DetailContract extends React.Component {
               <div className="info-contract-teacher">
                 <div className="d-flex">
                   <div className="item-info-contract-teacher mr-5">
-                    <h5 className="title-contract-teacher">Create at :</h5>
+                    <h5 className="title-contract-teacher">Ngày tạo :</h5>
                     <h5>
                       {moment(contractDetail.createAt).format('DD/MM/YYYY')} 
                     </h5>
                   </div>
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Student : </h5> 
+                  <h5 className="title-contract-teacher">Học sinh : </h5> 
                   <h5>
                     {student.username}
                   </h5> 
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Teacher : </h5> 
+                  <h5 className="title-contract-teacher">Giáo viên : </h5> 
                   <h5>
                     {teacher.username}
                   </h5> 
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Studying at :</h5>
+                  <h5 className="title-contract-teacher"> Địa điểm học :</h5>
                   <h5>
                     {`${contractDetail.address.address}, ${contractDetail.address.district}, Hồ Chí Minh` } 
                   </h5>
@@ -110,19 +110,19 @@ class DetailContract extends React.Component {
                   </h5>
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Skill :</h5>
+                  <h5 className="title-contract-teacher">Kỹ năng :</h5>
                   <div style={{display: "block"}}>
                     {selectedSkill}
                   </div>
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Hour :</h5> 
+                  <h5 className="title-contract-teacher">Số giờ :</h5> 
                   <h5>
                     {contractDetail.hour }
                   </h5>
                 </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher">Status :</h5>
+                  <h5 className="title-contract-teacher">Tình trạng :</h5>
                   <h5>
                     {contractDetail.status} 
                   </h5>
@@ -130,7 +130,7 @@ class DetailContract extends React.Component {
                 {
                     contractDetail.statusPay ? 
                     <div className="item-info-contract-teacher">
-                    <h5 className="title-contract-teacher">Pay at:</h5>
+                    <h5 className="title-contract-teacher">Ngày trả:</h5>
                     <h5>
                       {moment(contractDetail.payDate).format('DD/MM/YYYY')} 
                     </h5>
@@ -153,7 +153,7 @@ class DetailContract extends React.Component {
                   )}
                   </div>
                 <div className="item-info-contract-teacher">
-                  <h5 className="title-contract-teacher " >Total : </h5>
+                  <h5 className="title-contract-teacher " >Tổng tiền : </h5>
                   <h5 >
                     {`${contractDetail.value} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </h5>

@@ -32,11 +32,11 @@ class UserDetail extends React.Component {
         return (
             <div className="user-detail">
                 <Header/>
-                <h2 className="ml-5 mt-3 mb-5">User information</h2>
+                <h2 className="ml-5 mt-3 mb-5">Thông tin người dùng</h2>
                 <div className="row p-3 profile">
                     <div className="col-6">
                         <div className="activeR d-flex">
-                            <p className="usernameLabel">USERNAME </p>
+                            <p className="usernameLabel">TÊN </p>
                             <p className="value">{`${information.username  } - ${  information.type}`}</p>
                         </div>
                         <div className="activeR d-flex">
@@ -45,26 +45,26 @@ class UserDetail extends React.Component {
                         </div>
 
                         <div className="activeR d-flex">
-                            <p className="usernameLabel">GENDER </p>
+                            <p className="usernameLabel">GIỚI TÍNH </p>
                             <p className="value">{information.sex|| `Nam`}</p>
                         </div>
 
                         <div className="activeR d-flex">
-                            <p className="usernameLabel">LOCKED </p>
-                            <p className="value">{information.isBlocked ? 'True' : 'False'}</p>
+                            <p className="usernameLabel">ĐANG BỊ KHÓA </p>
+                            <p className="value">{information.isBlocked ? 'Có' : 'Không'}</p>
                         </div>
 
                         <div className="activeR d-flex">
-                            <p className="usernameLabel">PHONE </p>
+                            <p className="usernameLabel">SỐ ĐIỆN THOẠI</p>
                             <p  className="value">{information.phone || '01234xxxx'}</p>
                         </div>
                         <div className="activeR d-flex">
-                            <p className="usernameLabel">AGE </p>
+                            <p className="usernameLabel">TUỔI </p>
                             <p  className="value">{information.birthday || '20'}</p>
                         </div>
                         
                         <div className="activeR d-flex">
-                                <p className="usernameLabel">ADDRESS </p>
+                                <p className="usernameLabel">ĐỊA CHỈ</p>
                                 <p  className="value" >{information.major || 'HCM'}</p>
                         </div>
                         
@@ -78,15 +78,15 @@ class UserDetail extends React.Component {
                            ( information.type === 'Người dạy') ?
                             <div className="mt-5">
                                  <div className="activeR d-flex">
-                                    <p className="usernameLabel">MAJOR </p>
+                                    <p className="usernameLabel">NGHỀ NGHIỆP </p>
                                     <p className="value">{information.major}</p>
                                 </div>
                                 <div className="activeR d-flex">
-                                    <p className="usernameLabel">SKILL </p>
+                                    <p className="usernameLabel">KỸ NĂNG </p>
                                     <p className="value">{information.major}</p>
                                 </div>
                                 <div className="activeR d-flex">
-                                    <p className="usernameLabel">INTRODUCTION </p>
+                                    <p className="usernameLabel">GIỚI THIỆU </p>
                                     <p className="value">{information.intro || 'Nothing'}</p>
                                 </div>
                             </div> : <></>

@@ -9,12 +9,10 @@ class UserDetailModal extends React.PureComponent {
 
   render(){
     const { information, open, handleShow} = this.props;
-    console.log(information);
-
-      const style={
-    width : '100px',
-    textAlign: 'right'
- }
+    const style={
+      width : '100px',
+      textAlign: 'right'
+    }
     return (
       <Modal show={open} onHide={handleShow} size="lg">
         <Modal.Header closeButton>
@@ -25,7 +23,7 @@ class UserDetailModal extends React.PureComponent {
             <div className="row p-3 ">
               <div className="col-7">
                 <div className=" d-flex">
-                    <h6 className="mr-3" style={style}>Username :</h6>
+                    <h6 className="mr-3" style={style}>Tên :</h6>
                     <p >{`${information.username  } - ${  information.type}`}</p>
                 </div>
                 <div className=" d-flex mt-1">
@@ -34,23 +32,23 @@ class UserDetailModal extends React.PureComponent {
                 </div>
 
                 <div className=" d-flex mt-1">
-                    <h6 className="mr-3"  style={style}>Gender :</h6>
+                    <h6 className="mr-3"  style={style}>Giới tính :</h6>
                     <p >{information.sex|| `Nam`}</p>
                 </div>
 
                         
 
                 <div className=" d-flex mt-1">
-                    <h6 className="mr-3" style={style}>Phone :</h6>
+                    <h6 className="mr-3" style={style}>Số điện thoại :</h6>
                     <p  >{information.phone || '01234xxxx'}</p>
                 </div>
                 <div className=" d-flex mt-1">
-                  <h6 className="mr-3" style={style}>Birthday :</h6>
+                  <h6 className="mr-3" style={style}>Ngày sinh :</h6>
                     <p >{moment(information.birthday).format('DD/MM/YYYY')}</p>
                 </div>
                         
                 <div className=" d-flex mt-1">
-                  <h6 className="mr-3" style={style}>Address : </h6>
+                  <h6 className="mr-3" style={style}> Địa chỉ : </h6>
                         <p  >{information.major || 'HCM'}</p>
                 </div>
                         
@@ -64,11 +62,11 @@ class UserDetailModal extends React.PureComponent {
                   ( information.type === 'Người dạy') ?
                   <div className="mt-5">
                     <div className=" d-flex mt-1">
-                          <h6 className="mr-3" style={style}>Major : </h6>
+                          <h6 className="mr-3" style={style}> Nghề nghiệp : </h6>
                           <p >{information.major}</p>
                     </div>
                     <div className=" d-flex mt-1">
-                        <h6 className="mr-3" style={style}>Skill : </h6>
+                        <h6 className="mr-3" style={style}>Kỹ năng : </h6>
                         <p >{information.major}</p>
                     </div>
                   </div> : <></>

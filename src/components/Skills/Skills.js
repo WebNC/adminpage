@@ -87,8 +87,8 @@ class Skills extends React.Component {
   handleConfirm = (id) => {
     const {handleDelete} = this
     confirm({
-      title: 'Bạn muốn xóa skill này?',
-      content: 'Xác nhận nếu bạn thực sự muốn xóa skill này',
+      title: 'Bạn muốn xóa kỹ năng này?',
+      content: 'Xác nhận nếu bạn thực sự muốn xóa kỹ năng này',
       onOk() {
         handleDelete(id)
       },
@@ -160,7 +160,7 @@ class Skills extends React.Component {
       <div className="content-skill">
          <Modal show={show} onHide={this.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Enter new skill</Modal.Title>
+          <Modal.Title>Nhập kỹ năng mới</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex">
@@ -170,43 +170,43 @@ class Skills extends React.Component {
               className={error ? 'input-skill-error ' : 'input-skill rounded'}
               onChange={this.onChange} />
           <antd.Button type="primary"  className="ml-3" onClick={this.handleSave}>
-            Save Changes
+            Lưu thay đổi
           </antd.Button>
           </div>
           
           </Modal.Body>
         <Modal.Footer>
           <antd.Button type="danger" onClick={this.handleClose}>
-            Close
+            Đóng
           </antd.Button>
         </Modal.Footer>
       </Modal>
       <h2>Skill List </h2>
         <div className="d-flex">
           <input type="text" name="skill" id="skill"
-            placeholder="Enter new skill"
+            placeholder="Thêm kỹ năng mới"
             value={skill}
             onFocus={this.handleFocus}
             className={error ? 'input-skill-error ' : 'input-skill rounded'}
             onChange={this.onChange} />
-          <antd.Button type = "primary" onClick={this.handleAddSkill}>Add</antd.Button>
+          <antd.Button type = "primary" onClick={this.handleAddSkill}>Thêm</antd.Button>
                   
         </div>
-      <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+      
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
             <th>#</th>
-            <th>Skill</th>
-            <th>Amount</th>
-            <th>Setting</th>
+            <th>Kỹ năng</th>
+            <th>Số lượng</th>
+            <th>Tác vụ</th>
           </tr>
         </thead>
         <tbody>
           {skills}
         </tbody>
       </Table>
-    
+      <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
       </div>
     );
   }

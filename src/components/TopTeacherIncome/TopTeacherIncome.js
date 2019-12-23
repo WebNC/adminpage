@@ -1,28 +1,50 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {Table} from 'react-bootstrap'
-import {getAllTopTeacherIncome} from '../../api/topIncome.action'
+import {Select, DatePicker} from 'antd'
+import {getAllTopTeacherIncomeAll, getAllTopTeacherIncome} from '../../api/topIncome.action'
 import './TopTeacherIncome.scss';
 
+const {Option} = Select
+const {RangePicker,MonthPicker} = DatePicker
 
 class TopTeacherIncome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           topSkill: [],
+          type: 'All',
         };
     }
 
     componentDidMount = () => {
-      getAllTopTeacherIncome('month').then(res=>{
+      getAllTopTeacherIncomeAll().then(res=>{
         this.setState({topSkill: res.data.message})
       })
     }
 
+    handleChange = (value) => {
+      const { type } = this.state
+      this.setState({type: value});
+      if(type == "All"){
+        getAllTopTeacherIncomeAll().then(res=>{
+          this.setState({topSkill: res.data.message})
+        })
+      }
+    }
+
+    onChange = (date, dateString) => {
+      const {type} = this.state;
+      getAllTopTeacherIncome(type,dateString).then(res=>{
+        this.setState({topSkill: res.data.message})
+      })
+    }
 
     render() {
-      const {topSkill} = this.state;
+      const {topSkill,type} = this.state;
       const teacherList = topSkill.map((item, index) => {
         if (item.income > 0){
           return(
@@ -39,13 +61,24 @@ class TopTeacherIncome extends React.Component {
       return (
         <>
         <h2>Top 10 doanh thu cao nhất theo giáo Viên</h2>
+        <div>
+          <Select defaultValue="All" style={{ width: 300}} onChange={this.handleChange}>
+            <Option value="All">Toàn thời gian</Option>
+            <Option value="date">Trong ngày</Option>
+            <Option value="month">Trong tháng</Option>
+            <Option value="range">Trong khoảng</Option>
+          </Select>
+          {type == "date" && <DatePicker onChange={this.onChange}/>}
+          {type == "month" && <MonthPicker onChange={this.onChange} placeholder="Chọn tháng"/>}
+          {type == "range" && <RangePicker onChange={this.onChange}/>}
+        </div>
           <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
               <th>ID</th>
-              <th>Name</th>
-              <th>Income</th>
+              <th>Tên</th>
+              <th>Thu nhập</th>
             </tr>
           </thead>
           <tbody>

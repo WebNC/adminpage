@@ -24,35 +24,35 @@ class Home extends React.PureComponent {
     return <>
       <Header/>
       <div className="content">
-      <Tabs defaultActiveKey="2" tabPosition= 'left' style={{ height: 700 }}>
-          { isRoot &&<TabPane tab='Create Admin' key={1}>
+      <Tabs defaultActiveKey="2" tabPosition= 'left' style={{ height: 900 }}>
+          { isRoot &&<TabPane tab='Tạo Admin mới' key={1}>
             <CreateNewAdmin/>
           </TabPane>}
-          <TabPane tab='Profile' key={2}>
+          <TabPane tab='Thông tin cá nhân' key={2}>
             <Profile/>
           </TabPane>
-          <TabPane tab='Teacher' key={3}>
+          <TabPane tab='Giáo viên' key={3}>
             <Teachers/>
           </TabPane>
-          <TabPane tab='Students' key={4}>
+          <TabPane tab='Học sinh' key={4}>
             <Students/>
           </TabPane>
-          <TabPane tab='Skills' key={5}>
+          <TabPane tab='Kỹ năng' key={5}>
             <Skills/>
           </TabPane>
-          <TabPane tab='Contracts' key={6}>
+          <TabPane tab='Hợp đồng' key={6}>
             <Contracts/>
           </TabPane>
-          <TabPane tab='Reports' key={7}>
+          <TabPane tab='Khiếu nại' key={7}>
             <Reports/>
           </TabPane>
-          <TabPane tab='Income Chart' key={8}>
+          <TabPane tab='Biểu đồ doanh thu' key={8}>
             <IncomeChart/>
           </TabPane>
-          <TabPane tab='Top Teacher Income' key={9}>
+          <TabPane tab='Top doanh thu giáo viên' key={9}>
             <TopTeacherIncome/>
           </TabPane>
-          <TabPane tab='Top Skill Income' key={10}>
+          <TabPane tab='Top doanh thu kĩ năng' key={10}>
             <TopSkillIncome/>
           </TabPane>
       </Tabs>

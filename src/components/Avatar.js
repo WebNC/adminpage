@@ -21,7 +21,6 @@ class AvatarIMG extends React.Component {
         const {storeAvatarURL} = this.props;
         const {target} = e;
         if (target.files[0].size > 71680) {
-            alert("File is too big!");
             e.target.value = "";
         } else {
             storeAvatarURL(target.value)

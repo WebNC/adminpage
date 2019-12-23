@@ -122,15 +122,14 @@ class Teachers extends React.Component {
         <>
                 <UserDetailModal open={showModal} information={teacher} handleShow={this.handleShowModal}/>
 
-          <h2>Teacher List</h2>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          <h2>Danh sách giáo viên</h2>
           <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
-              <th>Username</th>
-              <th>Majors</th>
-              <th>Setting</th>
+              <th>Tên</th>
+              <th>Chuyên ngành</th>
+              <th>Tác vụ</th>
 
             </tr>
           </thead>
@@ -138,7 +137,7 @@ class Teachers extends React.Component {
             {teacherList}
           </tbody>
         </Table>
-     
+        <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
         </>
         
      );

@@ -66,17 +66,16 @@ class Reports extends React.Component {
       return (
         <>
           <h2>Danh sách report</h2>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
           <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
-              <th>Create Date</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Content</th>
-              <th>Status</th>
-              <th>Setting</th>
+              <th>Ngày tạo</th>
+              <th>Từ người dùng</th>
+              <th>Đến người dùng</th>
+              <th>Nội dung</th>
+              <th>Tình trạng</th>
+              <th>Tác vụ</th>
 
             </tr>
           </thead>
@@ -84,7 +83,7 @@ class Reports extends React.Component {
             {teacherList}
           </tbody>
         </Table>
-     
+        <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
         </>
         
      );

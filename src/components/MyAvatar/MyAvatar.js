@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import {  Button, Avatar, Tooltip, Result} from 'antd';
 import { Modal} from 'react-bootstrap'
@@ -23,10 +24,8 @@ class MyAvatar extends React.Component {
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
-      isFirstLoadModal: true
     });
   };
 
@@ -41,7 +40,6 @@ class MyAvatar extends React.Component {
       file
     }).then(res=>{
         if(res){
-          console.log(res)
             this.setState({
                 successMessage: true
             })
