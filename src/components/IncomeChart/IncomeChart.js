@@ -2,23 +2,28 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import {LineChart, XAxis, YAxis, CartesianGrid, Line, Label, Tooltip} from 'recharts'
-import {Select, DatePicker} from 'antd';
+import {Select, DatePicker, Spin, Icon} from 'antd';
 import {getIncomeDataAll,getIncomeData} from '../../api/chart.action'
 
 const {Option} = Select;
 const {MonthPicker,RangePicker} = DatePicker;
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class IncomeChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             type: "All",
+            isLoading: true,
         };
     }
 
     componentDidMount = () => {
         getIncomeDataAll().then(res =>{
-            this.setState({data:res.data});
+            this.setState({
+                data:res.data,
+                isLoading: false,
+            });
         })
     }
 
@@ -40,12 +45,18 @@ class IncomeChart extends React.Component {
     }
 
     render() {
-        const { data, type } = this.state;
+        const { data, type, isLoading } = this.state;
       return (
         <>
+        {isLoading === true ? (
+          <div style={{textAlign: "center"}}>
+            <Spin indicator={antIcon} />
+          </div>
+        ):(
+            <>
             <h2>Biểu đồ thống kê doanh thu</h2>
             <div>
-                <Select defaultValue="All" style={{ width: 300}} onChange={this.handleChange}>
+                <Select defaultValue="All" style={{ width: 300, marginLeft: "60px", marginBottom: "10px", marginRight: "10px"}} onChange={this.handleChange}>
                     <Option value="All">Trong năm</Option>
                     <Option value="month">Trong tháng</Option>
                     <Option value="range">Trong khoảng</Option>
@@ -67,7 +78,8 @@ class IncomeChart extends React.Component {
                 <Tooltip />
             </LineChart>
         </>
-        
+        )}
+        </>
      );
     }
 }

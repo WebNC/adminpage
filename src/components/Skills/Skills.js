@@ -32,14 +32,15 @@ class Skills extends React.Component {
       if(res){
         this.setState({
           skillList: res.skillList,
-          number: res.number
+          number: res.number,
+          isLoading: false,
         })
       }
     })
     getNumberSkill().then(res=>{
       this.setState({ 
         amount: res.message,
-        isLoading: false })
+        })
     })
   }
 

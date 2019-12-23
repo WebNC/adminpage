@@ -13,10 +13,22 @@ class UserDetailModal extends React.PureComponent {
       width : '100px',
       textAlign: 'right'
     }
+    
+    let skill = '';
+    let address = '';
+    if(information.skill !== undefined){
+      let str  = ''
+      information.skill.forEach((ele)=>{
+        str += `${ele.name}, `
+      })
+      skill = str.slice(0, -2);
+      address = `${information.address.address}, ${information.address.district}, HCM`
+    }
+    
     return (
       <Modal show={open} onHide={handleShow} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Contract detail</Modal.Title>
+          <Modal.Title>Thông tin chi tiết</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div >
@@ -44,10 +56,11 @@ class UserDetailModal extends React.PureComponent {
                     <p >{moment(information.birthday).format('DD/MM/YYYY')}</p>
                 </div>
                         
+                { information.address &&
                 <div className=" d-flex mt-1">
                   <h6 className="mr-3" style={style}> Địa chỉ : </h6>
-                        <p  >{information.major || 'HCM'}</p>
-                </div>
+                  <p>{address}</p>
+                </div>}
                         
                         
               </div>
@@ -64,7 +77,7 @@ class UserDetailModal extends React.PureComponent {
                     </div>
                     <div className=" d-flex mt-1">
                         <h6 className="mr-3" style={style}>Kỹ năng: </h6>
-                        <p >{information.major}</p>
+                        <p >{skill}</p>
                     </div>
                   </div> : <></>
                 }

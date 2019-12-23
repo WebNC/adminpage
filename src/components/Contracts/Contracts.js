@@ -23,13 +23,15 @@ class Contracts extends React.Component {
 
     componentDidMount = () => {
       getAllContract(1).then(res=>{
-        this.setState({contracts: res.data.message})
+        this.setState({
+          contracts: res.data.message,
+          isLoading: false
+        })
       })
 
       getNumberContract().then(res =>{
         this.setState({
-          amount: res.data.message,
-          isLoading: false
+          amount: res.data.message
         })
       })
     }

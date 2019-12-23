@@ -23,15 +23,18 @@ class Teachers extends React.Component {
 
     componentDidMount = () => {
       getAllUserTeacher(1).then(res=>{
-        this.setState({teachers: res.data.message})
+        this.setState({
+          teachers: res.data.message,
+          isLoading: false,
+        })
       })
 
       getNumberUserTeacher().then(res =>{
         this.setState({
           amount: res.data.message,
-          isLoading: false
         })
       })
+      
     }
 
     handleUpdate = (id) =>{

@@ -24,13 +24,15 @@ class Reports extends React.Component {
 
     componentDidMount = () => {
       getAllReport(1).then(res=>{
-        this.setState({reports: res.data.message})
+        this.setState({
+          reports: res.data.message,
+          isLoading: false
+        })
       })
 
       getNumberReport().then(res =>{
         this.setState({
-          amount: res.data.message,
-          isLoading: false
+          amount: res.data.message
         })
       })
       

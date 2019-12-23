@@ -23,13 +23,16 @@ class Students extends React.Component {
 
     componentDidMount = () => {
       getAllUserStudent(1).then(res=>{
-        this.setState({students: res.data.message})
+        this.setState({
+          students: res.data.message,
+          isLoading: false
+        })
       })
       
       getNumberUserStudent().then(res=>{
         this.setState({
-          amount: res.data.message,
-          isLoading: false})
+          amount: res.data.message
+        })
       })      
     }
 
