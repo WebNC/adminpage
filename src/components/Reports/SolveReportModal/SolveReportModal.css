@@ -1,0 +1,11 @@
+.solve-modal {
+  min-width: 80vw;
+  max-width: 80vw;
+}
+.solve-button {
+  margin-right: 10px;
+}
+.solve-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

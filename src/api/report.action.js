@@ -18,11 +18,20 @@ export const getNumberReport = () =>{
         }).catch(error => console.log(error));
 }
 
-
-export const solveReport = (id) => {
+export const solveReport= (id, type) => {
     return API
         .post(`/report/solve-report`, {
-            id,
+            id, type
+        })
+        .then(res => {
+            return res
+        }).catch(error => console.log(error));
+}
+
+export const getDetailReport = (studentID, teacherID, contractID) => {
+    return API
+        .post(`/report/detail`, {
+            studentID, teacherID, contractID
         })
         .then(res => {
             return res

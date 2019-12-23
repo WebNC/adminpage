@@ -3,8 +3,9 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
 import { Button, Pagination } from "antd";
+import SolveReportModal from './SolveReportModal/SolveReportModal'
 import FormatDate from '../../helper/FomatDate'
-import {getAllReport, getNumberReport, solveReport} from '../../api/report.action'
+import {getAllReport, getNumberReport} from '../../api/report.action'
 import './Reports.scss';
 
 
@@ -15,6 +16,7 @@ class Reports extends React.Component {
           reports: [],
           amount: 0,
           pageSize: 5,
+          isShow: false,
         };
     }
 
@@ -36,31 +38,44 @@ class Reports extends React.Component {
       })
     }
 
-    solve = (id, index) => {
-      solveReport(id).then( res => {
-        if(res.status == 200){
-          const { reports } = this.state;
-          reports[index].status = true;
-          this.setState({reports})
-        }
-      })
+    handleShowModal = () => {
+      const { isShow } = this.state
+      this.setState({isShow: !isShow});
     }
+    // solve = (id, index) => {
+    //   solveReport(id).then( res => {
+    //     if(res.status == 200){
+    //       const { reports } = this.state;
+    //       reports[index].status = true;
+    //       this.setState({reports})
+    //     }
+    //   })
+    // }
 
     render() {
-      const {reports, amount, pageSize} = this.state;
+      const {reports, amount, pageSize, isShow} = this.state;
       const teacherList = reports.map((item, index) => {
         return(
+          <>
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{FormatDate(item.date)}</td>
             <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
-            <td><p>{item.teacherName}</p><p>ID: {item.teacherName}</p></td>
+            <td><p>{item.teacherName}</p><p>ID: {item.teacherID}</p></td>
             <td><p>{item.content}</p></td>
             <td>{item.status === false?'Chưa giải quyết': 'Đã giải quyết'}</td>
             <td>
-              { item.status === false ? <div><Button onClick =  { () => this.solve(item._id,index)}> Giải quyết </Button></div> : '' }
+              { item.status === false ? <div><Button onClick =  { () => this.handleShowModal()}> Xem chi tiết </Button></div> : '' }
             </td>
           </tr>
+          <SolveReportModal 
+            teacherID={item.teacherID} 
+            studentID={item.studentID} 
+            contractID={item.contractID} 
+            handleShowModal={this.handleShowModal} 
+            open={isShow} 
+            reportID = {item._id}/>
+          </>
         )
       })
       return (
