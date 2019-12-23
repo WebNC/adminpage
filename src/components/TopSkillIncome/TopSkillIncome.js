@@ -52,7 +52,7 @@ class TopSkillIncome extends React.Component {
               <td>{index + 1}</td>
               <td>{item.id}</td>
               <td>{item.name}</td>
-              <td>{item.income}</td>
+              <td>{`${item.income}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
             </tr>
           )
         }
@@ -60,9 +60,9 @@ class TopSkillIncome extends React.Component {
       })
       return (
         <>
-        <h2>Top 10 doanh thu cao nhất theo skill</h2>
+        <h2>Top 10 doanh thu cao nhất theo kỹ năng</h2>
         <div>
-          <Select defaultValue="All" style={{ width: 300}} onChange={this.handleChange}>
+          <Select defaultValue="All" style={{ width: 300, marginBottom: "10px", marginRight: "10px"}} onChange={this.handleChange}>
             <Option value="All">Toàn thời gian</Option>
             <Option value="date">Trong ngày</Option>
             <Option value="month">Trong tháng</Option>

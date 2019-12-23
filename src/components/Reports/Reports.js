@@ -41,6 +41,11 @@ class Reports extends React.Component {
     handleShowModal = () => {
       const { isShow } = this.state
       this.setState({isShow: !isShow});
+
+    }
+
+    handleSolveReport = (reports) => {
+      this.setState({reports});
     }
     // solve = (id, index) => {
     //   solveReport(id).then( res => {
@@ -54,6 +59,7 @@ class Reports extends React.Component {
 
     render() {
       const {reports, amount, pageSize, isShow} = this.state;
+
       const teacherList = reports.map((item, index) => {
         return(
           <>
@@ -74,7 +80,10 @@ class Reports extends React.Component {
             contractID={item.contractID} 
             handleShowModal={this.handleShowModal} 
             open={isShow} 
-            reportID = {item._id}/>
+            reportID = {item._id}
+            reports = {reports}
+            index={index}
+            handleSolveReport={this.handleSolveReport}/>
           </>
         )
       })
@@ -98,7 +107,9 @@ class Reports extends React.Component {
             {teacherList}
           </tbody>
         </Table>
-        <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+        {amount > pageSize &&
+          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+        }
         </>
         
      );

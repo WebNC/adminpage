@@ -62,7 +62,7 @@ class Contracts extends React.Component {
             <td>{moment(item.createAt).format('DD/MM/YYYY')}</td>
             <td>{moment(item.fromDate).format('DD/MM/YYYY')}</td>
             <td>{moment(item.toDate).format('DD/MM/YYYY')}</td>
-            <td>{item.value}</td>
+            <td>{`${item.value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
             <td>{item.status}</td>
             <td>
               <div>
@@ -98,8 +98,9 @@ class Contracts extends React.Component {
               {contractList}
             </tbody>
           </Table>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-     
+          {amount > pageSize &&
+            <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          }
         </>
         
      );

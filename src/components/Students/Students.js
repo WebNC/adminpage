@@ -127,7 +127,9 @@ class Students extends React.Component {
               {studentsList}
             </tbody>
           </Table>
-          <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          {amount > pageSize &&
+            <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+          }
         </>
      );
     }

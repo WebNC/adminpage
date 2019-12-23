@@ -139,6 +139,7 @@ class Skills extends React.Component {
 
   render() {
     const {error, skill, skillList, number, show, selectedSkill, amount, pageSize} = this.state;
+    console.log(amount/pageSize);
     const skills = skillList.map((item, index) => {
       return(
         <tr key={index}>
@@ -181,7 +182,7 @@ class Skills extends React.Component {
           </antd.Button>
         </Modal.Footer>
       </Modal>
-      <h2>Skill List </h2>
+      <h2>Danh sách kỹ năng </h2>
         <div className="d-flex">
           <input type="text" name="skill" id="skill"
             placeholder="Thêm kỹ năng mới"
@@ -206,7 +207,9 @@ class Skills extends React.Component {
           {skills}
         </tbody>
       </Table>
-      <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+      {amount > pageSize &&
+        <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
+      }
       </div>
     );
   }
