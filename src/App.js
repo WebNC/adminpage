@@ -11,7 +11,6 @@ import Login from './containers/Login/Login';
 import Register from './containers/Register';
 import Home from './containers/Home/Home';
 import Profile from './containers/ChangeProfile/Profile';
-import UserDetail from './components/UserDetail/UserDetail';
 
 
 

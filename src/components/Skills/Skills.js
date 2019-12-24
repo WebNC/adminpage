@@ -175,7 +175,7 @@ class Skills extends React.Component {
               <Modal.Title>Nhập kỹ năng mới</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <div className="d-flex">
+              <div className="d-flex mt-3 ml-2 mb-3 ">
               <input type="text" name="selectedSkill" id="selectedSkill"
                   value={selectedSkill}
                   onFocus={this.handleFocus}
@@ -187,11 +187,11 @@ class Skills extends React.Component {
               </div>
               
               </Modal.Body>
-            <Modal.Footer>
+            {/* <Modal.Footer>
               <antd.Button type="danger" onClick={this.handleClose}>
                 Đóng
               </antd.Button>
-            </Modal.Footer>
+            </Modal.Footer> */}
           </Modal>
           <h2>Danh sách kỹ năng </h2>
             <div className="d-flex">

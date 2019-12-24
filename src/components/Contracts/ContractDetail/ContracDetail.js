@@ -63,7 +63,7 @@ class DetailContract extends React.Component {
           skill = str.slice(0, -2);
         }
         return (
-         <Modal show={open} onHide={handleShowDetailContract}>
+         <Modal show={open} onHide={handleShowDetailContract} size="md">
             <Modal.Header closeButton>
               <Modal.Title>Chi tiết hợp đồng</Modal.Title>
             </Modal.Header>

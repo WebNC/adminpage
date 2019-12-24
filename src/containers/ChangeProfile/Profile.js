@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Tab, Tabs} from 'react-bootstrap'
 import ChangeBasicInfo from './ChangeBasicInfo'
 import ChangePassword from './ChangePassword'
-import ChangeAvatar from './ChangeAvatar'
+// import ChangeAvatar from './ChangeAvatar'
 import './Profile.scss'
 import Header from '../Header'
 
@@ -32,9 +32,9 @@ class Profile extends React.Component {
                         <Tab eventKey="profile" title="Password" className="pt-5">
                             <ChangePassword/>
                         </Tab>
-                        <Tab eventKey="contact" title="Avatar" className="pt-5" >
+                        {/* <Tab eventKey="contact" title="Avatar" className="pt-5" >
                             <ChangeAvatar/>
-                        </Tab>
+                        </Tab> */}
                     </Tabs>
 
                 </div>
