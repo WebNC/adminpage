@@ -60,13 +60,13 @@ class DetailContract extends React.Component {
             skills.forEach(element => {
                 if(contractDetail.skill.indexOf(element._id) !== -1)
                     selectedSkill.push(
-                        <h5 style={{fontSize: 14, textAlign: "left"}} >
+                        <h5 key={element._id} style={{fontSize: 14, textAlign: "left"}} >
                         {element.name}
                     </h5>)
           });
         }
         return (
-         <Modal show={open} onHide={handleShowDetailContract}>
+         <Modal show={open} onHide={handleShowDetailContract} size="md">
             <Modal.Header closeButton>
               <Modal.Title>Chi tiết hợp đồng</Modal.Title>
             </Modal.Header>

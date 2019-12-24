@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import {Spin, Icon} from 'antd'
 import moment from 'moment'
 import 'moment/locale/vi'
@@ -38,6 +38,7 @@ class Message extends React.Component {
               <>
               {messages.content.map((element) => 
                 <MessageContent 
+                  key={element.time}
                   message={element.content} 
                   time={moment(element.time).format('lll')} 
                   isTeacher={teacher._id === element.from}

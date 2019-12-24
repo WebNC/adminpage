@@ -18,7 +18,8 @@ class Reports extends React.Component {
           amount: 0,
           pageSize: 5,
           isShow: false,
-          isLoading: true
+          isLoading: true,
+          selectedReport : {}
         };
     }
 
@@ -54,12 +55,18 @@ class Reports extends React.Component {
       this.setState({reports});
     }
 
+    handleClickShowReport = (item) =>{
+      this.setState({
+        selectedReport: item,
+      })
+    }
+
     render() {
-      const {reports, amount, pageSize, isShow, isLoading} = this.state;
+      const {reports, amount, pageSize, isShow, isLoading, selectedReport} = this.state;
       const teacherList = reports.map((item, index) => {
         return(
-          <>
-          <tr key={item._id}>
+         
+          <tr key={index} onClick={() => this.handleClickShowReport(item)} >
             <td>{index + 1}</td>
             <td>{FormatDate(item.date)}</td>
             <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
@@ -67,24 +74,25 @@ class Reports extends React.Component {
             <td><p>{item.content}</p></td>
             <td>{item.status === false?'Chưa giải quyết': 'Đã giải quyết'}</td>
             <td>
-              { item.status === false ? <div><Button onClick =  { () => this.handleShowModal()}> Xem chi tiết </Button></div> : '' }
+              { item.status === false ? <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div> : '' }
             </td>
           </tr>
-          <SolveReportModal 
-            teacherID={item.teacherID} 
-            studentID={item.studentID} 
-            contractID={item.contractID} 
-            handleShowModal={this.handleShowModal} 
-            open={isShow} 
-            reportID = {item._id}
-            reports = {reports}
-            index={index}
-            handleSolveReport={this.handleSolveReport}/>
-          </>
         )
       })
       return (
         <>
+        
+
+          <SolveReportModal
+            teacherID={selectedReport.teacherID} 
+            studentID={selectedReport.studentID} 
+            contractID={selectedReport.contractID} 
+            handleShowModal={this.handleShowModal} 
+            open={isShow} 
+            reportID = {selectedReport._id}
+            reports = {reports}
+            handleSolveReport={this.handleSolveReport}/>
+
         {isLoading === true ? (
           <div style={{textAlign: "center"}}>
             <Spin indicator={antIcon} />
