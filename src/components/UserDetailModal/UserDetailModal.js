@@ -15,14 +15,17 @@ class UserDetailModal extends React.PureComponent {
     }
     
     let skill = '';
-    let address = '';
-    if(information.skill !== undefined){
+    let address = null;
+
+    if(information.skill !== undefined && information.address !== undefined){
       let str  = ''
       information.skill.forEach((ele)=>{
         str += `${ele.name}, `
       })
       skill = str.slice(0, -2);
-      address = `${information.address.address}, ${information.address.district}, HCM`
+      if(information.address.address !== undefined){
+        address = `${information.address.address}, ${information.address.district}, HCM`
+      }
     }
     
     return (
@@ -47,16 +50,16 @@ class UserDetailModal extends React.PureComponent {
                     <h6 className="mr-3"  style={style}>Giới tính :</h6>
                     <p >{information.sex|| `Nam`}</p>
                 </div>
-                <div className=" d-flex mt-1">
-                    <h6 className="mr-3" style={style}>Số điện thoại :</h6>
+                <div className=" d-flex mt-2">
+                    <h6 className="mr-3" style={style}>Phone :</h6>
                     <p  >{information.phone || '01234xxxx'}</p>
                 </div>
-                <div className=" d-flex mt-1">
+                {information.birthday && <div className=" d-flex mt-1">
                   <h6 className="mr-3" style={style}>Ngày sinh :</h6>
                     <p >{moment(information.birthday).format('DD/MM/YYYY')}</p>
-                </div>
+                </div>}
                         
-                { information.address &&
+                { address &&
                 <div className=" d-flex mt-1">
                   <h6 className="mr-3" style={style}> Địa chỉ : </h6>
                   <p>{address}</p>

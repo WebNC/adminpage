@@ -53,22 +53,13 @@ class Reports extends React.Component {
     handleSolveReport = (reports) => {
       this.setState({reports});
     }
-    // solve = (id, index) => {
-    //   solveReport(id).then( res => {
-    //     if(res.status == 200){
-    //       const { reports } = this.state;
-    //       reports[index].status = true;
-    //       this.setState({reports})
-    //     }
-    //   })
-    // }
 
     render() {
       const {reports, amount, pageSize, isShow, isLoading} = this.state;
       const teacherList = reports.map((item, index) => {
         return(
           <>
-          <tr key={index}>
+          <tr key={item._id}>
             <td>{index + 1}</td>
             <td>{FormatDate(item.date)}</td>
             <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>

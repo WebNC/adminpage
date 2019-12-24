@@ -53,7 +53,7 @@ class Profile extends React.Component {
                                 <p className="value">{ user.username }</p>
                             </div>
                             <div className="ml-5 d-flex mt-3">
-                                <h6 className="mr-3"style={style}>email :</h6>
+                                <h6 className="mr-3"style={style}>Email :</h6>
                                 <p  className="value">{user.email}</p>
                             </div>
                             {
@@ -66,7 +66,7 @@ class Profile extends React.Component {
                             {
                             user.phone ?
                             <div className="ml-5 d-flex mt-3">
-                                <h6 className="mr-3"style={style}>Số điện thoại : </h6>
+                                <h6 className="mr-3"style={style}>Phone : </h6>
                                 <p  className="value">{user.phone}</p>
                             </div> : ' '
                             }
