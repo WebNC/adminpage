@@ -14,6 +14,16 @@
       "controlComponents": ["CustomInput"],
       "depth": 3
     }],
+    "react/jsx-no-undef": [
+      true,
+      { 
+        "allowGlobals": true 
+      }
+    ],
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": true
+    }],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "import/imports-first": ["error", "absolute-first"],

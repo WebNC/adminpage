@@ -85,7 +85,7 @@ class TopTeacherIncome extends React.Component {
             <Spin indicator={antIcon} />
           </div>
         ):(
-          <>
+          <div  className="pl-5 pr-2">
           <h2>Top 10 doanh thu cao nhất theo giáo Viên</h2>
           <div>
             <Select defaultValue="All" style={{ width: 300, marginRight: "10px", marginBottom: "10px"}} onChange={this.handleChange}>
@@ -111,7 +111,7 @@ class TopTeacherIncome extends React.Component {
               {teacherList}
             </tbody>
           </Table>
-          </>
+          </div>
         )}
         </>
      );

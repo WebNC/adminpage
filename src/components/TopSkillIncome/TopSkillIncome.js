@@ -81,7 +81,7 @@ class TopSkillIncome extends React.Component {
         return null;
       })
       return (
-        <>
+        <div  className="pl-5 pr-2">
         {isLoading === true ? (
           <div style={{textAlign: "center"}}>
             <Spin indicator={antIcon} />
@@ -115,7 +115,7 @@ class TopSkillIncome extends React.Component {
             </Table>
           </>
         )}
-      </>
+      </div>
       );
     }
 }

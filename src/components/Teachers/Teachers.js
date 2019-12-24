@@ -130,7 +130,7 @@ class Teachers extends React.Component {
             <Spin indicator={antIcon} />
           </div>
         ):(
-          <>
+          <div className="pl-5 pr-2">
             <UserDetailModal open={showModal} information={teacher} handleShow={this.handleShowModal}/>
             <h2>Danh sách giáo viên</h2>
             <Table striped bordered hover>
@@ -150,7 +150,7 @@ class Teachers extends React.Component {
             {amount > pageSize &&
               <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
             }
-          </>
+          </div>
         )}
         </>
         

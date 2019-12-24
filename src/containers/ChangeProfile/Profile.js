@@ -6,6 +6,7 @@ import ChangePassword from './ChangePassword'
 // import ChangeAvatar from './ChangeAvatar'
 import './Profile.scss'
 import Header from '../Header'
+// import MyFooter from '../../components/Footer'
 
 
 class Profile extends React.Component {
@@ -20,16 +21,16 @@ class Profile extends React.Component {
     render() {
        
         return (
-            <div className="">
+            <div className="contain">
                 <Header/>
                 <div className="loginModal profile-container mt-5">
-                    <div className="loginT mt-5 change-profile-title" >Change Profile</div>
+                    <div className="loginT mt-3 change-profile-title" >Change Profile</div>
 
                     <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
-                        <Tab eventKey="home" title="Basic information" className="pt-5">
+                        <Tab eventKey="home" title="Basic information" className="pt-3">
                             <ChangeBasicInfo/>
                         </Tab>
-                        <Tab eventKey="profile" title="Password" className="pt-5">
+                        <Tab eventKey="profile" title="Password" className="pt-3">
                             <ChangePassword/>
                         </Tab>
                         {/* <Tab eventKey="contact" title="Avatar" className="pt-5" >
@@ -37,7 +38,11 @@ class Profile extends React.Component {
                         </Tab> */}
                     </Tabs>
 
+
                 </div>
+                {/* <div className="footer">
+                <MyFooter />
+                </div>                 */}
             </div>
 
         );

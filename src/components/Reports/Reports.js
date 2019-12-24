@@ -80,7 +80,7 @@ class Reports extends React.Component {
         )
       })
       return (
-        <>
+        <div  className="pl-5 pr-2">
         
 
           <SolveReportModal
@@ -122,7 +122,7 @@ class Reports extends React.Component {
           }
           </>
         )}
-        </>
+        </div>
      );
     }
 }

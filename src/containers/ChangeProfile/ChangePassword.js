@@ -85,7 +85,7 @@ class ChangePassword extends React.Component {
 
 
         return (
-        <div className="ml-5">
+        <div className="ml-3">
             <div className="errorNotification">{errorText}</div>
             <div className="errorNotification mb-3">{successText}</div>
 

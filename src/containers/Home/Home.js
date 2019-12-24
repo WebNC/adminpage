@@ -12,6 +12,7 @@ import Reports from '../Reports';
 import TopTeacherIncome from '../TopTeacherIncome';
 import TopSkillIncome from '../TopSkillIncome'
 import IncomeChart from '../../components/IncomeChart/IncomeChart'
+import MyFooter from '../../components/Footer'
 
 import './Home.scss'
 
@@ -57,6 +58,7 @@ class Home extends React.PureComponent {
           </TabPane>
       </Tabs>
       </div>
+      <MyFooter/>
     </>
       
   }

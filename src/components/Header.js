@@ -37,7 +37,8 @@ class Header extends React.Component {
 
                     </Navbar>
                     <Navbar className="ml-auto">
-                        <Button type="primary" className="ml-auto" onClick= {()=> this.handleLogout()}>Log out</Button>   
+                        <Button type="primary" className="ml-auto" onClick= {()=> this.handleLogout()}>Log out
+                        </Button>   
                     </Navbar>
                     
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

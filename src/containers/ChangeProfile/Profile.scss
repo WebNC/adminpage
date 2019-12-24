@@ -1,24 +1,31 @@
 @import "../../utils/utils.scss";
 
-
-.profile-container {
-  height: 920px !important;
-  width: 900px !important;
-
-  .change-profile-title {
-    margin-left: 10%;
-    height: 100px !important;
-    width: 260px !important;
+.contain{
+  overflow: hidden;
+  .profile-container {
+    height: 520px !important;
+    width: 800px !important;
+  
+    .change-profile-title {
+      margin-left: 8%;
+      height: 100px !important;
+      width: 260px !important;
+    }
+  
+    .item-name{
+      text-align: right !important;
+      width: 180px;
+    }
+  
+    .group-button{
+      margin-left: 20% !important;
+    }
+  
+    .footer{
+      position: relative;
+      bottom: 0em;
+    }
+   
   }
-
-  .item-name{
-    text-align: right !important;
-    width: 180px;
-  }
-
-  .group-button{
-    margin-left: 20% !important;
-  }
-
- 
+  
 }

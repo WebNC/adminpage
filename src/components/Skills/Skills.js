@@ -169,7 +169,7 @@ class Skills extends React.Component {
           <antd.Spin indicator={antIcon} />
         </div>
       ):(
-        <div className="content-skill">
+        <div className="content-skill pl-5 pr-2">
           <Modal show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Nhập kỹ năng mới</Modal.Title>

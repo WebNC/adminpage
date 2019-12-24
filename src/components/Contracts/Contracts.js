@@ -88,7 +88,7 @@ class Contracts extends React.Component {
             <Spin indicator={antIcon} />
           </div>
         ):(
-          <>
+          < div  className="pl-5 pr-2">
             <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
             <h2>Danh sách hợp đồng </h2>
             <Table striped bordered hover>
@@ -111,7 +111,7 @@ class Contracts extends React.Component {
             {amount > pageSize &&
               <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
             }
-          </>
+          </ div>
         )}
       </>
      );
