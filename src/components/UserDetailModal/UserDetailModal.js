@@ -69,7 +69,9 @@ class UserDetailModal extends React.PureComponent {
               </div>
 
               <div className="col-5">
-                <MyAvatar canNotChange user={information}/>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                  <MyAvatar canNotChange user={information}/>
+                </div>
                 {/* <img src="http://placehold.it/1000" height="120" width="120" alt="avatar" className="avartar"/> */}
                 {
                   ( information.type === 'Người dạy') ?

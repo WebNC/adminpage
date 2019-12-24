@@ -1,8 +1,4 @@
-/* .mesage-component {
-  display: flex;
-
-}
-
+/* 
 .mesage-component .from {
   width: 30%; 
   height: 500px; 
@@ -24,10 +20,18 @@
 
 .mesage-component 
  */
-.message-content {
+
+.message-component {
   width: 60%;
+}
+
+.message-component h4 {
+  padding-left: 10px;
+}
+.message-content {
   overflow-y: scroll;
   padding: 10px;
+  height: 90%;
 }
 
 .mesage-component .input-message {

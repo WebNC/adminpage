@@ -61,6 +61,9 @@ class MyAvatar extends React.Component {
   render() {
     const {  canNotChange, user} = this.props;
     const {visible, imagePreviewUrl, successMessage, errMessage, file} = this.state;
+    if(!user.url) {
+      user.url="/default-avatar.png"
+    }
     return (
       <div>
         {

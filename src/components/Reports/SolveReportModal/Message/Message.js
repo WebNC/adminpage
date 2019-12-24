@@ -27,7 +27,8 @@ class Message extends React.Component {
     const {teacher, student, messages} = this.props;
 
     return (
-      <>
+      <div className="message-component">
+        <h4>Nội dung tin nhắn</h4>
         {messages !== undefined ? (
           <div className="message-content" ref={this.mesRef}>
             {messages.content.length === 0 ? (
@@ -52,7 +53,7 @@ class Message extends React.Component {
             <Spin indicator={antIcon} />
           </div>
       )}
-     </>
+     </div>
     );
   }
 }
