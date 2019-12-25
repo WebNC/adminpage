@@ -2,9 +2,9 @@
 /* eslint-disable prefer-template */
 import API from './axios.config'
 
-export const getAllContract = page => {
+export const getAllContract = (page, pageSize, filters, sorter) => {
     return API
-        .get(`/contract-list/${page}`)
+        .post(`/contract-list/list`,{page, pageSize,filters,sorter})
         .then(res => {
             return res
         }).catch(error => console.log(error));

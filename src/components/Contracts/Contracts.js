@@ -18,14 +18,19 @@ class Contracts extends React.Component {
           detailContract: {},
           isLoading: true,
           loading: false,
+          createFilter: [],
+          statusFilter: [],
         };
     }
 
     componentDidMount = () => {
-      getAllContract(1).then(res=>{
+      const pager = { ...this.state.pagination };
+      getAllContract(pager.current,pager.pageSize,{},undefined).then(res=>{
         this.setState({
           contracts: res.data.message,
-          isLoading: false
+          isLoading: false,
+          createFilter: res.data.filterCreate,
+          statusFilter: res.data.filterStatus,
         })
       })
 
@@ -38,21 +43,20 @@ class Contracts extends React.Component {
       })
     }
 
-
-    handleChange = (value) =>{
-      
-    }
     handleTableChange = (pagination, filters, sorter) => {
+      console.log(filters);
       const pager = { ...this.state.pagination };
       pager.current = pagination.current;
       this.setState({
         pagination: pager,
         loading: true,
       });
-      getAllContract(pager.current).then(res=>{
+      getAllContract(pager.current,pager.pageSize,filters,sorter).then(res=>{
+        pager.total = res.data.total
         this.setState({
           contracts: res.data.message,
           loading: false,
+          pagination: pager,
         })
       })
     }
@@ -64,7 +68,6 @@ class Contracts extends React.Component {
     }
 
     handleDetailContract = (item) =>{
-      console.log(item)
       this.setState({
         detailContract: item,
       })
@@ -73,19 +76,20 @@ class Contracts extends React.Component {
 
     render() {
       // open, handleShowDetailContract, contractDetail
-      const {contracts, showDetailModal, detailContract, isLoading} = this.state;
+      const {contracts, showDetailModal, detailContract, isLoading, createFilter, statusFilter} = this.state;
       const dataSource = contracts;
       const columns = [
         {
           title: 'Ngày tạo',
           dataIndex: 'createAt',
           key: 'createAt',
+          sorter: true,
+          filters: createFilter,
           render: day => `${moment(day).format('DD/MM/YYYY')}`,
         },
         {
           title: 'Từ ngày',
           dataIndex: 'fromDate',
-          key: 'fromDate',
           render: day => `${moment(day).format('DD/MM/YYYY')}`,
         },
         {
@@ -97,6 +101,7 @@ class Contracts extends React.Component {
         {
           title: 'Giá trị',
           dataIndex: 'value',
+          sorter: true,
           key: 'value',
           render: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
         },
@@ -104,6 +109,7 @@ class Contracts extends React.Component {
           title: 'Tình trạng',
           dataIndex: 'status',
           key: 'status',
+          filters: statusFilter,
         },
         {
           title: 'Tác vụ',
@@ -132,26 +138,6 @@ class Contracts extends React.Component {
               pagination={this.state.pagination}
               loading={this.state.loading}
             />
-            {/* <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Ngày tạo</th>
-                  <th>Từ ngày</th>
-                  <th>Đến ngày</th>
-                  <th>Giá trị</th>
-                  <th>Tình trạng</th>
-                  <th>Tác vụ</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                {contractList}
-              </tbody>
-            </Table>
-            {amount > pageSize &&
-              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/> 
-            }*/}
           </>
         )}
       </>
