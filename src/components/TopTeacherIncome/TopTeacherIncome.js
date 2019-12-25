@@ -4,8 +4,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import moment from 'moment'
-import {Table} from 'react-bootstrap'
-import {Select, DatePicker, Spin, Icon} from 'antd'
+import {Select, DatePicker, Spin, Icon, Table} from 'antd'
 import {getAllTopTeacherIncomeAll, getAllTopTeacherIncome} from '../../api/topIncome.action'
 import './TopTeacherIncome.scss';
 
@@ -60,24 +59,43 @@ class TopTeacherIncome extends React.Component {
         })
       }
     }
-
     render() {
       const {topSkill,type, isLoading} = this.state;
       const monthFormat = 'YYYY-MM';
       const dateFormat = 'YYYY-MM-DD';
-      const teacherList = topSkill.map((item, index) => {
-        if (item.income > 0){
-          return(
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{`${item.income}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
-            </tr>
-          )
-        }
-        return null;
-      })
+      // const teacherList = topSkill.map((item, index) => {
+      //   if (item.income > 0){
+      //     return(
+      //       <tr key={index}>
+      //         <td>{index + 1}</td>
+      //         <td>{item.id}</td>
+      //         <td>{item.name}</td>
+      //         <td>{`${item.income}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
+      //       </tr>
+      //     )
+      //   }
+      //   return null;
+      // })
+      let data = topSkill.filter((ele) => ele.income>0);
+      const dataSource = data;
+      const columns = [
+        {
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+        },
+        {
+          title: 'Tên',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'Thu nhập',
+          dataIndex: 'income',
+          key: 'income',
+          render: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+        },
+      ];
       return (
         <>
         {isLoading === true ? (
@@ -86,7 +104,7 @@ class TopTeacherIncome extends React.Component {
           </div>
         ):(
           <div  className="pl-5 pr-2">
-          <h2>Top 10 doanh thu cao nhất theo giáo Viên</h2>
+          <h2>Top 10 doanh thu cao nhất theo giáo viên</h2>
           <div>
             <Select defaultValue="All" style={{ width: 300, marginRight: "10px", marginBottom: "10px"}} onChange={this.handleChange}>
               <Option value="All">Toàn thời gian</Option>
@@ -98,7 +116,14 @@ class TopTeacherIncome extends React.Component {
             {type == "month" && <MonthPicker defaultValue={moment('2019-12', monthFormat)} onChange={this.onChange} placeholder="Chọn tháng"/>}
             {type == "range" && <RangePicker defaultValue={[moment('2019-12-17', dateFormat), moment('2019-12-26', dateFormat)]} onChange={this.onChange}/>}
           </div>
-            <Table striped bordered hover>
+          <Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record.id}
+              loading={this.state.loading}
+            />
+            {/* <Table striped bordered hover>
             <thead>
               <tr>
                 <th>#</th>
@@ -110,7 +135,7 @@ class TopTeacherIncome extends React.Component {
             <tbody>
               {teacherList}
             </tbody>
-          </Table>
+          </Table> */}
           </div>
         )}
         </>

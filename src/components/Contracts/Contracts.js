@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import moment from 'moment'
-import {Pagination, Button, Icon, Spin, Select, Table} from 'antd';
+import {Button, Icon, Spin, Table} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import DetailContract from './ContractDetail/ContracDetail'
@@ -13,7 +13,7 @@ class Contracts extends React.Component {
         super(props);
         this.state = {
           contracts: [],
-          pagination: {total:0, pageSize:5, current: 1},
+          pagination: {total:0, pageSize: 7, current: 1},
           showDetailModal : false,
           detailContract: {},
           isLoading: true,
@@ -114,8 +114,6 @@ class Contracts extends React.Component {
         {
           title: 'Tác vụ',
           key: 'operation',
-          fixed: 'right',
-          width: 100,
           render: (text, record) => <Button onClick={() => this.handleDetailContract(record)}>Xem chi tiết</Button>,
         },
       ];
@@ -133,6 +131,7 @@ class Contracts extends React.Component {
             <Table 
               dataSource={dataSource}
               columns={columns}
+              bordered
               rowKey={record => record._id}
               onChange={this.handleTableChange}
               pagination={this.state.pagination}

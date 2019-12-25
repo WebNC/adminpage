@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
-import {Pagination, Modal, Button, Icon, Spin} from 'antd'
+import { Modal, Button, Icon, Spin, Table} from 'antd'
 import {getAllUserStudent, blockUser,unblockUser, getNumberUserStudent} from '../../api/user.action'
 import './Students.scss';
 import UserDetailModal from '../UserDetailModal/UserDetailModal'
@@ -13,8 +12,7 @@ class Students extends React.Component {
         super(props);
         this.state = {
           students: [],
-          amount: 0,
-          pageSize: 10,
+          pagination: {total:0, pageSize:7, current: 1},
           showModal : false,
           student: {},
           isLoading: true
@@ -30,8 +28,10 @@ class Students extends React.Component {
       })
       
       getNumberUserStudent().then(res=>{
+        const pagination = { ...this.state.pagination };
+        pagination.total = res.data.message;
         this.setState({
-          amount: res.data.message
+          pagination
         })
       })      
     }
@@ -73,9 +73,18 @@ class Students extends React.Component {
       });
     }
 
-    handleChange = (value) =>{
-      getAllUserStudent(value).then(res=>{
-        this.setState({students: res.data.message})
+    handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+        pagination: pager,
+        loading: true,
+      });
+      getAllUserStudent(pager.current).then(res=>{
+        this.setState({
+          students: res.data.message,
+          loading: false,
+        })
       })
     }
 
@@ -86,6 +95,7 @@ class Students extends React.Component {
       this.handleShowModal();
     }
 
+
     handleShowModal = () =>{
       const {showModal} = this.state;
       this.setState({
@@ -94,29 +104,57 @@ class Students extends React.Component {
     }
 
     render() {
-      const {students, amount, pageSize, showModal, student, isLoading} = this.state;
-      const studentsList = students.map((item, index) => {
-          return(
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.username}</td>
-              <td>
-              <div>
-                {/* <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link> */}
-                <Button onClick={() => this.handleClickShowModal(item)}>Xem chi tiết</Button>
+      const {students, showModal, student, isLoading} = this.state;
+      // const studentsList = students.map((item, index) => {
+      //     return(
+      //       <tr key={index}>
+      //         <td>{index + 1}</td>
+      //         <td>{item.username}</td>
+      //         <td>
+      //         <div>
+      //           {/* <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link> */}
+      //           <Button onClick={() => this.handleClickShowModal(item)}>Xem chi tiết</Button>
 
-                <span className="ml-3">
-                  {item.isBlocked ? 
-                    <Button  type="primary" onClick={() => this.handleOpenLock(item._id)}>Mở khóa tài khoản</Button> :
-                    <Button  type="danger" onClick={() => this.handleLock(item._id)}>Khóa tài khoản</Button>
+      //           <span className="ml-3">
+      //             {item.isBlocked ? 
+      //               <Button  type="primary" onClick={() => this.handleOpenLock(item._id)}>Mở khóa tài khoản</Button> :
+      //               <Button  type="danger" onClick={() => this.handleLock(item._id)}>Khóa tài khoản</Button>
+      //           }
+      //           </span>
+      //         </div>
+      //       </td>
+      //     </tr>
+      //     )
+      //   })
+      const dataSource = students;
+      const columns = [
+        {
+          title: 'ID',
+          dataIndex: '_id',
+          key: '_id',
+        },
+        {
+          title: 'Tên',
+          dataIndex: 'username',
+          key: 'username',
+        },
+        {
+          title: 'Tác vụ',
+          key: 'operation',
+          render: (text, record) => 
+            <>
+            <div>
+              <Button onClick={() => this.handleClickShowModal(record)}>Xem chi tiết</Button>
+              <span className="ml-3">
+                {record.isBlocked ? 
+                    <Button  type="primary" onClick={() => this.handleOpenLock(record._id)}>Mở khóa tài khoản</Button> :
+                    <Button  type="danger" onClick={() => this.handleLock(record._id)}>Khóa tài khoản</Button>
                 }
                 </span>
               </div>
-            </td>
-          </tr>
-          )
-        })
-
+            </>
+        },
+      ];
       return (
         <>
         {isLoading === true ? (
@@ -127,7 +165,16 @@ class Students extends React.Component {
           <div  className="pl-5 pr-2">
             <UserDetailModal open={showModal} information={student} handleShow={this.handleShowModal}/>
             <h2>Danh sách học sinh</h2>
-            <Table striped bordered hover>
+            <Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record._id}
+              onChange={this.handleTableChange}
+              pagination={this.state.pagination}
+              loading={this.state.loading}
+            />
+            {/* <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -141,7 +188,7 @@ class Students extends React.Component {
             </Table>
             {amount > pageSize &&
               <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-            }
+            } */}
           </div>
         )}
         </>

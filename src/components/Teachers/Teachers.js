@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
-import {Pagination, Modal, Button, Icon, Spin} from 'antd'
+import {Modal, Button, Icon, Spin, Table} from 'antd'
 import {getAllUserTeacher, blockUser, unblockUser, getNumberUserTeacher} from '../../api/user.action'
 import './Teachers.scss';
 import UserDetailModal from '../UserDetailModal/UserDetailModal'
@@ -13,11 +12,11 @@ class Teachers extends React.Component {
         super(props);
         this.state = {
           teachers: [],
-          pageSize: 10,
-          amount: 0,
+          pagination: {total:0, pageSize:7, current: 1},
           showModal : false,
           teacher: {},
-          isLoading: true
+          isLoading: true,
+          loading: false,
         };
     }
 
@@ -30,8 +29,10 @@ class Teachers extends React.Component {
       })
 
       getNumberUserTeacher().then(res =>{
+        const pagination = { ...this.state.pagination };
+        pagination.total = res.data.message;
         this.setState({
-          amount: res.data.message,
+          pagination
         })
       })
       
@@ -76,12 +77,20 @@ class Teachers extends React.Component {
       
     }
 
-    handleChange = (value) =>{
-      getAllUserTeacher(value).then(res=>{
-        this.setState({teachers: res.data.message})
+    handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+        pagination: pager,
+        loading: true,
+      });
+      getAllUserTeacher(pager.current).then(res=>{
+        this.setState({
+          teachers: res.data.message,
+          loading: false,
+        })
       })
     }
-
     
     handleClickShowModal = item =>{
       this.setState({
@@ -99,30 +108,58 @@ class Teachers extends React.Component {
 
 
     render() {
-      const {teachers,amount,pageSize, showModal, teacher, isLoading} = this.state;
-      const teacherList = teachers.map((item, index) => {
-        return(
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{item.username}</td>
-            <td>{item.major}</td>
-            <td>
-              <div>
-                {/* <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link> */}
-                <Button onClick={() => this.handleClickShowModal(item)}>Xem chi tiết</Button>
+      const {teachers, showModal, teacher, isLoading} = this.state;
+      // const teacherList = teachers.map((item, index) => {
+      //   return(
+      //     <tr key={index}>
+      //       <td>{index + 1}</td>
+      //       <td>{item.username}</td>
+      //       <td>{item.major}</td>
+      //       <td>
+      //         <div>
+      //           {/* <Link to={`/${item._id}`}><MdRemoveRedEye  className="view-detail" /></Link> */}
+      //           <Button onClick={() => this.handleClickShowModal(item)}>Xem chi tiết</Button>
 
-                <span className="ml-3">
-                  {item.isBlocked ? 
-                    <Button  type="primary" onClick={() => this.handleOpenLock(item._id)}>Mở khóa tài khoản</Button> :
-                    <Button  type="danger" onClick={() => this.handleLock(item._id)}>Khóa tài khoản</Button>
+      //           <span className="ml-3">
+      //             {item.isBlocked ? 
+      //               <Button  type="primary" onClick={() => this.handleOpenLock(item._id)}>Mở khóa tài khoản</Button> :
+      //               <Button  type="danger" onClick={() => this.handleLock(item._id)}>Khóa tài khoản</Button>
+      //           }
+      //           </span>
+      //         </div>
+      //       </td>
+      //     </tr>
+      //   )
+      // })
+      const dataSource = teachers;
+      const columns = [
+        {
+          title: 'Tên',
+          dataIndex: 'username',
+          key: 'username',
+        },
+        {
+          title: 'Chuyên ngành',
+          dataIndex: 'major',
+          key: 'major',
+        },
+        {
+          title: 'Tác vụ',
+          key: 'operation',
+          render: (text, record) => 
+            <>
+            <div>
+              <Button onClick={() => this.handleClickShowModal(record)}>Xem chi tiết</Button>
+              <span className="ml-3">
+                {record.isBlocked ? 
+                    <Button  type="primary" onClick={() => this.handleOpenLock(record._id)}>Mở khóa tài khoản</Button> :
+                    <Button  type="danger" onClick={() => this.handleLock(record._id)}>Khóa tài khoản</Button>
                 }
                 </span>
               </div>
-            </td>
-          </tr>
-        )
-      })
-
+            </>
+        },
+      ];
       return (
         <>
         {isLoading === true ? (
@@ -133,7 +170,16 @@ class Teachers extends React.Component {
           <div className="pl-5 pr-2">
             <UserDetailModal open={showModal} information={teacher} handleShow={this.handleShowModal}/>
             <h2>Danh sách giáo viên</h2>
-            <Table striped bordered hover>
+            <Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record._id}
+              onChange={this.handleTableChange}
+              pagination={this.state.pagination}
+              loading={this.state.loading}
+            />
+            {/* <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -149,7 +195,7 @@ class Teachers extends React.Component {
             </Table>
             {amount > pageSize &&
               <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-            }
+            } */}
           </div>
         )}
         </>

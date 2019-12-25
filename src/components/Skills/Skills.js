@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */
 import React from 'react';
-import {Table, Modal} from 'react-bootstrap'
+import {Modal} from 'react-bootstrap'
 import * as antd from "antd";
 import {getSkill, addSkill, editSkill, deleteSkill, getNumberSkill} from '../../api/skill.action';
 import './Skills.scss';
@@ -21,8 +21,7 @@ class Skills extends React.Component {
       show: false,
       selectedSkill : '',
       selectedSkillID: '',
-      amount: 0,
-      pageSize: 8,
+      pagination: {total:0, pageSize:8, current: 1},
       isLoading: true,
     };
   }
@@ -38,8 +37,10 @@ class Skills extends React.Component {
       }
     })
     getNumberSkill().then(res=>{
-      this.setState({ 
-        amount: res.message,
+      const pagination = { ...this.state.pagination };
+        pagination.total = res.message;
+        this.setState({
+          pagination
         })
     })
   }
@@ -134,34 +135,75 @@ class Skills extends React.Component {
     })
   }
 
-  handleChange = (value) =>{
-    getSkill(value).then(res=>{
+  // handleChange = (value) =>{
+  //   getSkill(value).then(res=>{
+  //     this.setState({
+  //       skillList: res.skillList,
+  //       number: res.number
+  //     })
+  //   })
+  // }
+  handleTableChange = (pagination, filters, sorter) => {
+    const pager = { ...this.state.pagination };
+    pager.current = pagination.current;
+    this.setState({
+      pagination: pager,
+      loading: true,
+    });
+    getSkill(pager.current).then(res=>{
       this.setState({
         skillList: res.skillList,
-        number: res.number
+        number: res.number,
+        loading: false,
       })
     })
   }
-
   render() {
-    const {error, skill, skillList, number, show, selectedSkill, amount, pageSize, isLoading} = this.state;
-    const skills = skillList.map((item, index) => {
-      return(
-        <tr key={index}>
-          <td>{index + 1}</td>
-          <td>{item.name}</td>
-          <td>{number[item._id] ? number[item._id].number : 0}</td>
-          <td>
-            <antd.Button  onClick={()=> this.handleEdit(item.name, item._id)}>Chỉnh sửa</antd.Button>
-            <span className="ml-3">
+    const {error, skill, skillList, number, show, selectedSkill, isLoading} = this.state;
+    // const skills = skillList.map((item, index) => {
+    //   return(
+    //     <tr key={index}>
+    //       <td>{index + 1}</td>
+    //       <td>{item.name}</td>
+    //       <td>{number[item._id] ? number[item._id].number : 0}</td>
+    //       <td>
+    //         <antd.Button  onClick={()=> this.handleEdit(item.name, item._id)}>Chỉnh sửa</antd.Button>
+    //         <span className="ml-3">
+    //           <antd.Button 
+    //             type = "danger"
+    //             onClick={()=>this.handleConfirm(item._id)}>Xóa</antd.Button>
+    //         </span>
+    //       </td>
+    //     </tr>
+    //     )
+    //   })
+    const dataSource = skillList;
+      const columns = [
+        {
+          title: 'Kỹ Năng',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'Số lượng',
+          render: (text, record) => number[record._id] ? number[record._id].number : 0
+        },
+        {
+          title: 'Tác vụ',
+          key: 'operation',
+          render: (text, record) => 
+            <>
+            <div>
+              <antd.Button  onClick={()=> this.handleEdit(record.name, record._id)}>Chỉnh sửa</antd.Button>
+              <span className="ml-3">
               <antd.Button 
-                type = "danger"
-                onClick={()=>this.handleConfirm(item._id)}>Xóa</antd.Button>
-            </span>
-          </td>
-        </tr>
-        )
-      })
+                   type = "danger"
+                  onClick={()=>this.handleConfirm(record._id)}>Xóa</antd.Button>
+               </span>
+              </div>
+            </>
+        },
+      ];
     return (
       <>
       {isLoading === true ? (
@@ -194,7 +236,7 @@ class Skills extends React.Component {
             </Modal.Footer> */}
           </Modal>
           <h2>Danh sách kỹ năng </h2>
-            <div className="d-flex">
+            <div className="d-flex" style={{ marginBottom: "10px"}}>
               <input type="text" name="skill" id="skill"
                 placeholder="Thêm kỹ năng mới"
                 value={skill}
@@ -203,7 +245,16 @@ class Skills extends React.Component {
                 onChange={this.onChange} />
               <antd.Button type = "primary" onClick={this.handleAddSkill}>Thêm</antd.Button>     
             </div>
-          <Table striped bordered hover className="mt-3">
+            <antd.Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record._id}
+              onChange={this.handleTableChange}
+              pagination={this.state.pagination}
+              loading={this.state.loading}
+            />
+          {/* <Table striped bordered hover className="mt-3">
             <thead>
               <tr>
                 <th>#</th>
@@ -218,7 +269,7 @@ class Skills extends React.Component {
           </Table>
           {amount > pageSize &&
             <antd.Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-          }
+          } */}
         </div>
       )}
       </>

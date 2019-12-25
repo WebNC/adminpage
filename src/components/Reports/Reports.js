@@ -1,10 +1,9 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
-import { Button, Pagination, Icon, Spin } from "antd";
+import moment from 'moment'
+import { Button, Icon, Spin, Table } from "antd";
 import SolveReportModal from './SolveReportModal/SolveReportModal'
-import FormatDate from '../../helper/FomatDate'
 import {getAllReport, getNumberReport} from '../../api/report.action'
 import './Reports.scss';
 
@@ -15,10 +14,10 @@ class Reports extends React.Component {
         super(props);
         this.state = {
           reports: [],
-          amount: 0,
-          pageSize: 5,
+          pagination: {total:0, pageSize:5, current: 1},
           isShow: false,
           isLoading: true,
+          loading: false,
           selectedReport : {}
         };
     }
@@ -34,8 +33,10 @@ class Reports extends React.Component {
       })
 
       getNumberReport().then(res =>{
+        const pagination = { ...this.state.pagination };
+        pagination.total = res.data.message;
         this.setState({
-          amount: res.data.message
+          pagination
         })
       })
       
@@ -52,7 +53,20 @@ class Reports extends React.Component {
       this.setState({isShow: !isShow});
 
     }
-
+    handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+        pagination: pager,
+        loading: true,
+      });
+      getAllReport(pager.current).then(res=>{
+        this.setState({
+          reports: res.data.message,
+          loading: false,
+        })
+      })
+    }
     handleSolveReport = (reports) => {
       this.setState({reports});
     }
@@ -65,23 +79,55 @@ class Reports extends React.Component {
     }
 
     render() {
-      const {reports, amount, pageSize, isShow, isLoading, selectedReport, index} = this.state;
-      const teacherList = reports.map((item, index) => {
-        return(
+      const {reports, isShow, isLoading, selectedReport, index} = this.state;
+      // const teacherList = reports.map((item, index) => {
+      //   return(
          
-          <tr key={index} onClick={() => this.handleClickShowReport(item, index)} >
-            <td>{index + 1}</td>
-            <td>{FormatDate(item.date)}</td>
-            <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
-            <td><p>{item.teacherName}</p><p>ID: {item.teacherID}</p></td>
-            <td><p>{item.content}</p></td>
-            <td>{item.status === false?'Chưa giải quyết': 'Đã giải quyết'}</td>
-            <td>
-              { item.status === false ? <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div> : '' }
-            </td>
-          </tr>
-        )
-      })
+      //     <tr key={index} onClick={() => this.handleClickShowReport(item, index)} >
+      //       <td>{index + 1}</td>
+      //       <td>{FormatDate(item.date)}</td>
+      //       <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
+      //       <td><p>{item.teacherName}</p><p>ID: {item.teacherID}</p></td>
+      //       <td><p>{item.content}</p></td>
+      //       <td>{item.status === false?'Chưa giải quyết': 'Đã giải quyết'}</td>
+      //       <td>
+      //         { item.status === false ? <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div> : '' }
+      //       </td>
+      //     </tr>
+      //   )
+      // })
+      const dataSource = reports;
+      const columns = [
+        {
+          title: 'Ngày tạo',
+          dataIndex: 'date',
+          key: 'date',
+          render: day => `${moment(day).format('DD/MM/YYYY')}`,
+        },
+        {
+          title: 'Từ người dùng',
+          render: (text, record) => <><p>{record.studentName}</p><p>ID: {record.studentID}</p></>,
+        },
+        {
+          title: 'Từ người dùng',
+          render: (text, record) => <><p>{record.teacherName}</p><p>ID: {record.teacherID}</p></>,
+        },
+        {
+          title: 'Nội dung',
+          dataIndex: 'content',
+        },
+        {
+          title: 'Tình trạng',
+          dataIndex: 'status',
+          key: 'status',
+          render: status => status === false?'Chưa giải quyết': 'Đã giải quyết'
+        },
+        {
+          title: 'Tác vụ',
+          key: 'operation',
+          render: (text, record) =>  record.status === false && <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div>,
+        },
+      ];
       return (
         <div  className="pl-5 pr-2">
         
@@ -104,7 +150,16 @@ class Reports extends React.Component {
         ):(
           <>
             <h2>Danh sách report</h2>
-            <Table striped bordered hover>
+            <Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record._id}
+              onChange={this.handleTableChange}
+              pagination={this.state.pagination}
+              loading={this.state.loading}
+            />
+            {/* <Table striped bordered hover>
             <thead>
               <tr>
                 <th>#</th>
@@ -123,7 +178,7 @@ class Reports extends React.Component {
           </Table>
           {amount > pageSize &&
             <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-          }
+          } */}
           </>
         )}
         </div>

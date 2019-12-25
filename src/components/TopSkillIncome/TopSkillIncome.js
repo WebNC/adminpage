@@ -4,8 +4,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import moment from 'moment';
-import {Table} from 'react-bootstrap'
-import { Select, DatePicker, Spin, Icon } from "antd";
+import { Select, DatePicker, Spin, Icon, Table } from "antd";
 import {getAllTopSkillIncomeAll, getAllTopSkillIncome} from '../../api/topIncome.action'
 import './TopSkillIncome.scss';
 
@@ -68,19 +67,39 @@ class TopSkillIncome extends React.Component {
       const {topSkill, type, isLoading} = this.state;
       const monthFormat = 'YYYY-MM';
       const dateFormat = 'YYYY-MM-DD';
-      const teacherList = topSkill.map((item, index) => {
-        if (item.income > 0){
-          return(
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{`${item.income}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
-            </tr>
-          )
-        }
-        return null;
-      })
+      // const teacherList = topSkill.map((item, index) => {
+      //   if (item.income > 0){
+      //     return(
+      //       <tr key={index}>
+      //         <td>{index + 1}</td>
+      //         <td>{item.id}</td>
+      //         <td>{item.name}</td>
+      //         <td>{`${item.income}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
+      //       </tr>
+      //     )
+      //   }
+      //   return null;
+      // })
+      let data = topSkill.filter((ele) => ele.income>0);
+      const dataSource = data;
+      const columns = [
+        {
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+        },
+        {
+          title: 'Tên',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'Thu nhập',
+          dataIndex: 'income',
+          key: 'income',
+          render: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+        },
+      ];
       return (
         <div  className="pl-5 pr-2">
         {isLoading === true ? (
@@ -101,7 +120,14 @@ class TopSkillIncome extends React.Component {
               {type == "month" && <MonthPicker defaultValue={moment('2019-12', monthFormat)} onChange={this.onChange} placeholder="Chọn tháng"/>}
               {type == "range" && <RangePicker defaultValue={[moment('2019-12-17', dateFormat), moment('2019-12-26', dateFormat)]} onChange={this.onChange} placeholder="Chọn khoảng"/>}
             </div>
-              <Table striped bordered hover>
+            <Table 
+              dataSource={dataSource}
+              columns={columns}
+              bordered
+              rowKey={record => record.id}
+              loading={this.state.loading}
+            />
+              {/* <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -113,7 +139,7 @@ class TopSkillIncome extends React.Component {
               <tbody>
                 {teacherList}
               </tbody>
-            </Table>
+            </Table> */}
           </>
         )}
       </div>
