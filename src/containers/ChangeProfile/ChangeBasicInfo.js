@@ -63,9 +63,10 @@ class ChangeBasicInfo extends React.Component {
 
     validateInfor = () => {
         const { phone, age} = this.state;
-        const isVNPhoneMobile = /^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/;
         const isError = /[a-zA-Z]|\s\W|(_)/;
-        if (!isVNPhoneMobile.test(phone) || age.search(isError) !== -1 || phone.search(isError) !== -1) {
+     
+
+        if ( age.toString().search(isError) !== -1 || phone.toString().search(isError) !== -1) {
          this.setState({
             error: true
          })
@@ -95,7 +96,7 @@ class ChangeBasicInfo extends React.Component {
                         })
                     }
                    
-                }
+              }
                
             )
         }
@@ -106,7 +107,7 @@ class ChangeBasicInfo extends React.Component {
     render(){
         const { username,phone,age,address, error, success } = this.state
         const errorText = error && <p className="errorNotification">Something is invalid!</p>
-        const successText = success && <p className="errorNotification">Change password successfully!</p>
+        const successText = success && <p className="errorNotification">Change Successfully!</p>
 
 
         return ( 
