@@ -8,7 +8,6 @@ import {
 import { connect } from 'react-redux'
 
 import Login from './containers/Login/Login';
-import Register from './containers/Register';
 import Home from './containers/Home/Home';
 import Profile from './containers/ChangeProfile/Profile';
 
@@ -42,18 +41,9 @@ class App extends React.Component {
       <Route exact path="/" >
         {!logined ? <Redirect to="/login" /> : <Home />}
       </Route>
-      <Route exact path="/register" >
-          {!logined ? <Redirect to="/login" /> : <Register />}
-      </Route>
       <Route exact path="/profile" >
         {!logined ? <Redirect to="/login" /> : <Profile />}
       </Route>
-      {/* <Route exact path="/:id" >
-        {!logined ? <Redirect to="/login" /> : <UserDetail />}
-      </Route > */}
-      {/* <Route  exact path="/contract/:id"   component={UserDetail} /> */}
-      {/* <Route  exact path="/:id"   component={UserDetail} /> */}
-      
 
 
     </Switch>

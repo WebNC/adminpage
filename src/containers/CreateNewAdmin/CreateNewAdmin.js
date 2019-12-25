@@ -49,20 +49,32 @@ class CreateNewAdmin extends React.Component {
         const { username, password, email } = this.state;
         const {handleRegister} = this.props;
         if(username.trim() && password.trim() && email.trim()){
-            register(username, password, email).then(res => {
-                if(!res){
-                       this.setState({errors: true})
-                }
-                else{
-                    
-                    handleRegister(username, email, password);
-                    this.setState({
-                        email: '',
-                        password: '',
-                        username: '',
-                        success: true
-                    })
-                }
+            if(email.trim().indexOf('@') !== - 1 && email.trim().indexOf('.com') !== -1){
+                register(username, password, email).then(res => {
+                    if(!res){
+                           this.setState({errors: true})
+                    }
+                    else{
+                        
+                        handleRegister(username, email, password);
+                        this.setState({
+                            email: '',
+                            password: '',
+                            username: '',
+                            success: true
+                        })
+                    }
+                })
+            }
+            else{
+                this.setState({
+                    errors : true
+                })
+            }
+         
+        } else{
+            this.setState({
+                errors : true
             })
         }
        

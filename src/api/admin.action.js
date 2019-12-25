@@ -13,7 +13,7 @@ export const register = (username, password, email, phone) => {
         .then(res => {
             if(res.data){
                 const {token} = res.data;
-                localStorage.setItem("token", token);
+                // localStorage.setItem("token", token);
             }
             return res;
         }).catch(res => {

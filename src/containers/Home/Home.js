@@ -25,7 +25,7 @@ class Home extends React.PureComponent {
     return <>
       <Header/>
       <div className="content">
-      <Tabs defaultActiveKey="2" tabPosition= 'left' style={{ height: 900 }}>
+      <Tabs defaultActiveKey="2" tabPosition= 'left' style={{ height: 720 }}>
           { isRoot &&<TabPane tab='Tạo Admin mới' key={1}>
             <CreateNewAdmin/>
           </TabPane>}
