@@ -74,9 +74,6 @@ class Contracts extends React.Component {
     render() {
       // open, handleShowDetailContract, contractDetail
       const {contracts, showDetailModal, detailContract, isLoading} = this.state;
-      const createFilter = contracts.map((ele)=>{
-        return moment(ele.createAt).format('DD/MM/YYYY')
-      })
       const dataSource = contracts;
       const columns = [
         {

@@ -27,10 +27,10 @@ class Profile extends React.Component {
                     <div className="loginT mt-3 change-profile-title" >Change Profile</div>
 
                     <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
-                        <Tab eventKey="home" title="Basic information" className="pt-3">
+                        <Tab eventKey="home" title="Thông tin cá nhân" className="pt-3">
                             <ChangeBasicInfo/>
                         </Tab>
-                        <Tab eventKey="profile" title="Password" className="pt-3">
+                        <Tab eventKey="profile" title="Mật khẩu" className="pt-3">
                             <ChangePassword/>
                         </Tab>
                         {/* <Tab eventKey="contact" title="Avatar" className="pt-5" >

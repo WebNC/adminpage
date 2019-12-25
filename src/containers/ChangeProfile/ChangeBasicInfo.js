@@ -2,6 +2,7 @@ import React from 'react';
 import {  Input, Button, Icon} from 'antd';
 import { connect } from 'react-redux'
 import {getUser, updateProfile} from '../../api/admin.action'
+import { Link } from 'react-router-dom'
 import './Profile.scss'
 
 
@@ -116,7 +117,7 @@ class ChangeBasicInfo extends React.Component {
             <div className="errorNotification mb-3">{successText}</div>
 
             <div className="d-flex mt-1 ">
-                <p className="mr-4 item-name">Username</p>
+                <p className="mr-4 item-name">Tên hiển thị</p>
                 <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />}
                     style={{ width: 380}}
@@ -128,7 +129,7 @@ class ChangeBasicInfo extends React.Component {
             </div>
             <div className="d-flex mt-3">
                 <div className="d-flex">
-                    <p className="mr-4 item-name">Phone</p>
+                    <p className="mr-4 item-name">Số điện thoại</p>
                     <Input
                         prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
                         name="phone" id="phone"
@@ -140,7 +141,7 @@ class ChangeBasicInfo extends React.Component {
                 </div>
 
                 <div className="d-flex">
-                    <p className="mr-4 ml-5">Age</p>
+                    <p className="mr-4 ml-5">Tuổi</p>
                     <Input
                         name="age" id="age"
                         value={age}
@@ -153,7 +154,7 @@ class ChangeBasicInfo extends React.Component {
             </div>
            
             <div className="d-flex mt-3">
-                <p className="mr-4 item-name">Address</p>
+                <p className="mr-4 item-name">Địa chỉ</p>
                 <Input
                     prefix={<Icon type="home"   style={{ color: 'rgba(0,0,0,.25)' }}/>}
                     name="address" id="address"
@@ -165,8 +166,10 @@ class ChangeBasicInfo extends React.Component {
             </div>
 
             <div className="d-flex mt-5 group-button">
-                <Button onClick={this.handleCancelInfor} className="ml-5 mr-3"> Cancel </Button>
-                <Button onClick={this.handleChangeInfor} disabled={error} > Change </Button>
+                <Button onClick={this.handleCancelInfor} className="ml-5 mr-3" >
+                    <Link to='/'>Hủy</Link>  
+                </Button>
+                <Button onClick={this.handleChangeInfor} disabled={error} > Cập nhật </Button>
             </div>
 
         </div>
