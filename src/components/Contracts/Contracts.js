@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Table} from 'react-bootstrap'
 import moment from 'moment'
-import {Pagination, Button, Icon, Spin} from 'antd';
+import {Pagination, Button, Icon, Spin, Select, Table} from 'antd';
 import {getAllContract, getNumberContract} from '../../api/contract.action'
 import './contracts.scss';
 import DetailContract from './ContractDetail/ContracDetail'
+
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class Contracts extends React.Component {
@@ -13,11 +13,11 @@ class Contracts extends React.Component {
         super(props);
         this.state = {
           contracts: [],
-          pageSize: 10,
-          amount: 0,
+          pagination: {total:0, pageSize:5, current: 1},
           showDetailModal : false,
           detailContract: {},
           isLoading: true,
+          loading: false,
         };
     }
 
@@ -30,19 +30,32 @@ class Contracts extends React.Component {
       })
 
       getNumberContract().then(res =>{
+        const pagination = { ...this.state.pagination };
+        pagination.total = res.data.message;
         this.setState({
-          amount: res.data.message
+          pagination,
         })
       })
     }
 
 
     handleChange = (value) =>{
-      getAllContract(value).then(res=>{
-        this.setState({contracts: res.data.message})
+      
+    }
+    handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+        pagination: pager,
+        loading: true,
+      });
+      getAllContract(pager.current).then(res=>{
+        this.setState({
+          contracts: res.data.message,
+          loading: false,
+        })
       })
     }
-
     handleShowModal = () =>{
       const {showDetailModal} = this.state;
       this.setState({
@@ -51,6 +64,7 @@ class Contracts extends React.Component {
     }
 
     handleDetailContract = (item) =>{
+      console.log(item)
       this.setState({
         detailContract: item,
       })
@@ -59,28 +73,50 @@ class Contracts extends React.Component {
 
     render() {
       // open, handleShowDetailContract, contractDetail
-      const {contracts,amount,pageSize, showDetailModal, detailContract, isLoading} = this.state;
-      const contractList = contracts.map((item, index) => {
-        return(
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{moment(item.createAt).format('DD/MM/YYYY')}</td>
-            <td>{moment(item.fromDate).format('DD/MM/YYYY')}</td>
-            <td>{moment(item.toDate).format('DD/MM/YYYY')}</td>
-            <td>{`${item.value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
-            <td>{item.status}</td>
-            <td>
-              <div>
-                {/* <Link to={`/contract/${item._id}`}>
-                </Link> */}
-                <Button onClick={() => this.handleDetailContract(item)}>Xem chi tiết</Button>
-
-              </div>
-            </td>
-          </tr>
-        )
+      const {contracts, showDetailModal, detailContract, isLoading} = this.state;
+      const createFilter = contracts.map((ele)=>{
+        return moment(ele.createAt).format('DD/MM/YYYY')
       })
-
+      const dataSource = contracts;
+      const columns = [
+        {
+          title: 'Ngày tạo',
+          dataIndex: 'createAt',
+          key: 'createAt',
+          render: day => `${moment(day).format('DD/MM/YYYY')}`,
+        },
+        {
+          title: 'Từ ngày',
+          dataIndex: 'fromDate',
+          key: 'fromDate',
+          render: day => `${moment(day).format('DD/MM/YYYY')}`,
+        },
+        {
+          title: 'Đến ngày',
+          dataIndex: 'toDate',
+          key: 'toDate',
+          render: day => `${moment(day).format('DD/MM/YYYY')}`,
+        },
+        {
+          title: 'Giá trị',
+          dataIndex: 'value',
+          key: 'value',
+          render: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        },
+        {
+          title: 'Tình trạng',
+          dataIndex: 'status',
+          key: 'status',
+        },
+        {
+          title: 'Tác vụ',
+          key: 'operation',
+          fixed: 'right',
+          width: 100,
+          render: (text, record) => <Button onClick={() => this.handleDetailContract(record)}>Xem chi tiết</Button>,
+        },
+      ];
+      
       return (
         <>
         {isLoading === true ? (
@@ -88,10 +124,18 @@ class Contracts extends React.Component {
             <Spin indicator={antIcon} />
           </div>
         ):(
-          < div  className="pl-5 pr-2">
+          <>
             <DetailContract open={showDetailModal} contractDetail={detailContract} handleShowDetailContract={this.handleShowModal} />
             <h2>Danh sách hợp đồng </h2>
-            <Table striped bordered hover>
+            <Table 
+              dataSource={dataSource}
+              columns={columns}
+              rowKey={record => record._id}
+              onChange={this.handleTableChange}
+              pagination={this.state.pagination}
+              loading={this.state.loading}
+            />
+            {/* <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -109,9 +153,9 @@ class Contracts extends React.Component {
               </tbody>
             </Table>
             {amount > pageSize &&
-              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/>
-            }
-          </ div>
+              <Pagination defaultCurrent={1} total= {amount} pageSize = {pageSize} onChange={this.handleChange}/> 
+            }*/}
+          </>
         )}
       </>
      );
