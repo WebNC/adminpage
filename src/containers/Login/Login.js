@@ -64,8 +64,9 @@ class Login extends React.Component {
                     </div>
 
                     <Form  className="login-form">
-                        <Form.Item className="logo-component"></Form.Item>
+                        <Form.Item className="logo-component">
                             <Logo size={120} />
+                        </Form.Item>
                             <div className="errorNotification mt-1">{errorText}</div>
                             <Input
                                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
