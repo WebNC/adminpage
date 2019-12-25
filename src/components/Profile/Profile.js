@@ -23,6 +23,11 @@ class Profile extends React.Component {
             } ,
             isLoading: false});
         })
+    
+    }
+
+    handleChangeURL = (user) => {
+        this.setState({user})
     }
 
     handleLogout = () => {
@@ -84,7 +89,7 @@ class Profile extends React.Component {
                         </div>
 
                         <div className="col-4">
-                            <MyAvatar user={user}/>
+                            <MyAvatar user={user} handleChangeURL={this.handleChangeURL}/>
                             {/* <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/> */}
                         </div>
                     </div>

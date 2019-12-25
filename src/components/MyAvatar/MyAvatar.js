@@ -31,7 +31,7 @@ class MyAvatar extends React.Component {
 
  onFormSubmit = (e) => {
     e.preventDefault();
-    const {user} = this.props;
+    const {user, handleChangeURL} = this.props;
     const {file} = this.state
 
 
@@ -39,10 +39,11 @@ class MyAvatar extends React.Component {
       id: user._id,
       file
     }).then(res=>{
-        if(res){
+        if(res.data){
             this.setState({
-                successMessage: true
+                successMessage: true,
             })
+            handleChangeURL(res.data)
         }
     })
 }
@@ -68,7 +69,7 @@ class MyAvatar extends React.Component {
       <div>
         {
           canNotChange ? 
-          <Avatar size={130} src={user.url } className="avatar-img" /> :
+          <Avatar size={130} src={  user.url } className="avatar-img" /> :
 
           <Tooltip placement="bottom" title="Cập nhật ảnh đại diện">
             <Button className="btn-avatar" onClick={this.showModal}>
