@@ -25,6 +25,7 @@ class TopSkillIncome extends React.Component {
 
     componentDidMount = () => {
       getAllTopSkillIncomeAll().then(res=>{
+        
         this.setState({
           topSkill: res.data.message,
           isLoading: false

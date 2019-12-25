@@ -47,23 +47,21 @@ class SolveReportModal extends React.Component {
       this.setState({
         message: 'Đã giải quyết khiếu nại'
       })
-      console.log(res);
     })
     reports[index].status = true;
-    handleSolveReport(reports);
+    // handleSolveReport(reports);
   }
 
   handleAcceptButton = () => {
     const { reportId } = this.state;
-    const { reports, index, handleSolveReport } = this.props
+    const { reports, index, handleSolveReport , handleShowModal} = this.props
     solveReport(reportId, true).then(res => {
       this.setState({
         message: 'Đã giải quyết khiếu nại'
       })
-      console.log(res);
     })
     reports[index].status = true;
-    handleSolveReport(reports);
+    // handleSolveReport(reports);
   }
 
     render() {

@@ -55,18 +55,19 @@ class Reports extends React.Component {
       this.setState({reports});
     }
 
-    handleClickShowReport = (item) =>{
+    handleClickShowReport = (item, index) =>{
       this.setState({
         selectedReport: item,
+        index
       })
     }
 
     render() {
-      const {reports, amount, pageSize, isShow, isLoading, selectedReport} = this.state;
+      const {reports, amount, pageSize, isShow, isLoading, selectedReport, index} = this.state;
       const teacherList = reports.map((item, index) => {
         return(
          
-          <tr key={index} onClick={() => this.handleClickShowReport(item)} >
+          <tr key={index} onClick={() => this.handleClickShowReport(item, index)} >
             <td>{index + 1}</td>
             <td>{FormatDate(item.date)}</td>
             <td><p>{item.studentName}</p><p>ID: {item.studentID}</p></td>
@@ -91,6 +92,7 @@ class Reports extends React.Component {
             open={isShow} 
             reportID = {selectedReport._id}
             reports = {reports}
+            index={index}
             handleSolveReport={this.handleSolveReport}/>
 
         {isLoading === true ? (
