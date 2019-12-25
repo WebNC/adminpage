@@ -30,14 +30,11 @@ class Header extends React.Component {
                             <Logo size={50} />
                         </Link>
                         <Link to="/" className="brand-title ml-4">
-                            HOME
+                            Trang chủ
                         </Link>
-
-                     
-
                     </Navbar>
                     <Navbar className="ml-auto">
-                        <Button type="primary" className="ml-auto" onClick= {()=> this.handleLogout()}>Log out
+                        <Button type="primary" className="ml-auto" onClick= {()=> this.handleLogout()}>Đăng xuất
                         </Button>   
                     </Navbar>
                     

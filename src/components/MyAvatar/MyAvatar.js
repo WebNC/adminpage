@@ -77,7 +77,7 @@ class MyAvatar extends React.Component {
             </Button>
 
             <div> </div>
-            <Button className="mt-3 ml-4" onClick={this.showModal}>Change</Button>
+            <Button className="mt-3" onClick={this.showModal}>Cập nhật ảnh đại diện</Button>
 
         </Tooltip>
 

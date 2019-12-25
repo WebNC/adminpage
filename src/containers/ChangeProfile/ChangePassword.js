@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Input, Button, Icon} from 'antd';
 import {getUser, updatePassword} from '../../api/admin.action'
-
+import { Link } from 'react-router-dom'
 
 
 class ChangePassword extends React.Component {
@@ -90,7 +90,7 @@ class ChangePassword extends React.Component {
             <div className="errorNotification mb-3">{successText}</div>
 
             <div className="d-flex mt-1">
-                <p className="mr-4 item-name">New Password</p>
+                <p className="mr-4 item-name">Mật khẩu mới</p>
                 <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     name="newPassword" id="newPassword"
@@ -103,7 +103,7 @@ class ChangePassword extends React.Component {
             </div>
 
             <div className="d-flex mt-3">
-                <p className="mr-4 item-name">Retype</p>
+                <p className="mr-4 item-name">Nhập lại mật khẩu</p>
                 <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     name="retypePassword" id="retypePassword"
@@ -118,8 +118,10 @@ class ChangePassword extends React.Component {
         
         
             <div className="d-flex mt-5 group-button">
-            <Button onClick={this.handleCancelPsw} className="ml-5 mr-3"> Cancel </Button>
-            <Button onClick={this.handleChangePsw} disabled={errorPassword}> Change </Button>
+            <Button onClick={this.handleCancelPsw} className="ml-5 mr-3">
+                <Link to='/'>Hủy</Link>
+            </Button>
+            <Button onClick={this.handleChangePsw} disabled={errorPassword}> Cập nhật </Button>
             </div>
         </div>
 

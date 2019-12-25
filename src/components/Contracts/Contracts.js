@@ -74,7 +74,6 @@ class Contracts extends React.Component {
                 {/* <Link to={`/contract/${item._id}`}>
                 </Link> */}
                 <Button onClick={() => this.handleDetailContract(item)}>Xem chi tiết</Button>
-
               </div>
             </td>
           </tr>

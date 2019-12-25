@@ -27,6 +27,8 @@ class Reports extends React.Component {
       getAllReport(1).then(res=>{
         this.setState({
           reports: res.data.message,
+          selectedReport: res.data.message[0],
+          index: 0,
           isLoading: false
         })
       })

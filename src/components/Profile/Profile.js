@@ -52,7 +52,7 @@ class Profile extends React.Component {
                 <div>
                     <h2>Thông tin cá nhân</h2>
                     <div className="row p-3 profile">
-                        <div className="col-7">
+                        <div className="col-6">
                             <div className=" d-flex ml-5 mt-4">
                                 <h6 className="mr-3" style={style}>Tên :</h6>
                                 <p className="value">{ user.username }</p>
@@ -88,7 +88,7 @@ class Profile extends React.Component {
                             
                         </div>
 
-                        <div className="col-4">
+                        <div className="col-3 mt-5" style={{textAlign: "center"}}>
                             <MyAvatar user={user} handleChangeURL={this.handleChangeURL}/>
                             {/* <img src="http://placehold.it/1000" height="150" width="150" alt="avatar" className="avartar"/> */}
                         </div>
