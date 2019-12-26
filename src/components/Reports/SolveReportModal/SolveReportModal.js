@@ -29,14 +29,16 @@ class SolveReportModal extends React.Component {
     const {teacherID, studentID, contractID, reportID} = props;
     
     getDetailReport(studentID, teacherID, contractID).then(res=>{
-      this.setState({
-        reportId: reportID,
-        student : res.data.student,
-        teacher: res.data.teacher,
-        contract: res.data.contract,
-        chat: res.data.chat,
-        message: '',
-      })
+      if (res) {
+        this.setState({
+          reportId: reportID,
+          student : res.data.student,
+          teacher: res.data.teacher,
+          contract: res.data.contract,
+          chat: res.data.chat,
+          message: '',
+        })
+      }
     })
   }
 

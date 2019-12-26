@@ -158,6 +158,11 @@ class Reports extends React.Component {
               onChange={this.handleTableChange}
               pagination={this.state.pagination}
               loading={this.state.loading}
+              onRow={(record, rowIndex) => {
+                return {
+                  onClick: event => this.handleClickShowReport(record, rowIndex), // click row
+                };
+              }}
             />
             {/* <Table striped bordered hover>
             <thead>
