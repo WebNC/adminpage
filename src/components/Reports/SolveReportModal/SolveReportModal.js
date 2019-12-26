@@ -67,7 +67,7 @@ class SolveReportModal extends React.Component {
   }
 
     render() {
-        const {open, handleShowModal, reports} = this.props;
+        const {open, handleShowModal, reports, index} = this.props;
         const {student, teacher, chat, contract, message} = this.state;
         // console.log(this.props.reports);
 
@@ -87,7 +87,7 @@ class SolveReportModal extends React.Component {
                   </div>
                   </Modal.Body>
                 <Modal.Footer>
-                { (reports.status === false) && <div className="solve-buttons" >
+                { (reports[index].status === false) && <div className="solve-buttons" >
                     <Button className="solve-button" onClick={() => this.handleAcceptButton()}>Hoàn tiền</Button>
                     <Button onClick={() => this.handleDeclineButton()}>Không hoàn tiền</Button>
                   </div>} 
