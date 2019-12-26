@@ -23,6 +23,7 @@ export const register = (username, password, email, phone) => {
 }
 
 export const login = (email, password) => {
+    console.log(email, password)
     return API
         .post(`/users/login`, {
             email,

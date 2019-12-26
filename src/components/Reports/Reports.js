@@ -53,6 +53,7 @@ class Reports extends React.Component {
       this.setState({isShow: !isShow});
 
     }
+
     handleTableChange = (pagination, filters, sorter) => {
       const pager = { ...this.state.pagination };
       pager.current = pagination.current;
@@ -125,9 +126,10 @@ class Reports extends React.Component {
         {
           title: 'Tác vụ',
           key: 'operation',
-          render: (text, record) =>  record.status === false && <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div>,
+          render: (text, record) =>  <div><Button onClick =  {this.handleShowModal}> Xem chi tiết </Button></div>,
         },
       ];
+      // record.status === false &&
       return (
         <div  className="pl-5 pr-2">
         
